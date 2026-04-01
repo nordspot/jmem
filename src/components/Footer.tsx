@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--color-primary-dark)] text-white">
+    <footer className="bg-[var(--color-dark)] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
@@ -115,7 +115,7 @@ export function Footer() {
             </h3>
             <ul className="space-y-4">
               <li className="flex gap-3">
-                <MapPin className="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-[var(--color-primary)] shrink-0 mt-0.5" />
                 <span className="text-sm text-white/70">
                   Hauptstrasse 15
                   <br />
@@ -123,7 +123,7 @@ export function Footer() {
                 </span>
               </li>
               <li className="flex gap-3">
-                <Phone className="w-5 h-5 text-[var(--color-accent)] shrink-0" />
+                <Phone className="w-5 h-5 text-[var(--color-primary)] shrink-0" />
                 <a
                   href="tel:+41323917030"
                   className="text-sm text-white/70 hover:text-white transition-colors"
@@ -132,7 +132,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex gap-3">
-                <Mail className="w-5 h-5 text-[var(--color-accent)] shrink-0" />
+                <Mail className="w-5 h-5 text-[var(--color-primary)] shrink-0" />
                 <a
                   href="mailto:info@jmemwiler.ch"
                   className="text-sm text-white/70 hover:text-white transition-colors"

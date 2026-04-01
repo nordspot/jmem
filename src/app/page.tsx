@@ -54,7 +54,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <stat.icon className="w-8 h-8 text-[var(--color-accent)] mx-auto mb-3" />
+                <stat.icon className="w-8 h-8 text-[var(--color-primary)] mx-auto mb-3" />
                 <p className="text-3xl font-bold text-[var(--color-primary)]">
                   {stat.value}
                 </p>
@@ -127,7 +127,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[var(--color-primary)]">
+      <section className="py-20 bg-[var(--color-dark)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Bereit für dein Abenteuer?
@@ -139,7 +139,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/kontakt"
-              className="bg-[var(--color-accent)] text-[var(--color-primary-dark)] font-semibold px-8 py-3.5 rounded-full hover:bg-[var(--color-accent-light)] transition-colors text-sm"
+              className="bg-[var(--color-primary)] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[var(--color-primary-light)] transition-colors text-sm"
             >
               Kontakt aufnehmen
             </Link>

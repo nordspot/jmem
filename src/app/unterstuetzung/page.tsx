@@ -23,7 +23,7 @@ export default function UnterstuetzungPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
-              <Heart className="w-12 h-12 text-[var(--color-accent)] mx-auto mb-4" />
+              <Heart className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Gebet</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Bete für unsere Mitarbeiter, Studenten, Schulen und Einsätze.
@@ -31,7 +31,7 @@ export default function UnterstuetzungPage() {
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
-              <CreditCard className="w-12 h-12 text-[var(--color-accent)] mx-auto mb-4" />
+              <CreditCard className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Spenden</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Unterstütze unsere Arbeit finanziell. Jeder Beitrag hilft uns,
@@ -39,7 +39,7 @@ export default function UnterstuetzungPage() {
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
-              <Mail className="w-12 h-12 text-[var(--color-accent)] mx-auto mb-4" />
+              <Mail className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Mitarbeit</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Komm als Freiwillige/r oder Langzeitmitarbeiter/in zu uns.

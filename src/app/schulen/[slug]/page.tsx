@@ -96,7 +96,7 @@ export default async function SchoolPage({
               {school.startDate && (
                 <div className="bg-[var(--color-warm)] rounded-xl p-5">
                   <div className="flex items-center gap-2 text-sm font-medium text-gray-900 mb-1">
-                    <Calendar className="w-4 h-4 text-[var(--color-accent)]" />
+                    <Calendar className="w-4 h-4 text-[var(--color-primary)]" />
                     Nächster Start
                   </div>
                   <p className="text-sm text-gray-600">{school.startDate}</p>
@@ -105,7 +105,7 @@ export default async function SchoolPage({
               {school.duration && (
                 <div className="bg-[var(--color-warm)] rounded-xl p-5">
                   <div className="flex items-center gap-2 text-sm font-medium text-gray-900 mb-1">
-                    <Clock className="w-4 h-4 text-[var(--color-accent)]" />
+                    <Clock className="w-4 h-4 text-[var(--color-primary)]" />
                     Dauer
                   </div>
                   <p className="text-sm text-gray-600">{school.duration}</p>
@@ -114,7 +114,7 @@ export default async function SchoolPage({
               {school.price && (
                 <div className="bg-[var(--color-warm)] rounded-xl p-5">
                   <div className="flex items-center gap-2 text-sm font-medium text-gray-900 mb-1">
-                    <DollarSign className="w-4 h-4 text-[var(--color-accent)]" />
+                    <DollarSign className="w-4 h-4 text-[var(--color-primary)]" />
                     Kosten
                   </div>
                   <p className="text-sm text-gray-600">{school.price}</p>

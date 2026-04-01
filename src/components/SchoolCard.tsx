@@ -72,7 +72,7 @@ export function SchoolCard({
               {price}
             </p>
           )}
-          <span className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent-dark)] group-hover:gap-3 transition-all">
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent)] group-hover:gap-3 transition-all">
             Mehr erfahren <ArrowRight className="w-4 h-4" />
           </span>
         </div>

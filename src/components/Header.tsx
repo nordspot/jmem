@@ -60,7 +60,7 @@ function NavDropdown({
   const textClass =
     isHome && !scrolled
       ? "text-white/90 hover:text-white"
-      : "text-gray-700 hover:text-[var(--color-primary)]";
+      : "text-gray-700 hover:text-[var(--color-accent)]";
 
   if (!item.children) {
     return (
@@ -102,7 +102,7 @@ function NavDropdown({
                 <Link
                   key={child.href}
                   href={child.href}
-                  className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-[var(--color-warm)] hover:text-[var(--color-primary)] transition-colors"
+                  className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-[var(--color-warm)] hover:text-[var(--color-accent)] transition-colors"
                 >
                   {child.name}
                 </Link>
@@ -229,7 +229,7 @@ export function Header() {
                     <Link
                       key={child.href}
                       href={child.href}
-                      className="block px-8 py-2 text-sm text-gray-500 hover:text-[var(--color-primary)] transition-colors"
+                      className="block px-8 py-2 text-sm text-gray-500 hover:text-[var(--color-accent)] transition-colors"
                       onClick={() => setMobileOpen(false)}
                     >
                       {child.name}

@@ -11,15 +11,22 @@
 }
 
 :root {
-  --color-primary: #E34234;
-  --color-primary-light: #e8584b;
-  --color-primary-dark: #c93528;
-  --color-accent: #1F8BC7;
-  --color-accent-light: #3aa0d8;
-  --color-accent-dark: #186f9f;
+  /* Blue is the primary UI color (buttons, headers, sections) */
+  --color-primary: #1F8BC7;
+  --color-primary-light: #3aa0d8;
+  --color-primary-dark: #186f9f;
+  /* Red-coral is accent only (nav links, highlights) */
+  --color-accent: #E34234;
+  --color-accent-light: #e8584b;
+  --color-accent-dark: #c93528;
+  /* Caption blue for overlays */
+  --color-caption: #008bcb;
+  /* Warm neutrals */
   --color-warm: #f5f0e8;
   --color-warm-dark: #e8dcc8;
-  --color-caption: #008bcb;
+  /* Dark navy for footer and dark sections */
+  --color-dark: #1a2e44;
+  --color-dark-light: #243d58;
   --background: #fafaf8;
   --foreground: #1a1a1a;
 }
@@ -35,6 +42,8 @@
   --color-accent-dark: var(--color-accent-dark);
   --color-warm: var(--color-warm);
   --color-warm-dark: var(--color-warm-dark);
+  --color-dark: var(--color-dark);
+  --color-dark-light: var(--color-dark-light);
   --font-sans: var(--font-geist-sans);
   --font-heading: 'Pathway Gothic One', sans-serif;
 }
