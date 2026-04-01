@@ -1,31 +1,43 @@
-import Link from "next/link";
-import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Angebote | JMEM Wiler",
-  description: "Seminare, Camps, Events und Workshops bei JMEM Wiler.",
-};
+import Image from "next/image";
+import Link from "next/link";
 
 const offerings = [
-  { title: "Brunch4Two", description: "Ein besonderer Brunch für Paare mit Input zu Beziehungsthemen.", category: "Event", date: "Diverse Termine" },
-  { title: "Family Days", description: "Familientage mit Programm für Gross und Klein. Gemeinschaft, Spiel und geistliche Impulse.", category: "Camp", date: "Sommerferien" },
-  { title: "Summer Dance Intensive", description: "Intensivkurs für Tänzer/innen. Technik, Kreativität und Anbetung durch Tanz.", category: "Workshop", date: "Juli" },
-  { title: "we FOUNDation", description: "Grundlagenkurs für junge Erwachsene. Entdecke deine Identität und Berufung.", category: "Kurs", date: "Auf Anfrage" },
-  { title: "Sofazeit / Ehezeit", description: "Wochenende für Ehepaare. Zeit für einander in entspannter Atmosphäre.", category: "Seminar", date: "Diverse Termine" },
-  { title: "Mental Load Seminar", description: "Seminar zum Thema mentale Belastung in Ehe und Familie.", category: "Seminar", date: "Auf Anfrage" },
-  { title: "Esthers Process", description: "Seminar speziell für Frauen. Entdecke deine Berufung und Stärke.", category: "Seminar", date: "Auf Anfrage" },
-  { title: "The Story", description: "Entdecke die grosse Geschichte der Bibel von Anfang bis Ende.", category: "Kurs", date: "Auf Anfrage" },
-  { title: "Career Direct", description: "Professionelle Berufungsberatung mit wissenschaftlichem Assessment.", category: "Workshop", date: "Auf Anfrage" },
-  { title: "Reformations-Tour", description: "Historische Tour auf den Spuren der Reformation in der Schweiz.", category: "Event", date: "Auf Anfrage" },
+  // Familien & Paare
+  { title: "Family Adventure Camp", description: "Eine Woche voller Spass und Qualitätszeit für die ganze Familie.", image: "/images/site/angebot-family-camp.jpg", category: "Familie" },
+  { title: "Verliebte, Verlobte", description: "Programm für Dating- und verlobte Paare. 3,5 Tage intensive Zeit.", image: "/images/site/angebot-verlobte.jpg", category: "Paare" },
+  { title: "Sofazeit? Ehezeit!", description: "Online-Impulse für die Ehe. Bequem von zu Hause aus.", image: "/images/site/angebot-sofa.jpg", category: "Paare" },
+  { title: "Raus aus dem Sofa!", description: "Gemeinschaft und Inspiration für Ehepaare.", image: "/images/site/angebot-raus.jpg", category: "Paare" },
+  { title: "Ehe-Coaching & Paargespräche", description: "Professionelles Coaching für Ehepaare.", image: "/images/site/angebot-coaching.jpg", category: "Paare" },
+  { title: "Brunch 4 Two", description: "Brunch mit Input für Ehepaare.", image: "/images/site/angebot-brunch.jpg", category: "Paare" },
+  { title: "Ehe-Wochenende", description: "Wochenend-Retreat für Ehepaare.", image: "/images/site/angebot-ehe-wochenende.jpg", category: "Paare" },
+  // Kinder & Jugend
+  { title: "Kids-Club", description: "Für Kinder vom Kindergarten bis zur 2. Klasse.", image: "/images/site/angebot-kids-club.jpg", category: "Kinder" },
+  { title: "Eltern & Kids-Treff", description: "Gemeinsamer Treff für Eltern mit Kindern.", image: "/images/site/angebot-eltern-kids.jpg", category: "Kinder" },
+  { title: "Von Anfang an...", description: "Programm für Kinder von 0-4 Jahren.", image: "/images/site/angebot-von-anfang.jpg", category: "Kinder" },
+  { title: "Vater & Tochter", description: "Abenteuer-Wochenende für Väter und Töchter.", image: "/images/site/angebot-vater-tochter.jpg", category: "Familie" },
+  { title: "Mutter & Sohn", description: "Wochenende für Mütter und Söhne.", image: "/images/site/angebot-mutter-sohn.jpg", category: "Familie" },
+  { title: "Mutter & Tochter", description: "Wochenende für Mütter und Töchter.", image: "/images/site/angebot-mutter-tochter.jpg", category: "Familie" },
+  { title: "Vater & Sohn", description: "Abenteuer-Wochenende für Väter und Söhne.", image: "/images/site/angebot-vater-sohn.jpg", category: "Familie" },
+  // Kurse & Seminare
+  { title: "Summer Dance Intensive", description: "Intensivkurs für Tänzer/innen. Technik, Kreativität und Anbetung.", image: "/images/site/angebot-dance.jpg", category: "Workshop" },
+  { title: "Slum Survivor", description: "Erfahrungsprogramm: Armut und Ungerechtigkeit hautnah erleben.", image: "/images/site/angebot-slum.jpg", category: "Erfahrung" },
+  { title: "Bibel-Seminare", description: "Vertiefende Seminare zu biblischen Themen.", image: "/images/site/angebot-bibel.jpg", category: "Seminar" },
+  { title: "Reformations-Tour", description: "Historische Tour in Genf oder Bern auf den Spuren der Reformation.", image: "/images/site/angebot-reformation.jpg", category: "Tour" },
+  { title: "Career Direct", description: "Professionelle Berufungsberatung mit wissenschaftlichem Assessment.", image: "/images/site/angebot-career.jpg", category: "Workshop" },
+  { title: "Referate", description: "Besuche in Gemeinden und Jugendgruppen. Wir kommen zu euch!", image: "/images/site/angebot-referate.jpg", category: "Service" },
 ];
 
 const categoryColors: Record<string, string> = {
-  Event: "bg-blue-50 text-blue-700",
-  Camp: "bg-green-50 text-green-700",
+  Familie: "bg-emerald-50 text-emerald-700",
+  Paare: "bg-rose-50 text-rose-700",
+  Kinder: "bg-amber-50 text-amber-700",
   Workshop: "bg-purple-50 text-purple-700",
-  Kurs: "bg-amber-50 text-amber-700",
-  Seminar: "bg-rose-50 text-rose-700",
+  Seminar: "bg-blue-50 text-blue-700",
+  Tour: "bg-teal-50 text-teal-700",
+  Erfahrung: "bg-orange-50 text-orange-700",
+  Service: "bg-gray-50 text-gray-700",
 };
 
 export default function AngebotePage() {
@@ -33,40 +45,44 @@ export default function AngebotePage() {
     <>
       <section className="bg-[var(--color-primary)] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Angebote</h1>
+          <h1 className="text-4xl font-heading font-bold text-white mb-4">Angebote</h1>
           <p className="text-white/80 max-w-2xl text-lg">
             Seminare, Camps, Events und Workshops für Familien, Paare,
-            Jugendliche und Einzelpersonen.
+            Kinder, Jugendliche und Einzelpersonen.
           </p>
         </div>
       </section>
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {offerings.map((offering) => (
               <div
                 key={offering.title}
-                className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg hover:border-gray-200 transition-all duration-300"
+                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all duration-300"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg font-bold text-gray-900">
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={offering.image}
+                    alt={offering.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <span
+                      className={`text-xs font-medium px-2.5 py-1 rounded-full ${categoryColors[offering.category] || "bg-gray-50 text-gray-700"}`}
+                    >
+                      {offering.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-base font-bold text-gray-900 mb-2">
                     {offering.title}
                   </h3>
-                  <span
-                    className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ml-3 ${categoryColors[offering.category] || "bg-gray-50 text-gray-700"}`}
-                  >
-                    {offering.category}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  {offering.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-xs text-gray-500">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {offering.date}
-                  </span>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    {offering.description}
+                  </p>
                   <Link
                     href="/kontakt"
                     className="text-sm font-medium text-[var(--color-primary)] hover:underline"
