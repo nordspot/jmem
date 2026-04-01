@@ -93,9 +93,13 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Wave bottom */}
+      {/* Wave bottom - transition from hero to white section */}
       <div className="absolute bottom-0 left-0 right-0">
-        <WaveDivider variant="wave1" />
+        <WaveDivider
+          topColor="transparent"
+          bottomColor="white"
+          showLine
+        />
       </div>
     </section>
   );

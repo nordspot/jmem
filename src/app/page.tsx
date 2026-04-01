@@ -135,6 +135,7 @@ export default function HomePage() {
                 {...school}
                 href={`/schulen/${school.slug}`}
                 index={i}
+                showPrice={false}
               />
             ))}
           </div>
@@ -149,8 +150,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Wave before CTA */}
-      <WaveDivider variant="wave2" />
+      {/* Wave transition into CTA */}
+      <WaveDivider
+        topColor="var(--background)"
+        bottomColor="var(--color-dark)"
+        showLine
+      />
 
       {/* CTA */}
       <section className="py-20 bg-[var(--color-dark)]">

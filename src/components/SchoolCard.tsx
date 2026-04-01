@@ -14,6 +14,7 @@ interface SchoolCardProps {
   accredited?: boolean;
   href: string;
   index?: number;
+  showPrice?: boolean;
 }
 
 export function SchoolCard({
@@ -26,6 +27,7 @@ export function SchoolCard({
   accredited,
   href,
   index = 0,
+  showPrice = true,
 }: SchoolCardProps) {
   return (
     <motion.div
@@ -67,7 +69,7 @@ export function SchoolCard({
               </span>
             )}
           </div>
-          {price && (
+          {price && showPrice && (
             <p className="text-sm font-semibold text-[var(--color-primary)] mb-3">
               {price}
             </p>
