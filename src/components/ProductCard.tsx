@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 
@@ -10,7 +9,6 @@ interface ProductCardProps {
   image: string;
   category: string;
   inStock: boolean;
-  index?: number;
 }
 
 export function ProductCard({
@@ -19,7 +17,6 @@ export function ProductCard({
   image,
   category,
   inStock,
-  index = 0,
 }: ProductCardProps) {
   const categoryLabels: Record<string, string> = {
     books: "Buch",
@@ -29,13 +26,7 @@ export function ProductCard({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all duration-300"
-    >
+    <div className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all duration-300">
       <div className="relative aspect-square bg-gray-50 overflow-hidden">
         <Image
           src={image}
@@ -71,6 +62,6 @@ export function ProductCard({
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

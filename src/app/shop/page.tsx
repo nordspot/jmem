@@ -84,7 +84,6 @@ export default function ShopPage() {
                 image={product.image}
                 category={product.category}
                 inStock={product.inStock}
-                index={i}
               />
             ))}
           </div>
