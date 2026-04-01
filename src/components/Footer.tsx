@@ -9,21 +9,18 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-3 mb-4">
+            <Link href="/" className="block mb-4">
               <Image
                 src="/images/site/logo.svg"
                 alt="JMEM Wiler"
-                width={40}
-                height={40}
-                className="h-10 w-auto brightness-0 invert"
+                width={220}
+                height={55}
+                className="h-12 w-auto brightness-0 invert"
               />
-              <div>
-                <p className="text-lg font-bold">JMEM Wiler</p>
-                <p className="text-xs text-white/60">
-                  passion - training - mission
-                </p>
-              </div>
             </Link>
+            <p className="text-xs text-white/60 mb-2">
+              passion - training - mission
+            </p>
             <p className="text-sm text-white/70 leading-relaxed mt-4">
               Jugend mit einer Mission (YWAM) Wiler bei Seedorf ist ein
               überkonfessionelles, internationales Missionswerk.
