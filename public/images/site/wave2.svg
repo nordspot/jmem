@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 1200 200" style="enable-background:new 0 0 1200 200;" xml:space="preserve">
+<style type="text/css">
+	.st0{filter:url(#Adobe_OpacityMaskFilter);}
+	.st1{fill:#FFFFFF;}
+	.st2{mask:url(#SVGID_1_);}
+	.st3{fill:#10698C;}
+</style>
+<defs>
+	<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0" y="65" width="1200" height="135">
+		<feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"></feColorMatrix>
+	</filter>
+</defs>
+<mask maskUnits="userSpaceOnUse" x="0" y="65" width="1200" height="135" id="SVGID_1_">
+	<g class="st0">
+		<rect class="st1" width="1200" height="200"></rect>
+	</g>
+</mask>
+<g class="st2">
+	<path class="st3" d="M0,65c0,0,348.3,76.3,603,72.3s477-27.3,597-27.3v90H0V65z"></path>
+</g>
+</svg>
