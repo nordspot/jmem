@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const offerings = [
-  { title: "Brunch4Two", description: "Ein besonderer Brunch fuer Paare mit Input zu Beziehungsthemen.", category: "Event", date: "Diverse Termine" },
-  { title: "Family Days", description: "Familientage mit Programm fuer Gross und Klein. Gemeinschaft, Spiel und geistliche Impulse.", category: "Camp", date: "Sommerferien" },
-  { title: "Summer Dance Intensive", description: "Intensivkurs fuer Taenzer/innen. Technik, Kreativitaet und Anbetung durch Tanz.", category: "Workshop", date: "Juli" },
-  { title: "we FOUNDation", description: "Grundlagenkurs fuer junge Erwachsene. Entdecke deine Identitaet und Berufung.", category: "Kurs", date: "Auf Anfrage" },
-  { title: "Sofazeit / Ehezeit", description: "Wochenende fuer Ehepaare. Zeit fuer einander in entspannter Atmosphaere.", category: "Seminar", date: "Diverse Termine" },
+  { title: "Brunch4Two", description: "Ein besonderer Brunch für Paare mit Input zu Beziehungsthemen.", category: "Event", date: "Diverse Termine" },
+  { title: "Family Days", description: "Familientage mit Programm für Gross und Klein. Gemeinschaft, Spiel und geistliche Impulse.", category: "Camp", date: "Sommerferien" },
+  { title: "Summer Dance Intensive", description: "Intensivkurs für Tänzer/innen. Technik, Kreativität und Anbetung durch Tanz.", category: "Workshop", date: "Juli" },
+  { title: "we FOUNDation", description: "Grundlagenkurs für junge Erwachsene. Entdecke deine Identität und Berufung.", category: "Kurs", date: "Auf Anfrage" },
+  { title: "Sofazeit / Ehezeit", description: "Wochenende für Ehepaare. Zeit für einander in entspannter Atmosphäre.", category: "Seminar", date: "Diverse Termine" },
   { title: "Mental Load Seminar", description: "Seminar zum Thema mentale Belastung in Ehe und Familie.", category: "Seminar", date: "Auf Anfrage" },
-  { title: "Esthers Process", description: "Seminar speziell fuer Frauen. Entdecke deine Berufung und Staerke.", category: "Seminar", date: "Auf Anfrage" },
+  { title: "Esthers Process", description: "Seminar speziell für Frauen. Entdecke deine Berufung und Stärke.", category: "Seminar", date: "Auf Anfrage" },
   { title: "The Story", description: "Entdecke die grosse Geschichte der Bibel von Anfang bis Ende.", category: "Kurs", date: "Auf Anfrage" },
   { title: "Career Direct", description: "Professionelle Berufungsberatung mit wissenschaftlichem Assessment.", category: "Workshop", date: "Auf Anfrage" },
   { title: "Reformations-Tour", description: "Historische Tour auf den Spuren der Reformation in der Schweiz.", category: "Event", date: "Auf Anfrage" },
@@ -35,7 +35,7 @@ export default function AngebotePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-white mb-4">Angebote</h1>
           <p className="text-white/80 max-w-2xl text-lg">
-            Seminare, Camps, Events und Workshops fuer Familien, Paare,
+            Seminare, Camps, Events und Workshops für Familien, Paare,
             Jugendliche und Einzelpersonen.
           </p>
         </div>

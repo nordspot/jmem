@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
       <Image
         src="/images/site/hero-dts.jpg"
         alt="JMEM Wiler"
@@ -14,37 +14,71 @@ export function HeroSection() {
         className="object-cover"
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary-dark)]/90 via-[var(--color-primary)]/70 to-transparent" />
+      <div className="absolute inset-0 bg-[var(--color-primary-dark)]/75" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="max-w-2xl"
+          className="flex flex-col items-center"
         >
+          {/* Large JMEM Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mb-8"
+          >
+            <Image
+              src="/images/site/logo.svg"
+              alt="JMEM Wiler"
+              width={500}
+              height={125}
+              className="w-[320px] sm:w-[420px] lg:w-[500px] h-auto"
+              priority
+            />
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-[var(--color-accent)] font-medium tracking-widest uppercase text-sm mb-4"
+            transition={{ delay: 0.5 }}
+            className="text-white/90 font-[var(--font-heading)] tracking-[0.3em] uppercase text-lg sm:text-xl mb-6"
           >
             passion &middot; training &middot; mission
           </motion.p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Willkommen bei{" "}
-            <span className="text-[var(--color-accent)]">JMEM</span> Wiler
-          </h1>
-          <p className="text-lg text-white/80 leading-relaxed mb-10 max-w-xl">
-            Jugend mit einer Mission - Gott besser kennenlernen und ihn bekannt
-            machen. Entdecke unsere Schulen, Seminare und Einsaetze.
-          </p>
-          <div className="flex flex-wrap gap-4">
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 max-w-3xl"
+          >
+            Willkommen bei Jugend mit einer Mission
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            className="text-lg text-white/80 leading-relaxed mb-10 max-w-2xl"
+          >
+            Gott besser kennenlernen und ihn bekannt machen. Entdecke unsere
+            Schulen, Seminare und Einsätze in Wiler bei Seedorf.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1 }}
+            className="flex flex-wrap gap-4 justify-center"
+          >
             <Link
-              href="/schulen"
-              className="bg-[var(--color-accent)] text-[var(--color-primary-dark)] font-semibold px-8 py-3.5 rounded-full hover:bg-[var(--color-accent-light)] transition-colors text-sm"
+              href="/schulen/dts"
+              className="bg-[var(--color-primary)] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[var(--color-primary-light)] transition-colors text-sm"
             >
-              Unsere Schulen entdecken
+              Jüngerschaftsschule DTS
             </Link>
             <Link
               href="/angebote"
@@ -52,7 +86,7 @@ export function HeroSection() {
             >
               Angebote ansehen
             </Link>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 

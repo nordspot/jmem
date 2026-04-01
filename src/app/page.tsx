@@ -7,7 +7,7 @@ import { ArrowRight, Heart, Users, Globe, BookOpen } from "lucide-react";
 
 const sections = [
   {
-    title: "Juengerschaftsschule DTS",
+    title: "Jüngerschaftsschule DTS",
     description:
       "Gott besser kennenlernen und ihn bekannt machen. Die DTS ist dein Start bei JMEM.",
     image: "/images/site/hero-dts.jpg",
@@ -21,9 +21,9 @@ const sections = [
     href: "/angebote",
   },
   {
-    title: "Einsaetze",
+    title: "Einsätze",
     description:
-      "Komm mit uns auf Einsatz. Erlebe Mission hautnah in verschiedenen Laendern.",
+      "Komm mit uns auf Einsatz. Erlebe Mission hautnah in verschiedenen Ländern.",
     image: "/images/site/einsaetze.jpg",
     href: "/einsaetze",
   },
@@ -73,8 +73,8 @@ export default function HomePage() {
               Entdecke JMEM Wiler
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Training, Gemeinschaft und Mission - bei uns findest du vielfaeltige
-              Moeglichkeiten, Gott zu erleben und die Welt zu veraendern.
+              Training, Gemeinschaft und Mission - bei uns findest du vielfältige
+              Möglichkeiten, Gott zu erleben und die Welt zu verändern.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -130,10 +130,10 @@ export default function HomePage() {
       <section className="py-20 bg-[var(--color-primary)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Bereit fuer dein Abenteuer?
+            Bereit für dein Abenteuer?
           </h2>
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-            Ob Juengerschaftsschule, Kurzeinsatz oder Seminar - bei JMEM Wiler
+            Ob Jüngerschaftsschule, Kurzeinsatz oder Seminar - bei JMEM Wiler
             findest du deinen Platz. Nimm Kontakt mit uns auf!
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -162,14 +162,14 @@ export default function HomePage() {
                 Zu Gast bei uns
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Unser Zentrum in Wiler bei Seedorf bietet Gaestezimmer fuer
+                Unser Zentrum in Wiler bei Seedorf bietet Gästezimmer für
                 Einzelpersonen und Gruppen. Geniesse die ruhige Umgebung am
                 Fuss des Juras und die Gemeinschaft mit unserem internationalen
                 Team.
               </p>
               <div className="bg-[var(--color-warm)] rounded-xl p-6 space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Uebernachtung</span>
+                  <span className="text-sm text-gray-600">Übernachtung</span>
                   <span className="text-sm font-semibold">CHF 30 / Nacht</span>
                 </div>
                 <div className="flex justify-between">
@@ -184,7 +184,7 @@ export default function HomePage() {
                 <strong>Adresse:</strong> Hauptstrasse 15, 3266 Wiler bei Seedorf
               </p>
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                <strong>oeV:</strong> Zug nach Seedorf oder Aarberg, dann Bus
+                <strong>öV:</strong> Zug nach Seedorf oder Aarberg, dann Bus
                 Linie 74 bis Wiler bei Seedorf.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">

@@ -76,7 +76,7 @@ export default config({
         category: fields.select({
           label: "Kategorie",
           options: [
-            { label: "Buecher", value: "books" },
+            { label: "Bücher", value: "books" },
             { label: "Musik", value: "music" },
             { label: "Kinder & Jugend", value: "kids" },
             { label: "Tricks & Hilfsmittel", value: "tricks" },
@@ -98,7 +98,7 @@ export default config({
           label: "Team",
           options: [
             { label: "Generations", value: "generations" },
-            { label: "Juengerschaft", value: "juengerschaft" },
+            { label: "Jüngerschaft", value: "juengerschaft" },
             { label: "Bibel & Gesellschaft", value: "bibel-gesellschaft" },
             { label: "Supportteam", value: "support" },
             { label: "Leitung", value: "leitung" },
@@ -182,7 +182,7 @@ export default config({
       },
     }),
     aboutPage: singleton({
-      label: "Ueber uns",
+      label: "Über uns",
       path: "src/content/pages/about",
       format: { contentField: "content" },
       schema: {

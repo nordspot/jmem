@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "JMEM Wiler | Jugend mit einer Mission",
   description:
-    "Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf, Schweiz. Schulen, Einsaetze, Seminare und mehr. passion - training - mission.",
+    "Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf, Schweiz. Schulen, Einsätze, Seminare und mehr. passion - training - mission.",
   keywords: [
     "JMEM",
     "YWAM",

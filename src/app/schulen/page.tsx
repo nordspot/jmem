@@ -46,8 +46,8 @@ export default function SchulenPage() {
           </h2>
           <p className="text-gray-600 leading-relaxed">
             Die University of the Nations (UofN) ist die Trainingsplattform von
-            JMEM mit ueber 600 Standorten in 160 Laendern. Sie bietet
-            akkreditierte Programme in 15 Fakultaeten an. JMEM Wiler ist ein
+            JMEM mit über 600 Standorten in 160 Ländern. Sie bietet
+            akkreditierte Programme in 15 Fakultäten an. JMEM Wiler ist ein
             akkreditierter UofN-Standort.
           </p>
         </div>

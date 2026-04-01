@@ -3,8 +3,8 @@ import { Globe, Users, Calendar, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Einsaetze | JMEM Wiler",
-  description: "Kurzeinsaetze und Missionseinsaetze mit JMEM Wiler weltweit.",
+  title: "Einsätze | JMEM Wiler",
+  description: "Kurzeinsätze und Missionseinsätze mit JMEM Wiler weltweit.",
 };
 
 export default function EinsaetzePage() {
@@ -12,10 +12,10 @@ export default function EinsaetzePage() {
     <>
       <section className="bg-[var(--color-primary)] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Einsaetze</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Einsätze</h1>
           <p className="text-white/80 max-w-2xl text-lg">
             Komm mit uns auf Einsatz! Erlebe Mission hautnah und diene
-            Menschen in verschiedenen Laendern und Kulturen.
+            Menschen in verschiedenen Ländern und Kulturen.
           </p>
         </div>
       </section>
@@ -28,14 +28,14 @@ export default function EinsaetzePage() {
                 Mission erleben
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Bei JMEM Wiler hast du die Moeglichkeit, an verschiedenen
-                Einsaetzen teilzunehmen. Ob Kurzeinsatz ueber wenige Wochen
-                oder laengerfristiger Dienst - wir finden den passenden
-                Einsatz fuer dich.
+                Bei JMEM Wiler hast du die Möglichkeit, an verschiedenen
+                Einsätzen teilzunehmen. Ob Kurzeinsatz über wenige Wochen
+                oder längerfristiger Dienst - wir finden den passenden
+                Einsatz für dich.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Die Einsaetze sind Teil unserer Schulen (z.B. DTS) oder werden
-                als separate Kurzeinsaetze angeboten. Du kannst in
+                Die Einsätze sind Teil unserer Schulen (z.B. DTS) oder werden
+                als separate Kurzeinsätze angeboten. Du kannst in
                 verschiedenen Bereichen dienen: Evangelisation, soziale Arbeit,
                 Kinderprogramme, Bau und vieles mehr.
               </p>
@@ -45,7 +45,7 @@ export default function EinsaetzePage() {
                   <Globe className="w-8 h-8 text-[var(--color-primary)] mx-auto mb-2" />
                   <p className="text-sm font-medium text-gray-900">Weltweit</p>
                   <p className="text-xs text-gray-500 mt-1">
-                    Einsaetze auf allen Kontinenten
+                    Einsätze auf allen Kontinenten
                   </p>
                 </div>
                 <div className="bg-[var(--color-warm)] rounded-xl p-5 text-center">
@@ -78,8 +78,8 @@ export default function EinsaetzePage() {
                   DTS-Einsatz
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  Im Rahmen der Juengerschaftsschule (DTS) geht jedes Team auf
-                  einen 8-woechigen Einsatz. Bisherige Einsatzlaender umfassen
+                  Im Rahmen der Jüngerschaftsschule (DTS) geht jedes Team auf
+                  einen 8-wöchigen Einsatz. Bisherige Einsatzländer umfassen
                   Regionen in Europa, Asien und Afrika.
                 </p>
                 <Link
@@ -91,11 +91,11 @@ export default function EinsaetzePage() {
               </div>
               <div className="bg-white rounded-2xl border border-gray-100 p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-3">
-                  Kurzeinsaetze
+                  Kurzeinsätze
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  Kurzeinsaetze von 2 bis 6 Wochen fuer Einzelpersonen und
-                  Gruppen. Ideal fuer einen ersten Einblick in die
+                  Kurzeinsätze von 2 bis 6 Wochen für Einzelpersonen und
+                  Gruppen. Ideal für einen ersten Einblick in die
                   Missionsarbeit.
                 </p>
                 <Link

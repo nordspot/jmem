@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 
 const categories = [
   { key: "all", label: "Alle" },
-  { key: "books", label: "Buecher" },
+  { key: "books", label: "Bücher" },
   { key: "music", label: "Musik" },
   { key: "kids", label: "Kinder & Jugend" },
   { key: "tricks", label: "Tricks & Hilfsmittel" },
@@ -32,7 +32,7 @@ export default function ShopPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-white mb-4">Shop</h1>
           <p className="text-white/80 max-w-2xl text-lg">
-            Buecher, Musik, Materialien fuer die Kinder- und Jugendarbeit und
+            Bücher, Musik, Materialien für die Kinder- und Jugendarbeit und
             kreative Hilfsmittel.
           </p>
         </div>

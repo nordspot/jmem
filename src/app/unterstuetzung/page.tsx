@@ -2,8 +2,8 @@ import { Heart, CreditCard, Mail } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Unterstuetzung | JMEM Wiler",
-  description: "Unterstuetze die Arbeit von JMEM Wiler durch Gebet, Spenden oder Mitarbeit.",
+  title: "Unterstützung | JMEM Wiler",
+  description: "Unterstütze die Arbeit von JMEM Wiler durch Gebet, Spenden oder Mitarbeit.",
 };
 
 export default function UnterstuetzungPage() {
@@ -11,9 +11,9 @@ export default function UnterstuetzungPage() {
     <>
       <section className="bg-[var(--color-primary)] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Unterstuetzung</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Unterstützung</h1>
           <p className="text-white/80 max-w-2xl text-lg">
-            JMEM Wiler wird getragen von der grosszuegigen Unterstuetzung von
+            JMEM Wiler wird getragen von der grosszügigen Unterstützung von
             Freunden und Partnern. Jeder Beitrag macht einen Unterschied.
           </p>
         </div>
@@ -26,15 +26,15 @@ export default function UnterstuetzungPage() {
               <Heart className="w-12 h-12 text-[var(--color-accent)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Gebet</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Bete fuer unsere Mitarbeiter, Studenten, Schulen und Einsaetze.
-                Abonniere unseren Newsletter fuer aktuelle Gebetsanliegen.
+                Bete für unsere Mitarbeiter, Studenten, Schulen und Einsätze.
+                Abonniere unseren Newsletter für aktuelle Gebetsanliegen.
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
               <CreditCard className="w-12 h-12 text-[var(--color-accent)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Spenden</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Unterstuetze unsere Arbeit finanziell. Jeder Beitrag hilft uns,
+                Unterstütze unsere Arbeit finanziell. Jeder Beitrag hilft uns,
                 Menschen auszubilden und in die Welt zu senden.
               </p>
             </div>
@@ -43,7 +43,7 @@ export default function UnterstuetzungPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">Mitarbeit</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Komm als Freiwillige/r oder Langzeitmitarbeiter/in zu uns.
-                Wir suchen Menschen mit verschiedenen Gaben und Faehigkeiten.
+                Wir suchen Menschen mit verschiedenen Gaben und Fähigkeiten.
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function UnterstuetzungPage() {
           <div className="max-w-2xl mx-auto">
             <div className="bg-[var(--color-warm)] rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                Bankverbindung fuer Spenden
+                Bankverbindung für Spenden
               </h2>
               <div className="space-y-3 text-sm text-gray-600">
                 <div className="flex justify-between py-2 border-b border-gray-200">

@@ -3,8 +3,8 @@ import { Users, Globe, BookOpen, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Ueber uns | JMEM Wiler",
-  description: "Jugend mit einer Mission (YWAM) Wiler bei Seedorf - ein ueberkonfessionelles, internationales Missionswerk.",
+  title: "Über uns | JMEM Wiler",
+  description: "Jugend mit einer Mission (YWAM) Wiler bei Seedorf - ein überkonfessionelles, internationales Missionswerk.",
 };
 
 export default function UeberUnsPage() {
@@ -12,7 +12,7 @@ export default function UeberUnsPage() {
     <>
       <section className="bg-[var(--color-primary)] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Ueber uns</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Über uns</h1>
           <p className="text-white/80 max-w-2xl text-lg">
             Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf - seit
             1981 im Dienst von Gottes Reich.
@@ -31,19 +31,19 @@ export default function UeberUnsPage() {
                 <p>
                   JMEM Wiler ist ein Standort von Jugend mit einer Mission
                   (engl. Youth With A Mission, YWAM) in der Schweiz. Wir sind
-                  ein ueberkonfessionelles, internationales Missionswerk mit
+                  ein überkonfessionelles, internationales Missionswerk mit
                   dem Ziel, Gott bekannt zu machen.
                 </p>
                 <p>
                   Unser Zentrum befindet sich in Wiler bei Seedorf, am Fuss
                   des Juras im Berner Seeland. Hier leben und arbeiten rund
-                  35 internationale Mitarbeiter aus verschiedenen Laendern
+                  35 internationale Mitarbeiter aus verschiedenen Ländern
                   gemeinsam.
                 </p>
                 <p>
                   Wir bieten akkreditierte Schulen der University of the
-                  Nations (UofN), Seminare, Camps und Einsaetze an. Unser
-                  Herz schlaegt fuer Training, Gemeinschaft und Mission.
+                  Nations (UofN), Seminare, Camps und Einsätze an. Unser
+                  Herz schlägt für Training, Gemeinschaft und Mission.
                 </p>
               </div>
             </div>
@@ -67,11 +67,11 @@ export default function UeberUnsPage() {
                 {
                   name: "Generations",
                   description:
-                    "Dienst an Familien, Kindern und ueber Generationen hinweg.",
+                    "Dienst an Familien, Kindern und über Generationen hinweg.",
                   icon: Users,
                 },
                 {
-                  name: "Juengerschaft",
+                  name: "Jüngerschaft",
                   description:
                     "Training und Begleitung junger Menschen auf ihrem Weg mit Gott.",
                   icon: BookOpen,
@@ -85,7 +85,7 @@ export default function UeberUnsPage() {
                 {
                   name: "Supportteam",
                   description:
-                    "Verwaltung, Finanzen, Technik und Gastronomie fuer den laufenden Betrieb.",
+                    "Verwaltung, Finanzen, Technik und Gastronomie für den laufenden Betrieb.",
                   icon: MapPin,
                 },
               ].map((team) => (
@@ -112,8 +112,8 @@ export default function UeberUnsPage() {
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6 max-w-3xl">
               JMEM (Youth With A Mission) wurde 1960 von Loren Cunningham
-              gegruendet und ist heute mit ueber 18&apos;000 Vollzeitmitarbeitern
-              in mehr als 180 Laendern aktiv. Die drei Saeulen von JMEM sind
+              gegründet und ist heute mit über 18&apos;000 Vollzeitmitarbeitern
+              in mehr als 180 Ländern aktiv. Die drei Säulen von JMEM sind
               Training, Barmherzigkeit und Evangelisation.
             </p>
             <div className="grid sm:grid-cols-3 gap-6">
@@ -121,7 +121,7 @@ export default function UeberUnsPage() {
                 <p className="text-3xl font-bold text-[var(--color-primary)]">
                   180+
                 </p>
-                <p className="text-sm text-gray-500 mt-1">Laender</p>
+                <p className="text-sm text-gray-500 mt-1">Länder</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-[var(--color-primary)]">
@@ -133,7 +133,7 @@ export default function UeberUnsPage() {
                 <p className="text-3xl font-bold text-[var(--color-primary)]">
                   1960
                 </p>
-                <p className="text-sm text-gray-500 mt-1">Gegruendet</p>
+                <p className="text-sm text-gray-500 mt-1">Gegründet</p>
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function UeberUnsPage() {
             <p className="text-gray-600 leading-relaxed max-w-3xl">
               Unser Zentrum liegt idyllisch im Berner Seeland, eingebettet
               zwischen dem Jura und den Alpen. Die ruhige Lage bietet ideale
-              Bedingungen fuer Studium, Gebet und Gemeinschaft. In der Naehe
+              Bedingungen für Studium, Gebet und Gemeinschaft. In der Nähe
               befinden sich der Bielersee und verschiedene Wander- und
               Velowege.
             </p>
@@ -154,16 +154,16 @@ export default function UeberUnsPage() {
 
           {/* Gaeste */}
           <div id="gaeste" className="mt-16">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Gaeste</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Gäste</h2>
             <p className="text-gray-600 leading-relaxed mb-6 max-w-3xl">
-              Wir freuen uns, Gaeste bei uns willkommen zu heissen. Unser
-              Gaestezimmer steht Einzelpersonen und Gruppen zur Verfuegung.
+              Wir freuen uns, Gäste bei uns willkommen zu heissen. Unser
+              Gästezimmer steht Einzelpersonen und Gruppen zur Verfügung.
             </p>
             <div className="bg-white rounded-2xl border border-gray-100 p-6 max-w-md">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Preise</h3>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Uebernachtung</span>
+                  <span className="text-gray-600">Übernachtung</span>
                   <span className="font-semibold">CHF 30 / Nacht</span>
                 </div>
                 <div className="flex justify-between text-sm">

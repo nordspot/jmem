@@ -64,9 +64,9 @@ export default function KontaktPage() {
                     <option>Allgemeine Anfrage</option>
                     <option>Schulen / Anmeldung</option>
                     <option>Angebote / Events</option>
-                    <option>Gaestezimmer</option>
+                    <option>Gästezimmer</option>
                     <option>Shop</option>
-                    <option>Unterstuetzung / Spenden</option>
+                    <option>Unterstützung / Spenden</option>
                     <option>Sonstiges</option>
                   </select>
                 </div>

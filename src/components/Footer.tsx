@@ -26,7 +26,7 @@ export function Footer() {
             </Link>
             <p className="text-sm text-white/70 leading-relaxed mt-4">
               Jugend mit einer Mission (YWAM) Wiler bei Seedorf ist ein
-              ueberkonfessionelles, internationales Missionswerk.
+              überkonfessionelles, internationales Missionswerk.
             </p>
             <div className="flex gap-3 mt-6">
               <a
@@ -90,10 +90,10 @@ export function Footer() {
             <ul className="space-y-2.5">
               {[
                 ["Angebote", "/angebote"],
-                ["Einsaetze", "/einsaetze"],
+                ["Einsätze", "/einsaetze"],
                 ["Shop", "/shop"],
-                ["Unterstuetzung", "/unterstuetzung"],
-                ["Ueber uns", "/ueber-uns"],
+                ["Unterstützung", "/unterstuetzung"],
+                ["Über uns", "/ueber-uns"],
                 ["Datenschutz", "/datenschutz"],
               ].map(([name, href]) => (
                 <li key={href}>
