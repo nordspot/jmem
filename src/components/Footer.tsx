@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useLang } from "@/lib/LangContext";
 
 export function Footer() {
+  const { t } = useLang();
+
   return (
     <footer className="bg-[var(--color-dark)] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -19,11 +24,10 @@ export function Footer() {
               />
             </Link>
             <p className="text-xs text-white/60 mb-2">
-              passion - training - mission
+              {t.footer.tagline}
             </p>
             <p className="text-sm text-white/70 leading-relaxed mt-4">
-              Jugend mit einer Mission (YWAM) Wiler bei Seedorf ist ein
-              überkonfessionelles, internationales Missionswerk.
+              {t.footer.description}
             </p>
             <div className="flex gap-3 mt-6">
               <a
@@ -56,7 +60,7 @@ export function Footer() {
           {/* Schulen */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider mb-4 text-white/90">
-              Schulen
+              {t.footer.schoolsTitle}
             </h3>
             <ul className="space-y-2.5">
               {[
@@ -82,16 +86,16 @@ export function Footer() {
           {/* Quick Links */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider mb-4 text-white/90">
-              Weitere Links
+              {t.footer.linksTitle}
             </h3>
             <ul className="space-y-2.5">
               {[
-                ["Angebote", "/angebote"],
-                ["Einsätze", "/einsaetze"],
-                ["Shop", "/shop"],
-                ["Unterstützung", "/unterstuetzung"],
-                ["Über uns", "/ueber-uns"],
-                ["Datenschutz", "/datenschutz"],
+                [t.nav.angebote, "/angebote"],
+                [t.nav.einsaetze, "/einsaetze"],
+                [t.nav.shop, "/shop"],
+                [t.nav.unterstuetzung, "/unterstuetzung"],
+                [t.nav.ueberUns, "/ueber-uns"],
+                [t.footer.privacy, "/datenschutz"],
               ].map(([name, href]) => (
                 <li key={href}>
                   <Link
@@ -108,7 +112,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider mb-4 text-white/90">
-              Kontakt
+              {t.footer.contactTitle}
             </h3>
             <ul className="space-y-4">
               <li className="flex gap-3">
@@ -140,12 +144,12 @@ export function Footer() {
             </ul>
             <div className="mt-6 p-4 bg-white/5 rounded-xl">
               <p className="text-xs font-medium text-white/90 mb-1">
-                Telefonzeiten
+                {t.footer.phoneHours}
               </p>
               <p className="text-xs text-white/60">
-                Mo-Mi, Fr: 09:00-12:00 &amp; 14:00-17:00
+                {t.footer.phoneSchedule1}
                 <br />
-                Do: 09:00-12:00
+                {t.footer.phoneSchedule2}
               </p>
             </div>
           </div>
@@ -155,21 +159,20 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} Jugend mit einer Mission Wiler. Alle
-            Rechte vorbehalten.
+            &copy; {new Date().getFullYear()} {t.footer.copyright}
           </p>
           <div className="flex gap-6">
             <Link
               href="/datenschutz"
               className="text-xs text-white/40 hover:text-white/70 transition-colors"
             >
-              Datenschutz
+              {t.footer.privacy}
             </Link>
             <Link
               href="/impressum"
               className="text-xs text-white/40 hover:text-white/70 transition-colors"
             >
-              Impressum
+              {t.footer.imprint}
             </Link>
           </div>
         </div>

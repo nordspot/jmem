@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Pathway_Gothic_One } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { LangProvider } from "@/lib/LangContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,10 +15,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const pathwayGothicOne = Pathway_Gothic_One({
+  weight: "400",
+  variable: "--font-pathway",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "JMEM Wiler | Jugend mit einer Mission",
   description:
-    "Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf, Schweiz. Schulen, Einsätze, Seminare und mehr. passion - training - mission.",
+    "Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf, Schweiz. Schulen, Eins\u00e4tze, Seminare und mehr. passion - training - mission.",
   keywords: [
     "JMEM",
     "YWAM",
@@ -45,12 +52,14 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${pathwayGothicOne.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LangProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LangProvider>
       </body>
     </html>
   );

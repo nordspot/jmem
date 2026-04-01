@@ -6,53 +6,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLang } from "@/lib/LangContext";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
-const navigation = [
-  {
-    name: "Schulen",
-    href: "/schulen",
-    children: [
-      { name: "DTS - Jüngerschaftsschule", href: "/schulen/dts" },
-      { name: "SBCW - Bibl. Christl. Weltanschauung", href: "/schulen/sbcw" },
-      { name: "SBS - Bibelstudium", href: "/schulen/sbs" },
-      { name: "DBS - Jüngerschafts-Bibelschule", href: "/schulen/dbs" },
-      { name: "SVS - Visual Storytelling", href: "/schulen/svs" },
-      { name: "SMJ - Missional Justice", href: "/schulen/smj" },
-      { name: "BLP - Leiterschaftskurs", href: "/schulen/blp" },
-      { name: "WLC - Weltanschauung Leiterschaft", href: "/schulen/wlc" },
-      { name: "B-SBS - Berufsbegleitend", href: "/schulen/b-sbs" },
-      { name: "UofN - University of the Nations", href: "/schulen/uofn" },
-    ],
-  },
-  {
-    name: "Angebote",
-    href: "/angebote",
-    children: [
-      { name: "Agenda", href: "/angebote" },
-      { name: "Unsere Angebote", href: "/angebote" },
-    ],
-  },
-  { name: "Einsätze", href: "/einsaetze" },
-  { name: "Unterstützung", href: "/unterstuetzung" },
-  {
-    name: "Über uns",
-    href: "/ueber-uns",
-    children: [
-      { name: "JMEM Wiler", href: "/ueber-uns" },
-      { name: "Zentrum & Umgebung", href: "/ueber-uns#zentrum" },
-      { name: "Gäste", href: "/ueber-uns#gaeste" },
-      { name: "Kontakt", href: "/kontakt" },
-    ],
-  },
-  { name: "Shop", href: "/shop" },
-];
+interface NavItem {
+  name: string;
+  href: string;
+  children?: { name: string; href: string }[];
+}
 
 function NavDropdown({
   item,
   isHome,
   scrolled,
 }: {
-  item: (typeof navigation)[0];
+  item: NavItem;
   isHome: boolean;
   scrolled: boolean;
 }) {
@@ -100,7 +68,7 @@ function NavDropdown({
             <div className="py-2">
               {item.children.map((child) => (
                 <Link
-                  key={child.href}
+                  key={child.href + child.name}
                   href={child.href}
                   className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-[var(--color-warm)] hover:text-[var(--color-accent)] transition-colors"
                 >
@@ -120,6 +88,47 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const { t } = useLang();
+
+  const navigation: NavItem[] = [
+    {
+      name: t.nav.schulen,
+      href: "/schulen",
+      children: [
+        { name: "DTS - " + t.schools.dts.title, href: "/schulen/dts" },
+        { name: "SBCW - " + t.schools.sbcw.title, href: "/schulen/sbcw" },
+        { name: "SBS - " + t.schools.sbs.title, href: "/schulen/sbs" },
+        { name: "DBS - " + t.schools.dbs.title, href: "/schulen/dbs" },
+        { name: "SVS - " + t.schools.svs.title, href: "/schulen/svs" },
+        { name: "SMJ - " + t.schools.smj.title, href: "/schulen/smj" },
+        { name: "BLP - " + t.schools.blp.title, href: "/schulen/blp" },
+        { name: "WLC - " + t.schools.wlc.title, href: "/schulen/wlc" },
+        { name: "B-SBS - " + t.schools.bsbs.title, href: "/schulen/b-sbs" },
+        { name: "UofN - " + t.schools.uofn.title, href: "/schulen/uofn" },
+      ],
+    },
+    {
+      name: t.nav.angebote,
+      href: "/angebote",
+      children: [
+        { name: t.nav.agenda, href: "/angebote" },
+        { name: t.nav.unsereAngebote, href: "/angebote" },
+      ],
+    },
+    { name: t.nav.einsaetze, href: "/einsaetze" },
+    { name: t.nav.unterstuetzung, href: "/unterstuetzung" },
+    {
+      name: t.nav.ueberUns,
+      href: "/ueber-uns",
+      children: [
+        { name: t.nav.jmemWiler, href: "/ueber-uns" },
+        { name: t.nav.zentrumUmgebung, href: "/ueber-uns#zentrum" },
+        { name: t.nav.gaeste, href: "/ueber-uns#gaeste" },
+        { name: t.nav.kontakt, href: "/kontakt" },
+      ],
+    },
+    { name: t.nav.shop, href: "/shop" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -139,28 +148,16 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            {/* Only show header logo when NOT on transparent home header */}
-            {(!isHome || scrolled) && (
-              <>
-                <Image
-                  src="/images/site/logo.svg"
-                  alt="JMEM Wiler"
-                  width={48}
-                  height={48}
-                  className="h-10 w-auto lg:h-12"
-                />
-                <div className="hidden sm:block">
-                  <p className="text-lg font-bold text-[var(--color-primary)]">
-                    JMEM Wiler
-                  </p>
-                  <p className="text-xs text-gray-500 -mt-0.5">
-                    passion - training - mission
-                  </p>
-                </div>
-              </>
-            )}
-            {isHome && !scrolled && (
+          <Link href="/" className="shrink-0">
+            {(!isHome || scrolled) ? (
+              <Image
+                src="/images/site/jmem_bl.svg"
+                alt="JMEM Wiler"
+                width={180}
+                height={45}
+                className="h-8 lg:h-10 w-auto"
+              />
+            ) : (
               <span className="text-lg font-bold text-white">JMEM Wiler</span>
             )}
           </Link>
@@ -177,6 +174,13 @@ export function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
+            <LanguageSwitcher
+              className={
+                isHome && !scrolled
+                  ? "border-white/30 text-white hover:bg-white/10"
+                  : "border-gray-200 text-gray-700 hover:bg-gray-50"
+              }
+            />
             <Link
               href="/kontakt"
               className={`text-sm font-medium px-5 py-2.5 rounded-full transition-colors ${
@@ -185,7 +189,7 @@ export function Header() {
                   : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-light)]"
               }`}
             >
-              Kontakt
+              {t.nav.kontakt}
             </Link>
           </div>
 
@@ -227,7 +231,7 @@ export function Header() {
                   </Link>
                   {item.children?.map((child) => (
                     <Link
-                      key={child.href}
+                      key={child.href + child.name}
                       href={child.href}
                       className="block px-8 py-2 text-sm text-gray-500 hover:text-[var(--color-accent)] transition-colors"
                       onClick={() => setMobileOpen(false)}
@@ -237,12 +241,15 @@ export function Header() {
                   ))}
                 </div>
               ))}
+              <div className="px-4 pt-2">
+                <LanguageSwitcher className="border-gray-200 text-gray-700 hover:bg-gray-50" />
+              </div>
               <Link
                 href="/kontakt"
                 className="block mx-4 mt-4 text-center bg-[var(--color-primary)] text-white font-medium px-5 py-3 rounded-full hover:bg-[var(--color-primary-light)] transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Kontakt
+                {t.nav.kontakt}
               </Link>
             </nav>
           </motion.div>

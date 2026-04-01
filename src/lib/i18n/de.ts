@@ -1,0 +1,208 @@
+export const de = {
+  nav: {
+    schulen: "Schulen",
+    angebote: "Angebote",
+    einsaetze: "Eins\u00e4tze",
+    unterstuetzung: "Unterst\u00fctzung",
+    ueberUns: "\u00dcber uns",
+    shop: "Shop",
+    kontakt: "Kontakt",
+    agenda: "Agenda",
+    unsereAngebote: "Unsere Angebote",
+    jmemWiler: "JMEM Wiler",
+    zentrumUmgebung: "Zentrum & Umgebung",
+    gaeste: "G\u00e4ste",
+  },
+  hero: {
+    welcome: "Willkommen bei Jugend mit einer Mission",
+    tagline: "passion \u00b7 training \u00b7 mission",
+    subtitle:
+      "Gott besser kennenlernen und ihn bekannt machen. Entdecke unsere Schulen, Seminare und Eins\u00e4tze in Wiler bei Seedorf.",
+    ctaDTS: "J\u00fcngerschaftsschule DTS",
+    ctaAngebote: "Angebote ansehen",
+  },
+  stats: {
+    internationalStaff: "Internationale Mitarbeiter",
+    accreditedSchools: "Akkreditierte Schulen",
+    offers: "Angebote & Seminare",
+    since: "Seit",
+  },
+  video: {
+    title: "Unser Herz",
+    subtitle: "Erfahre mehr \u00fcber unsere Vision und unsere Gemeinschaft in Wiler bei Seedorf.",
+  },
+  discover: {
+    title: "Entdecke JMEM Wiler",
+    subtitle:
+      "Training, Gemeinschaft und Mission \u2013 bei uns findest du vielf\u00e4ltige M\u00f6glichkeiten, Gott zu erleben und die Welt zu ver\u00e4ndern.",
+  },
+  sections: {
+    dtsTitle: "J\u00fcngerschaftsschule DTS",
+    dtsDescription:
+      "Gott besser kennenlernen und ihn bekannt machen. Die DTS ist dein Start bei JMEM.",
+    seminarsTitle: "Seminare & Events",
+    seminarsDescription:
+      "Brunch4Two, Family Days, Summer Dance Intensive und viele weitere Angebote.",
+    outreachTitle: "Eins\u00e4tze",
+    outreachDescription:
+      "Komm mit uns auf Einsatz. Erlebe Mission hautnah in verschiedenen L\u00e4ndern.",
+    schoolsTitle: "Schulen & Kurse",
+    schoolsDescription:
+      "Lass dich ausbilden. 10 verschiedene Schulen mit UofN-Akkreditierung.",
+  },
+  schools: {
+    title: "Unsere Schulen",
+    subtitle: "10 akkreditierte Schulen der University of the Nations. Vollzeit und berufsbegleitend.",
+    allSchools: "Alle Schulen",
+    allSchoolsView: "Alle Schulen ansehen",
+    heroSubtitle: "Lass dich ausbilden! Alle unsere Schulen sind Teil der University of the Nations (UofN) und international akkreditiert.",
+    uofnTitle: "University of the Nations",
+    uofnDescription: "Die University of the Nations (UofN) ist die Trainingsplattform von JMEM mit \u00fcber 600 Standorten in 160 L\u00e4ndern. Sie bietet akkreditierte Programme in 15 Fakult\u00e4ten an. JMEM Wiler ist ein akkreditierter UofN-Standort.",
+    dts: {
+      shortName: "DTS",
+      title: "J\u00fcngerschaftsschule (Discipleship Training School)",
+      description: "Die DTS bietet dir die Gelegenheit in einem internationalen Umfeld deine Beziehung zu Gott zu vertiefen, deine Berufung zu entdecken, deine Pers\u00f6nlichkeit weiterzuentwickeln und gemeinsam mit anderen Missionserfahrungen zu sammeln.",
+    },
+    sbcw: {
+      shortName: "SBCW",
+      title: "Schule f\u00fcr Biblisch Christliche Weltanschauung",
+      description: "Lerne eine biblische Perspektive auf alle Lebensbereiche zu entwickeln und in Gesellschaft und Kultur hineinzuwirken.",
+    },
+    sbs: {
+      shortName: "SBS",
+      title: "Schule f\u00fcr Bibelstudium",
+      description: "Tauche tief ein in Gottes Wort mit induktivem Bibelstudium. Lerne die Bibel selbst\u00e4ndig zu studieren und zu lehren.",
+    },
+    dbs: {
+      shortName: "DBS",
+      title: "J\u00fcngerschafts-Bibelschule",
+      description: "Gemeinsam die ganze Bibel entdecken! In dieser Schule lernst du die biblischen Zusammenh\u00e4nge besser verstehen.",
+    },
+    svs: {
+      shortName: "SVS",
+      title: "School of Visual Storytelling",
+      description: "Lerne, wie du mit visuellen Medien Geschichten erz\u00e4hlen und damit Menschen f\u00fcr Gottes Reich begeistern kannst.",
+    },
+    smj: {
+      shortName: "SMJ",
+      title: "School of Missional Justice",
+      description: "Entdecke Gottes Herz f\u00fcr Gerechtigkeit und lerne, wie du in deinem Umfeld f\u00fcr Ver\u00e4nderung eintreten kannst.",
+    },
+    blp: {
+      shortName: "BLP",
+      title: "Ausbildungskurs f\u00fcr Leiter (Bible & Leadership Program)",
+      description: "Ein intensiver Kurs f\u00fcr angehende und bestehende Leiter, der biblische Grundlagen mit praktischer Leiterschaftsentwicklung verbindet.",
+    },
+    wlc: {
+      shortName: "WLC",
+      title: "Weltanschauungs-Leiterschaftskurs",
+      description: "Vertiefe dein Verst\u00e4ndnis christlicher Weltanschauung und entwickle deine Leiterschaftsf\u00e4higkeiten weiter.",
+    },
+    bsbs: {
+      shortName: "B-SBS",
+      title: "Berufsbegleitende Schule f\u00fcr Bibelstudium",
+      description: "Studiere die Bibel intensiv neben deinem Beruf. Modularer Aufbau mit flexiblen Terminen.",
+    },
+    uofn: {
+      shortName: "UofN",
+      title: "University of the Nations",
+      description: "JMEM Wiler ist Teil der University of the Nations mit 15 Fakult\u00e4ten weltweit. Akkreditierte Kurse mit internationaler Anerkennung.",
+    },
+  },
+  cta: {
+    title: "Bereit f\u00fcr dein Abenteuer?",
+    subtitle:
+      "Ob J\u00fcngerschaftsschule, Kurzeinsatz oder Seminar \u2013 bei JMEM Wiler findest du deinen Platz. Nimm Kontakt mit uns auf!",
+    contact: "Kontakt aufnehmen",
+    shop: "Shop besuchen",
+  },
+  guest: {
+    title: "Zu Gast bei uns",
+    description:
+      "Unser Zentrum in Wiler bei Seedorf bietet G\u00e4stezimmer f\u00fcr Einzelpersonen und Gruppen. Geniesse die ruhige Umgebung am Fuss des Juras und die Gemeinschaft mit unserem internationalen Team.",
+    overnight: "\u00dcbernachtung",
+    overnightPrice: "CHF 30 / Nacht",
+    meals: "Mahlzeiten",
+    mealsPrice: "CHF 21 / Tag",
+    arrival: "Anreise",
+    address: "Hauptstrasse 15, 3266 Wiler bei Seedorf",
+    publicTransport: "Zug nach Seedorf oder Aarberg, dann Bus Linie 74 bis Wiler bei Seedorf.",
+    car: "A1 Ausfahrt Kerzers, Richtung Aarberg, dann Seedorf/Wiler.",
+  },
+  common: {
+    moreInfo: "Mehr erfahren",
+    contact: "Kontakt",
+    back: "Zur\u00fcck",
+    allSchools: "Alle Schulen",
+    nextStart: "N\u00e4chster Start",
+    duration: "Dauer",
+    cost: "Kosten",
+    learnMore: "Mehr erfahren",
+    inquire: "Anfragen",
+  },
+  einsaetze: {
+    title: "Eins\u00e4tze",
+    subtitle: "Komm mit uns auf Einsatz! Erlebe Mission hautnah und diene Menschen in verschiedenen L\u00e4ndern und Kulturen.",
+    missionTitle: "Mission erleben",
+    missionP1: "Bei JMEM Wiler hast du die M\u00f6glichkeit, an verschiedenen Eins\u00e4tzen teilzunehmen. Ob Kurzeinsatz \u00fcber wenige Wochen oder l\u00e4ngerfristiger Dienst \u2013 wir finden den passenden Einsatz f\u00fcr dich.",
+    missionP2: "Die Eins\u00e4tze sind Teil unserer Schulen (z.B. DTS) oder werden als separate Kurzeins\u00e4tze angeboten. Du kannst in verschiedenen Bereichen dienen: Evangelisation, soziale Arbeit, Kinderprogramme, Bau und vieles mehr.",
+    worldwide: "Weltweit",
+    worldwideDesc: "Eins\u00e4tze auf allen Kontinenten",
+    inTeam: "Im Team",
+    inTeamDesc: "Gemeinsam mit anderen",
+    flexible: "Flexibel",
+    flexibleDesc: "2 Wochen bis mehrere Monate",
+    dtsOutreach: "DTS-Einsatz",
+    dtsOutreachDesc: "Im Rahmen der J\u00fcngerschaftsschule (DTS) geht jedes Team auf einen 8-w\u00f6chigen Einsatz. Bisherige Einsatzl\u00e4nder umfassen Regionen in Europa, Asien und Afrika.",
+    shortTerm: "Kurzeins\u00e4tze",
+    shortTermDesc: "Kurzeins\u00e4tze von 2 bis 6 Wochen f\u00fcr Einzelpersonen und Gruppen. Ideal f\u00fcr einen ersten Einblick in die Missionsarbeit.",
+    galleryTitle: "Eindr\u00fccke von unseren Eins\u00e4tzen",
+  },
+  ueberUns: {
+    title: "\u00dcber uns",
+    subtitle: "Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf \u2013 seit 1981 im Dienst von Gottes Reich.",
+    jmemWiler: "JMEM Wiler",
+    p1: "JMEM Wiler ist ein Standort von Jugend mit einer Mission (engl. Youth With A Mission, YWAM) in der Schweiz. Wir sind ein \u00fcberkonfessionelles, internationales Missionswerk mit dem Ziel, Gott bekannt zu machen.",
+    p2: "Unser Zentrum befindet sich in Wiler bei Seedorf, am Fuss des Juras im Berner Seeland. Hier leben und arbeiten rund 35 internationale Mitarbeiter aus verschiedenen L\u00e4ndern gemeinsam.",
+    p3: "Wir bieten akkreditierte Schulen der University of the Nations (UofN), Seminare, Camps und Eins\u00e4tze an. Unser Herz schl\u00e4gt f\u00fcr Training, Gemeinschaft und Mission.",
+    teamsTitle: "Unsere Teams",
+    generations: "Generations",
+    generationsDesc: "Dienst an Familien, Kindern und \u00fcber Generationen hinweg.",
+    discipleship: "J\u00fcngerschaft",
+    discipleshipDesc: "Training und Begleitung junger Menschen auf ihrem Weg mit Gott.",
+    bibleSociety: "Bibel & Gesellschaft",
+    bibleSocietyDesc: "Biblische Weltanschauung und gesellschaftliches Engagement.",
+    support: "Supportteam",
+    supportDesc: "Verwaltung, Finanzen, Technik und Gastronomie f\u00fcr den laufenden Betrieb.",
+    worldwideTitle: "JMEM weltweit",
+    worldwideDesc: "JMEM (Youth With A Mission) wurde 1960 von Loren Cunningham gegr\u00fcndet und ist heute mit \u00fcber 18\u2019000 Vollzeitmitarbeitern in mehr als 180 L\u00e4ndern aktiv. Die drei S\u00e4ulen von JMEM sind Training, Barmherzigkeit und Evangelisation.",
+    countries: "L\u00e4nder",
+    staffWorldwide: "Mitarbeiter weltweit",
+    founded: "Gegr\u00fcndet",
+    zentrum: "Zentrum & Umgebung",
+    zentrumDesc: "Unser Zentrum liegt idyllisch im Berner Seeland, eingebettet zwischen dem Jura und den Alpen. Die ruhige Lage bietet ideale Bedingungen f\u00fcr Studium, Gebet und Gemeinschaft. In der N\u00e4he befinden sich der Bielersee und verschiedene Wander- und Velowege.",
+    guests: "G\u00e4ste",
+    guestsDesc: "Wir freuen uns, G\u00e4ste bei uns willkommen zu heissen. Unser G\u00e4stezimmer steht Einzelpersonen und Gruppen zur Verf\u00fcgung.",
+    prices: "Preise",
+  },
+  footer: {
+    tagline: "passion - training - mission",
+    description: "Jugend mit einer Mission (YWAM) Wiler bei Seedorf ist ein \u00fcberkonfessionelles, internationales Missionswerk.",
+    schoolsTitle: "Schulen",
+    linksTitle: "Weitere Links",
+    contactTitle: "Kontakt",
+    phoneHours: "Telefonzeiten",
+    phoneSchedule1: "Mo-Mi, Fr: 09:00-12:00 & 14:00-17:00",
+    phoneSchedule2: "Do: 09:00-12:00",
+    privacy: "Datenschutz",
+    imprint: "Impressum",
+    copyright: "Jugend mit einer Mission Wiler. Alle Rechte vorbehalten.",
+  },
+};
+
+// Recursively map all leaf values to string
+type DeepStringify<T> = {
+  [K in keyof T]: T[K] extends object ? DeepStringify<T[K]> : string;
+};
+
+export type Dictionary = DeepStringify<typeof de>;

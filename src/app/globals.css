@@ -2,14 +2,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@font-face {
-  font-family: 'Pathway Gothic One';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/pathwaygothicone/v15/MwQrbgD32-KAvjkYGNUUxAtW7pEBwx-dTFxe.woff2') format('woff2');
-}
-
 :root {
   /* Blue is the primary UI color (buttons, headers, sections) */
   --color-primary: #1F8BC7;
@@ -45,7 +37,7 @@
   --color-dark: var(--color-dark);
   --color-dark-light: var(--color-dark-light);
   --font-sans: var(--font-geist-sans);
-  --font-heading: 'Pathway Gothic One', sans-serif;
+  --font-heading: var(--font-pathway), 'Pathway Gothic One', sans-serif;
 }
 
 body {
@@ -55,4 +47,8 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
 }

@@ -1,49 +1,51 @@
+"use client";
+
 import { HeroSection } from "@/components/HeroSection";
 import { SectionCard } from "@/components/SectionCard";
 import { SchoolCard } from "@/components/SchoolCard";
+import { WaveDivider } from "@/components/WaveDivider";
 import { schools } from "@/lib/schools";
+import { useLang } from "@/lib/LangContext";
 import Link from "next/link";
 import { ArrowRight, Heart, Users, Globe, BookOpen } from "lucide-react";
 
-const sections = [
-  {
-    title: "Jüngerschaftsschule DTS",
-    description:
-      "Gott besser kennenlernen und ihn bekannt machen. Die DTS ist dein Start bei JMEM.",
-    image: "/images/site/hero-dts.jpg",
-    href: "/schulen/dts",
-  },
-  {
-    title: "Seminare & Events",
-    description:
-      "Brunch4Two, Family Days, Summer Dance Intensive und viele weitere Angebote.",
-    image: "/images/site/angebote.jpg",
-    href: "/angebote",
-  },
-  {
-    title: "Einsätze",
-    description:
-      "Komm mit uns auf Einsatz. Erlebe Mission hautnah in verschiedenen Ländern.",
-    image: "/images/site/einsaetze.jpg",
-    href: "/einsaetze",
-  },
-  {
-    title: "Schulen & Kurse",
-    description:
-      "Lass dich ausbilden. 10 verschiedene Schulen mit UofN-Akkreditierung.",
-    image: "/images/site/schulen.jpg",
-    href: "/schulen",
-  },
-];
-
-const stats = [
-  { icon: Users, value: "35+", label: "Internationale Mitarbeiter" },
-  { icon: Globe, value: "10", label: "Akkreditierte Schulen" },
-  { icon: BookOpen, value: "20+", label: "Angebote & Seminare" },
-  { icon: Heart, value: "1981", label: "Seit" },
-];
-
 export default function HomePage() {
+  const { t } = useLang();
+
+  const sections = [
+    {
+      title: t.sections.dtsTitle,
+      description: t.sections.dtsDescription,
+      image: "/images/site/dts-group.jpg",
+      href: "/schulen/dts",
+    },
+    {
+      title: t.sections.seminarsTitle,
+      description: t.sections.seminarsDescription,
+      image: "/images/site/angebote.jpg",
+      href: "/angebote",
+    },
+    {
+      title: t.sections.outreachTitle,
+      description: t.sections.outreachDescription,
+      image: "/images/site/einsatz-1.jpg",
+      href: "/einsaetze",
+    },
+    {
+      title: t.sections.schoolsTitle,
+      description: t.sections.schoolsDescription,
+      image: "/images/site/schulen-nature.jpg",
+      href: "/schulen",
+    },
+  ];
+
+  const stats = [
+    { icon: Users, value: "35+", label: t.stats.internationalStaff },
+    { icon: Globe, value: "10", label: t.stats.accreditedSchools },
+    { icon: BookOpen, value: "20+", label: t.stats.offers },
+    { icon: Heart, value: "1981", label: t.stats.since },
+  ];
+
   return (
     <>
       <HeroSection />
@@ -65,16 +67,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Main Sections */}
+      {/* Video Section */}
       <section className="py-20 bg-[var(--color-warm)]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {t.video.title}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {t.video.subtitle}
+            </p>
+          </div>
+          <div className="relative w-full overflow-hidden rounded-2xl shadow-xl" style={{ paddingBottom: "56.25%" }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/ruzke9nYO54?start=14&rel=0"
+              title="JMEM Wiler Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Main Sections */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Entdecke JMEM Wiler
+              {t.discover.title}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Training, Gemeinschaft und Mission - bei uns findest du vielfältige
-              Möglichkeiten, Gott zu erleben und die Welt zu verändern.
+              {t.discover.subtitle}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -91,18 +115,17 @@ export default function HomePage() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                Unsere Schulen
+                {t.schools.title}
               </h2>
               <p className="text-gray-600 max-w-xl">
-                10 akkreditierte Schulen der University of the Nations.
-                Vollzeit und berufsbegleitend.
+                {t.schools.subtitle}
               </p>
             </div>
             <Link
               href="/schulen"
               className="hidden sm:flex items-center gap-2 text-sm font-medium text-[var(--color-primary)] hover:gap-3 transition-all"
             >
-              Alle Schulen <ArrowRight className="w-4 h-4" />
+              {t.schools.allSchools} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -120,34 +143,36 @@ export default function HomePage() {
               href="/schulen"
               className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-primary)]"
             >
-              Alle Schulen ansehen <ArrowRight className="w-4 h-4" />
+              {t.schools.allSchoolsView} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
+      {/* Wave before CTA */}
+      <WaveDivider variant="wave2" />
+
       {/* CTA */}
       <section className="py-20 bg-[var(--color-dark)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Bereit für dein Abenteuer?
+            {t.cta.title}
           </h2>
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-            Ob Jüngerschaftsschule, Kurzeinsatz oder Seminar - bei JMEM Wiler
-            findest du deinen Platz. Nimm Kontakt mit uns auf!
+            {t.cta.subtitle}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/kontakt"
               className="bg-[var(--color-primary)] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[var(--color-primary-light)] transition-colors text-sm"
             >
-              Kontakt aufnehmen
+              {t.cta.contact}
             </Link>
             <Link
               href="/shop"
               className="bg-white/10 backdrop-blur text-white font-medium px-8 py-3.5 rounded-full border border-white/20 hover:bg-white/20 transition-colors text-sm"
             >
-              Shop besuchen
+              {t.cta.shop}
             </Link>
           </div>
         </div>
@@ -159,37 +184,32 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Zu Gast bei uns
+                {t.guest.title}
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Unser Zentrum in Wiler bei Seedorf bietet Gästezimmer für
-                Einzelpersonen und Gruppen. Geniesse die ruhige Umgebung am
-                Fuss des Juras und die Gemeinschaft mit unserem internationalen
-                Team.
+                {t.guest.description}
               </p>
               <div className="bg-[var(--color-warm)] rounded-xl p-6 space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Übernachtung</span>
-                  <span className="text-sm font-semibold">CHF 30 / Nacht</span>
+                  <span className="text-sm text-gray-600">{t.guest.overnight}</span>
+                  <span className="text-sm font-semibold">{t.guest.overnightPrice}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Mahlzeiten</span>
-                  <span className="text-sm font-semibold">CHF 21 / Tag</span>
+                  <span className="text-sm text-gray-600">{t.guest.meals}</span>
+                  <span className="text-sm font-semibold">{t.guest.mealsPrice}</span>
                 </div>
               </div>
             </div>
             <div className="bg-[var(--color-warm)] rounded-2xl p-8">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Anreise</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">{t.guest.arrival}</h3>
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                <strong>Adresse:</strong> Hauptstrasse 15, 3266 Wiler bei Seedorf
+                <strong>Adresse:</strong> {t.guest.address}
               </p>
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                <strong>öV:</strong> Zug nach Seedorf oder Aarberg, dann Bus
-                Linie 74 bis Wiler bei Seedorf.
+                <strong>{"\u00f6V:"}</strong> {t.guest.publicTransport}
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                <strong>Auto:</strong> A1 Ausfahrt Kerzers, Richtung Aarberg,
-                dann Seedorf/Wiler.
+                <strong>Auto:</strong> {t.guest.car}
               </p>
             </div>
           </div>

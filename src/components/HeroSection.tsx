@@ -3,8 +3,12 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useLang } from "@/lib/LangContext";
+import { WaveDivider } from "./WaveDivider";
 
 export function HeroSection() {
+  const { t } = useLang();
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
       <Image
@@ -46,7 +50,7 @@ export function HeroSection() {
             transition={{ delay: 0.5 }}
             className="text-white/90 font-[var(--font-heading)] tracking-[0.3em] uppercase text-lg sm:text-xl mb-6"
           >
-            passion &middot; training &middot; mission
+            {t.hero.tagline}
           </motion.p>
 
           <motion.h1
@@ -55,7 +59,7 @@ export function HeroSection() {
             transition={{ delay: 0.7, duration: 0.6 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 max-w-3xl"
           >
-            Willkommen bei Jugend mit einer Mission
+            {t.hero.welcome}
           </motion.h1>
 
           <motion.p
@@ -64,8 +68,7 @@ export function HeroSection() {
             transition={{ delay: 0.9 }}
             className="text-lg text-white/80 leading-relaxed mb-10 max-w-2xl"
           >
-            Gott besser kennenlernen und ihn bekannt machen. Entdecke unsere
-            Schulen, Seminare und Einsätze in Wiler bei Seedorf.
+            {t.hero.subtitle}
           </motion.p>
 
           <motion.div
@@ -78,13 +81,13 @@ export function HeroSection() {
               href="/schulen/dts"
               className="bg-[var(--color-accent)] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[var(--color-accent)]/90 transition-colors text-sm"
             >
-              Jüngerschaftsschule DTS
+              {t.hero.ctaDTS}
             </Link>
             <Link
               href="/angebote"
               className="bg-white/10 backdrop-blur text-white font-medium px-8 py-3.5 rounded-full border border-white/20 hover:bg-white/20 transition-colors text-sm"
             >
-              Angebote ansehen
+              {t.hero.ctaAngebote}
             </Link>
           </motion.div>
         </motion.div>
@@ -92,18 +95,7 @@ export function HeroSection() {
 
       {/* Wave bottom */}
       <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 120V60C240 20 480 0 720 20C960 40 1200 80 1440 60V120H0Z"
-            fill="var(--background)"
-          />
-        </svg>
+        <WaveDivider variant="wave1" />
       </div>
     </section>
   );
