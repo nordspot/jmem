@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -48,16 +49,24 @@ const navigation = [
 
 function NavDropdown({
   item,
+  isHome,
+  scrolled,
 }: {
   item: (typeof navigation)[0];
+  isHome: boolean;
+  scrolled: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const textClass =
+    isHome && !scrolled
+      ? "text-white/90 hover:text-white"
+      : "text-gray-700 hover:text-[var(--color-primary)]";
 
   if (!item.children) {
     return (
       <Link
         href={item.href}
-        className="text-sm font-medium text-gray-700 hover:text-[var(--color-primary)] transition-colors px-3 py-2"
+        className={`text-sm font-medium transition-colors px-3 py-2 ${textClass}`}
       >
         {item.name}
       </Link>
@@ -72,7 +81,7 @@ function NavDropdown({
     >
       <Link
         href={item.href}
-        className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-[var(--color-primary)] transition-colors px-3 py-2"
+        className={`flex items-center gap-1 text-sm font-medium transition-colors px-3 py-2 ${textClass}`}
       >
         {item.name}
         <ChevronDown
@@ -108,49 +117,91 @@ function NavDropdown({
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const headerBg =
+    isHome && !scrolled
+      ? "bg-transparent border-transparent"
+      : "bg-white/90 backdrop-blur-md border-gray-100";
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${headerBg}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <Image
-              src="/images/site/logo.svg"
-              alt="JMEM Wiler"
-              width={48}
-              height={48}
-              className="h-10 w-auto lg:h-12"
-            />
-            <div className="hidden sm:block">
-              <p className="text-lg font-bold text-[var(--color-primary)]">
-                JMEM Wiler
-              </p>
-              <p className="text-xs text-gray-500 -mt-0.5">
-                passion - training - mission
-              </p>
-            </div>
+            {/* Only show header logo when NOT on transparent home header */}
+            {(!isHome || scrolled) && (
+              <>
+                <Image
+                  src="/images/site/logo.svg"
+                  alt="JMEM Wiler"
+                  width={48}
+                  height={48}
+                  className="h-10 w-auto lg:h-12"
+                />
+                <div className="hidden sm:block">
+                  <p className="text-lg font-bold text-[var(--color-primary)]">
+                    JMEM Wiler
+                  </p>
+                  <p className="text-xs text-gray-500 -mt-0.5">
+                    passion - training - mission
+                  </p>
+                </div>
+              </>
+            )}
+            {isHome && !scrolled && (
+              <span className="text-lg font-bold text-white">JMEM Wiler</span>
+            )}
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
             {navigation.map((item) => (
-              <NavDropdown key={item.name} item={item} />
+              <NavDropdown
+                key={item.name}
+                item={item}
+                isHome={isHome}
+                scrolled={scrolled}
+              />
             ))}
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/kontakt"
-              className="bg-[var(--color-primary)] text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-[var(--color-primary-light)] transition-colors"
+              className={`text-sm font-medium px-5 py-2.5 rounded-full transition-colors ${
+                isHome && !scrolled
+                  ? "bg-white/20 text-white border border-white/30 hover:bg-white/30"
+                  : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-light)]"
+              }`}
             >
               Kontakt
             </Link>
           </div>
 
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className={`lg:hidden p-2 rounded-lg transition-colors ${
+              isHome && !scrolled
+                ? "text-white hover:bg-white/10"
+                : "hover:bg-gray-100"
+            }`}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
