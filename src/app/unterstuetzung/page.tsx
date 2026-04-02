@@ -11,6 +11,7 @@ import {
   Palette,
   Baby,
 } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -52,15 +53,7 @@ const openPositions = [
 export default function UnterstuetzungPage() {
   return (
     <>
-      <section className="bg-[var(--color-primary)] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Unterstuetzung</h1>
-          <p className="text-white/80 max-w-2xl text-lg">
-            JMEM Wiler wird getragen von der grosszuegigen Unterstuetzung von
-            Freunden und Partnern. Jeder Beitrag macht einen Unterschied.
-          </p>
-        </div>
-      </section>
+      <PageHero title="Unterstützung" subtitle="JMEM Wiler wird getragen von der grosszügigen Unterstützung von Freunden und Partnern. Jeder Beitrag macht einen Unterschied." image="/images/site/about-worship.jpg" />
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

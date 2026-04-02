@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { products } from "@/lib/products";
 import { Search } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 
 const categories = [
   { key: "all", label: "Alle" },
@@ -28,15 +29,11 @@ export default function ShopPage() {
 
   return (
     <>
-      <section className="bg-[var(--color-primary)] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Shop</h1>
-          <p className="text-white/80 max-w-2xl text-lg">
-            Bücher, Musik, Materialien für die Kinder- und Jugendarbeit und
-            kreative Hilfsmittel.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Shop"
+        subtitle="Bücher, Musik, Materialien für die Kinder- und Jugendarbeit und kreative Hilfsmittel."
+        image="/images/site/schulen-dbs.jpg"
+      />
 
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -2,6 +2,7 @@ import { schools } from "@/lib/schools";
 import { testimonials } from "@/lib/testimonials";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Calendar,
   Clock,
@@ -46,8 +47,10 @@ export default async function SchoolPage({
 
   return (
     <>
-      <section className="bg-[var(--color-primary)] py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <Image src="/images/site/schulen-worship.jpg" alt="" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-[var(--color-dark)]/75" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/schulen"
             className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors"

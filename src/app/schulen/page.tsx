@@ -11,7 +11,7 @@ export default function SchulenPage() {
   return (
     <>
       {/* Hero with background image */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative pt-32 pb-20 overflow-hidden">
         <Image
           src="/images/site/schulen-worship.jpg"
           alt="Schulen"

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Users, Globe, BookOpen, MapPin } from "lucide-react";
 import { useLang } from "@/lib/LangContext";
+import { PageHero } from "@/components/PageHero";
 
 export default function UeberUnsPage() {
   const { t } = useLang();
@@ -32,14 +33,7 @@ export default function UeberUnsPage() {
 
   return (
     <>
-      <section className="bg-[var(--color-primary)] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">{t.ueberUns.title}</h1>
-          <p className="text-white/80 max-w-2xl text-lg">
-            {t.ueberUns.subtitle}
-          </p>
-        </div>
-      </section>
+      <PageHero title={t.ueberUns.title} subtitle={t.ueberUns.subtitle} image="/images/site/about-team.jpg" />
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

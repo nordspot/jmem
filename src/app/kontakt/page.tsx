@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,14 +10,7 @@ export const metadata: Metadata = {
 export default function KontaktPage() {
   return (
     <>
-      <section className="bg-[var(--color-primary)] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Kontakt</h1>
-          <p className="text-white/80 max-w-2xl text-lg">
-            Wir freuen uns auf deine Nachricht. Nimm Kontakt mit uns auf!
-          </p>
-        </div>
-      </section>
+      <PageHero title="Kontakt" subtitle="Wir freuen uns auf deine Nachricht. Nimm Kontakt mit uns auf!" image="/images/site/about-campus.jpg" />
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

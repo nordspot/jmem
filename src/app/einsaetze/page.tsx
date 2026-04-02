@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Globe, Users, Calendar, ArrowRight } from "lucide-react";
 import { useLang } from "@/lib/LangContext";
+import { PageHero } from "@/components/PageHero";
 
 const galleryImages = [
   { src: "/images/site/einsatz-1.jpg", alt: "Einsatz 1" },
@@ -21,14 +22,7 @@ export default function EinsaetzePage() {
 
   return (
     <>
-      <section className="bg-[var(--color-primary)] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-white mb-4">{t.einsaetze.title}</h1>
-          <p className="text-white/80 max-w-2xl text-lg">
-            {t.einsaetze.subtitle}
-          </p>
-        </div>
-      </section>
+      <PageHero title={t.einsaetze.title} subtitle={t.einsaetze.subtitle} image="/images/site/einsatz-1.jpg" />
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

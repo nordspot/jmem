@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { offerings } from "@/lib/offerings";
+import { PageHero } from "@/components/PageHero";
 
 const categoryColors: Record<string, string> = {
   Familie: "bg-emerald-50 text-emerald-700",
@@ -18,15 +19,11 @@ const categoryColors: Record<string, string> = {
 export default function AngebotePage() {
   return (
     <>
-      <section className="bg-[var(--color-primary)] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-heading font-bold text-white mb-4">Angebote</h1>
-          <p className="text-white/80 max-w-2xl text-lg">
-            Seminare, Camps, Events und Workshops für Familien, Paare,
-            Kinder, Jugendliche und Einzelpersonen.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Angebote"
+        subtitle="Seminare, Camps, Events und Workshops für Familien, Paare, Kinder, Jugendliche und Einzelpersonen."
+        image="/images/site/angebot-family-camp.jpg"
+      />
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
