@@ -224,7 +224,7 @@ function ProductEditor({
               className="flex items-center gap-1 text-red-400 hover:text-red-300 text-sm"
             >
               <Trash2 className="w-3.5 h-3.5" />
-              Loeschen
+              Löschen
             </button>
           )}
           <button onClick={onCancel} className="text-gray-500 hover:text-white text-sm">
@@ -455,7 +455,7 @@ export default function CmsPage() {
   }
 
   function handleDeleteProduct(sku: string) {
-    if (!confirm("Produkt wirklich loeschen?")) return;
+    if (!confirm("Produkt wirklich löschen?")) return;
     saveViaAgent(
       `Remove the product with SKU "${sku}" from src/lib/products.ts. Keep the same TypeScript format and other products unchanged.`
     );

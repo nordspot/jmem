@@ -9,21 +9,21 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Diese DTS war phaenomenal und eine der besten Entscheidungen, die ich je getroffen habe. Die Erfahrungen hier waren lebensveraendernd.",
+      "Diese DTS war phänomenal und eine der besten Entscheidungen, die ich je getroffen habe. Die Erfahrungen hier waren lebensverändernd.",
     name: "Kelsey",
     country: "USA",
     school: "dts",
   },
   {
     quote:
-      "Die SBCW hat mir geholfen, Gottes perfekten Plan fuer mein Leben zu erkennen und die Vision umzusetzen, die er mir gegeben hat.",
+      "Die SBCW hat mir geholfen, Gottes perfekten Plan für mein Leben zu erkennen und die Vision umzusetzen, die er mir gegeben hat.",
     name: "Simon",
     country: "India",
     school: "sbcw",
   },
   {
     quote:
-      "Meine Perspektive auf Gott und die ganze Welt hat sich durch diese Schule komplett veraendert.",
+      "Meine Perspektive auf Gott und die ganze Welt hat sich durch diese Schule komplett verändert.",
     name: "Dayana",
     country: "Colombia",
     school: "sbcw",
@@ -37,7 +37,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Die SBS hat mir geholfen, den roten Faden durch die Bibel zu sehen und viele Schaetze zu entdecken.",
+      "Die SBS hat mir geholfen, den roten Faden durch die Bibel zu sehen und viele Schätze zu entdecken.",
     name: "Stefan",
     country: "CH",
     school: "sbs",

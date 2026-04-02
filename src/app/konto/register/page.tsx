@@ -33,7 +33,7 @@ export default function RegisterPage() {
     setError(null);
 
     if (form.password !== form.confirmPassword) {
-      setError("Die Passwoerter stimmen nicht ueberein.");
+      setError("Die Passwörter stimmen nicht überein.");
       return;
     }
 
@@ -137,7 +137,7 @@ export default function RegisterPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Passwort bestaetigen *
+                  Passwort bestätigen *
                 </label>
                 <input
                   required

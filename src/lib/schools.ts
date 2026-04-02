@@ -10,6 +10,7 @@ export interface School {
   title: string;
   description: string;
   descriptionLong?: string;
+  image?: string;
   startDate?: string;
   endDate?: string;
   price?: string;
@@ -27,11 +28,12 @@ export const schools: School[] = [
   {
     slug: "dts",
     shortName: "DTS",
-    title: "Juengerschaftsschule (Discipleship Training School)",
+    title: "Jüngerschaftsschule (Discipleship Training School)",
+    image: "/images/site/dts-group.jpg",
     description:
-      "Die DTS bietet dir die Gelegenheit in einem internationalen Umfeld deine Beziehung zu Gott zu vertiefen, deine Berufung zu entdecken, deine Persoenlichkeit weiterzuentwickeln und gemeinsam mit anderen Missionserfahrungen zu sammeln.",
+      "Die DTS bietet dir die Gelegenheit in einem internationalen Umfeld deine Beziehung zu Gott zu vertiefen, deine Berufung zu entdecken, deine Persönlichkeit weiterzuentwickeln und gemeinsam mit anderen Missionserfahrungen zu sammeln.",
     descriptionLong:
-      "Die Juengerschaftsschule (DTS) ist die Grundausbildung bei JMEM und Voraussetzung fuer alle weiteren Schulen und Programme. In einem internationalen Umfeld vertiefst du deine Beziehung zu Gott, entdeckst deine Berufung und sammelst praktische Missionserfahrungen. Die erste Haelfte besteht aus Vorlesungen mit verschiedenen Referenten, die zweite Haelfte aus einem Missionseinsatz in einem anderen Land.",
+      "Die Jüngerschaftsschule (DTS) ist die Grundausbildung bei JMEM und Voraussetzung für alle weiteren Schulen und Programme. In einem internationalen Umfeld vertiefst du deine Beziehung zu Gott, entdeckst deine Berufung und sammelst praktische Missionserfahrungen. Die erste Hälfte besteht aus Vorlesungen mit verschiedenen Referenten, die zweite Hälfte aus einem Missionseinsatz in einem anderen Land.",
     startDate: "April 2026",
     duration: "5 Monate (12 Wochen Vorlesung + 8 Wochen Einsatz)",
     price: "CHF 7'700",
@@ -41,36 +43,37 @@ export const schools: School[] = [
         name: "Original DTS",
         subtitle: "Gott kennen und ihn bekannt machen",
         description:
-          "Die klassische Juengerschaftsschule: Gott kennen und ihn bekannt machen. Fuer alle ab 18 Jahren, die bereit sind, ihr Leben Gott ganz zur Verfuegung zu stellen.",
+          "Die klassische Jüngerschaftsschule: Gott kennen und ihn bekannt machen. Für alle ab 18 Jahren, die bereit sind, ihr Leben Gott ganz zur Verfügung zu stellen.",
       },
       {
         name: "Gerechtigkeits-DTS",
-        subtitle: "Gottes Herz fuer die Verletzlichen",
+        subtitle: "Gottes Herz für die Verletzlichen",
         description:
-          "Eine DTS mit besonderem Fokus auf Gerechtigkeit fuer die Verletzlichen und Benachteiligten. Du lernst Gottes Herz fuer die Armen kennen und wie du konkret fuer Veraenderung eintreten kannst.",
+          "Eine DTS mit besonderem Fokus auf Gerechtigkeit für die Verletzlichen und Benachteiligten. Du lernst Gottes Herz für die Armen kennen und wie du konkret für Veränderung eintreten kannst.",
       },
       {
         name: "Couples DTS",
         subtitle: "Gemeinsam als Ehepaar wachsen",
         description:
-          "Eine DTS speziell fuer verheiratete Paare. Wachst gemeinsam in eurer Beziehung zu Gott und zueinander, und entdeckt eure gemeinsame Berufung.",
+          "Eine DTS speziell für verheiratete Paare. Wachst gemeinsam in eurer Beziehung zu Gott und zueinander, und entdeckt eure gemeinsame Berufung.",
       },
       {
         name: "DTS 50plus",
         subtitle: "Bereit durchzustarten",
         description:
-          "Du bist ueber 50 und bereit fuer einen Neustart? Diese DTS ist fuer Menschen in der zweiten Lebenshaelfte, die ihre Erfahrung und Reife einsetzen moechten, um die Welt zu veraendern.",
+          "Du bist über 50 und bereit für einen Neustart? Diese DTS ist für Menschen in der zweiten Lebenshälfte, die ihre Erfahrung und Reife einsetzen möchten, um die Welt zu verändern.",
       },
     ],
   },
   {
     slug: "sbcw",
     shortName: "SBCW",
-    title: "Schule fuer Biblisch Christliche Weltanschauung",
+    title: "Schule für Biblisch Christliche Weltanschauung",
+    image: "/images/site/sbcw-1.jpg",
     description:
-      "Die gute Nachricht von Jesus Christus betrifft weit mehr als persoenliche Rettung und ist relevant in allen Bereichen der Gesellschaft. Die SBCW erforscht die 7 Einflussbereiche: Familie, Kirche, Staat, Bildung, Wirtschaft, Medien, Wissenschaft und Kunst.",
+      "Die gute Nachricht von Jesus Christus betrifft weit mehr als persönliche Rettung und ist relevant in allen Bereichen der Gesellschaft. Die SBCW erforscht die 7 Einflussbereiche: Familie, Kirche, Staat, Bildung, Wirtschaft, Medien, Wissenschaft und Kunst.",
     descriptionLong:
-      "Die SBCW hilft dir, eine biblische Perspektive auf alle Lebensbereiche zu entwickeln und in Gesellschaft und Kultur hineinzuwirken. Du erforschst die 7 Einflussbereiche der Gesellschaft und lernst, wie das Evangelium in jedem dieser Bereiche relevant ist. Neben dem Unterricht besuchst du verschiedene Organisationen und Projekte vor Ort, die in diesen Bereichen taetig sind.",
+      "Die SBCW hilft dir, eine biblische Perspektive auf alle Lebensbereiche zu entwickeln und in Gesellschaft und Kultur hineinzuwirken. Du erforschst die 7 Einflussbereiche der Gesellschaft und lernst, wie das Evangelium in jedem dieser Bereiche relevant ist. Neben dem Unterricht besuchst du verschiedene Organisationen und Projekte vor Ort, die in diesen Bereichen tätig sind.",
     startDate: "September 2026",
     duration: "12 Wochen",
     price: "CHF 3'300",
@@ -90,11 +93,12 @@ export const schools: School[] = [
   {
     slug: "sbs",
     shortName: "SBS",
-    title: "Schule fuer Bibelstudium",
+    title: "Schule für Bibelstudium",
+    image: "/images/site/sbs-1.jpg",
     description:
-      "Eine spannende Reise durch alle 66 Buecher der Bibel. 9-monatiges Programm in 3 Quartalen. Du lernst die induktive Studienmethode: Beobachtung, Interpretation, Anwendung.",
+      "Eine spannende Reise durch alle 66 Bücher der Bibel. 9-monatiges Programm in 3 Quartalen. Du lernst die induktive Studienmethode: Beobachtung, Interpretation, Anwendung.",
     descriptionLong:
-      "Die Schule fuer Bibelstudium (SBS) fuehrt dich in 9 Monaten durch alle 66 Buecher der Bibel. Du lernst die induktive Studienmethode mit den drei Schritten Beobachtung, Interpretation und Anwendung. Das Programm ist in 3 Quartale unterteilt, jeweils gefolgt von praktischen Einsaetzen. Die SBS ist eine intensive, aber lohnende Erfahrung, die dein Bibelverstaendnis grundlegend vertiefen wird.",
+      "Die Schule für Bibelstudium (SBS) führt dich in 9 Monaten durch alle 66 Bücher der Bibel. Du lernst die induktive Studienmethode mit den drei Schritten Beobachtung, Interpretation und Anwendung. Das Programm ist in 3 Quartale unterteilt, jeweils gefolgt von praktischen Einsätzen. Die SBS ist eine intensive, aber lohnende Erfahrung, die dein Bibelverständnis grundlegend vertiefen wird.",
     startDate: "September 2026",
     duration: "9 Monate (3 Quartale)",
     price: "CHF 7'920",
@@ -105,10 +109,10 @@ export const schools: School[] = [
       "3. Quartal: Apostelgeschichte, Briefe & Offenbarung",
     ],
     outreachDestinations: [
-      "Rumaenien",
+      "Rumänien",
       "Bulgarien",
       "Ungarn",
-      "Aethiopien",
+      "Äthiopien",
       "Madagaskar",
       "Mexiko",
       "Malawi",
@@ -118,9 +122,10 @@ export const schools: School[] = [
   {
     slug: "dbs",
     shortName: "DBS",
-    title: "Juengerschafts-Bibelschule",
+    title: "Jüngerschafts-Bibelschule",
+    image: "/images/site/schulen-dbs.jpg",
     description:
-      "Gemeinsam die ganze Bibel entdecken! In dieser Schule lernst du die biblischen Zusammenhaenge besser verstehen.",
+      "Gemeinsam die ganze Bibel entdecken! In dieser Schule lernst du die biblischen Zusammenhänge besser verstehen.",
     startDate: "April 2026",
     duration: "12 Wochen",
     price: "CHF 3'960",
@@ -130,8 +135,9 @@ export const schools: School[] = [
     slug: "svs",
     shortName: "SVS",
     title: "School of Visual Storytelling",
+    image: "/images/site/dts-outdoor.jpg",
     description:
-      "Lerne, wie du mit visuellen Medien Geschichten erzaehlen und damit Menschen fuer Gottes Reich begeistern kannst.",
+      "Lerne, wie du mit visuellen Medien Geschichten erzählen und damit Menschen für Gottes Reich begeistern kannst.",
     duration: "12 Wochen",
     accredited: true,
   },
@@ -139,8 +145,9 @@ export const schools: School[] = [
     slug: "smj",
     shortName: "SMJ",
     title: "School of Missional Justice",
+    image: "/images/site/einsatz-1.jpg",
     description:
-      "Entdecke Gottes Herz fuer Gerechtigkeit und lerne, wie du in deinem Umfeld fuer Veraenderung eintreten kannst.",
+      "Entdecke Gottes Herz für Gerechtigkeit und lerne, wie du in deinem Umfeld für Veränderung eintreten kannst.",
     duration: "12 Wochen",
     price: "CHF 3'850",
     accredited: true,
@@ -148,9 +155,10 @@ export const schools: School[] = [
   {
     slug: "blp",
     shortName: "BLP",
-    title: "Ausbildungskurs fuer Leiter (Bible & Leadership Program)",
+    title: "Ausbildungskurs für Leiter (Bible & Leadership Program)",
+    image: "/images/site/about-worship.jpg",
     description:
-      "Ein intensiver Kurs fuer angehende und bestehende Leiter, der biblische Grundlagen mit praktischer Leiterschaftsentwicklung verbindet.",
+      "Ein intensiver Kurs für angehende und bestehende Leiter, der biblische Grundlagen mit praktischer Leiterschaftsentwicklung verbindet.",
     duration: "12 Wochen",
     accredited: true,
   },
@@ -158,8 +166,9 @@ export const schools: School[] = [
     slug: "wlc",
     shortName: "WLC",
     title: "Weltanschauungs-Leiterschaftskurs",
+    image: "/images/site/dts-teaching.jpg",
     description:
-      "Vertiefe dein Verstaendnis christlicher Weltanschauung und entwickle deine Leiterschaftsfaehigkeiten weiter.",
+      "Vertiefe dein Verständnis christlicher Weltanschauung und entwickle deine Leiterschaftsfähigkeiten weiter.",
     duration: "6 Monate",
     price: "CHF 3'300",
     accredited: true,
@@ -167,7 +176,8 @@ export const schools: School[] = [
   {
     slug: "b-sbs",
     shortName: "B-SBS",
-    title: "Berufsbegleitende Schule fuer Bibelstudium",
+    title: "Berufsbegleitende Schule für Bibelstudium",
+    image: "/images/site/sbs-3.jpg",
     description:
       "Studiere die Bibel intensiv neben deinem Beruf. Modularer Aufbau mit flexiblen Terminen.",
     price: "CHF 450 / Modul",
@@ -177,8 +187,9 @@ export const schools: School[] = [
     slug: "uofn",
     shortName: "UofN",
     title: "University of the Nations",
+    image: "/images/site/about-group.jpg",
     description:
-      "JMEM Wiler ist Teil der University of the Nations mit 15 Fakultaeten weltweit. Akkreditierte Kurse mit internationaler Anerkennung.",
+      "JMEM Wiler ist Teil der University of the Nations mit 15 Fakultäten weltweit. Akkreditierte Kurse mit internationaler Anerkennung.",
     accredited: true,
   },
 ];

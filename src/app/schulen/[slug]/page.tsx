@@ -84,7 +84,7 @@ export default async function SchoolPage({
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2" data-edit-path="src/lib/schools.ts" data-edit-section="school-detail">
               <h2 className="text-xl font-bold text-gray-900 mb-4">
-                Ueber diese Schule
+                Über diese Schule
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
                 {school.descriptionLong || school.description}
@@ -110,7 +110,7 @@ export default async function SchoolPage({
                   </div>
                   <p className="text-sm text-gray-500 mt-4">
                     Neben dem Unterricht besuchst du verschiedene Organisationen
-                    und Projekte vor Ort, die in diesen Bereichen taetig sind
+                    und Projekte vor Ort, die in diesen Bereichen tätig sind
                     (Field Visits).
                   </p>
                 </div>
@@ -215,7 +215,7 @@ export default async function SchoolPage({
                   Interesse?
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Nimm Kontakt mit uns auf fuer weitere Informationen oder um
+                  Nimm Kontakt mit uns auf für weitere Informationen oder um
                   dich anzumelden.
                 </p>
                 <Link
@@ -232,7 +232,7 @@ export default async function SchoolPage({
                 <div className="bg-[var(--color-warm)] rounded-xl p-5">
                   <div className="flex items-center gap-2 text-sm font-medium text-gray-900 mb-1">
                     <Calendar className="w-4 h-4 text-[var(--color-primary)]" />
-                    Naechster Start
+                    Nächster Start
                   </div>
                   <p className="text-sm text-gray-600">{school.startDate}</p>
                 </div>

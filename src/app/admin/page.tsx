@@ -115,7 +115,7 @@ export default function AdminPage() {
     const newAttachments: Attachment[] = [];
     for (const file of Array.from(files)) {
       if (!ACCEPTED_TYPES.includes(file.type)) {
-        alert(`Dateityp nicht unterstuetzt: ${file.type}`);
+        alert(`Dateityp nicht unterstützt: ${file.type}`);
         continue;
       }
       if (file.size > MAX_FILE_SIZE) {
@@ -183,7 +183,7 @@ export default function AdminPage() {
   }, [tab, authed, agentOnly]);
 
   async function handleRevert(sha: string) {
-    if (!confirm(`Commit ${sha.slice(0, 7)} wirklich rueckgaengig machen?`)) return;
+    if (!confirm(`Commit ${sha.slice(0, 7)} wirklich rückgängig machen?`)) return;
     setReverting(sha);
     try {
       const res = await fetch("/api/admin/rollback", {
@@ -193,7 +193,7 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert(`Erfolgreich rueckgaengig gemacht. Neuer Commit: ${data.sha.slice(0, 7)}`);
+        alert(`Erfolgreich rückgängig gemacht. Neuer Commit: ${data.sha.slice(0, 7)}`);
         loadHistory();
       } else {
         alert(`Fehler: ${data.error}`);
@@ -355,13 +355,13 @@ export default function AdminPage() {
                 <Bot className="w-16 h-16 text-gray-700 mx-auto mb-4" />
                 <h2 className="text-xl font-bold text-gray-400 mb-2">CMS Agent</h2>
                 <p className="text-gray-600 text-sm max-w-md mx-auto mb-8">
-                  Beschreibe, was du aendern moechtest. Der Agent liest die Dateien, macht die Aenderungen und committet sie automatisch.
+                  Beschreibe, was du ändern möchtest. Der Agent liest die Dateien, macht die Änderungen und committet sie automatisch.
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center max-w-lg mx-auto">
                   {[
-                    "Fuege ein neues Buch zum Shop hinzu",
+                    "Füge ein neues Buch zum Shop hinzu",
                     "Aktualisiere die DTS-Startdaten",
-                    "Aendere die Telefonnummer",
+                    "Ändere die Telefonnummer",
                     "Neues Angebot: Worship Night",
                   ].map((suggestion) => (
                     <button
@@ -532,7 +532,7 @@ export default function AdminPage() {
                     sendMessage();
                   }
                 }}
-                placeholder="Was moechtest du aendern?"
+                placeholder="Was möchtest du ändern?"
                 rows={1}
                 className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm resize-none focus:outline-none focus:border-[var(--color-primary)]"
               />
@@ -621,7 +621,7 @@ export default function AdminPage() {
                         ) : (
                           <>
                             <RotateCcw className="w-3 h-3 inline mr-1" />
-                            Rueckgaengig
+                            Rückgängig
                           </>
                         )}
                       </button>

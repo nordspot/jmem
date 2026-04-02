@@ -15,32 +15,32 @@ import { PageHero } from "@/components/PageHero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Unterstuetzung | JMEM Wiler",
+  title: "Unterstützung | JMEM Wiler",
   description:
-    "Unterstuetze die Arbeit von JMEM Wiler durch Gebet, Spenden oder Mitarbeit.",
+    "Unterstütze die Arbeit von JMEM Wiler durch Gebet, Spenden oder Mitarbeit.",
 };
 
 const openPositions = [
   {
     title: "Schulen (DTS, SBCW, DBS, SMJ)",
-    description: "Mitarbeit in der Leitung und Durchfuehrung unserer Schulen.",
+    description: "Mitarbeit in der Leitung und Durchführung unserer Schulen.",
     icon: GraduationCap,
   },
   {
     title: "Kinder-, Jugend- und Familienarbeit",
     description:
-      "Begleitung und Foerderung von Kindern, Jugendlichen und Familien auf dem Campus.",
+      "Begleitung und Förderung von Kindern, Jugendlichen und Familien auf dem Campus.",
     icon: Baby,
   },
   {
     title: "IT-Support und Netzwerkpflege",
-    description: "Technische Unterstuetzung und Wartung unserer IT-Infrastruktur.",
+    description: "Technische Unterstützung und Wartung unserer IT-Infrastruktur.",
     icon: Monitor,
   },
   {
     title: "Kommunikation und Marketing",
     description:
-      "Oeffentlichkeitsarbeit, Social Media und Kommunikation nach aussen.",
+      "Öffentlichkeitsarbeit, Social Media und Kommunikation nach aussen.",
     icon: Megaphone,
   },
   {
@@ -63,15 +63,15 @@ export default function UnterstuetzungPage() {
               <Heart className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Gebet</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Bete fuer unsere Mitarbeiter, Studenten, Schulen und Einsaetze.
-                Abonniere unseren Newsletter fuer aktuelle Gebetsanliegen.
+                Bete für unsere Mitarbeiter, Studenten, Schulen und Einsätze.
+                Abonniere unseren Newsletter für aktuelle Gebetsanliegen.
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
               <CreditCard className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Spenden</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Unterstuetze unsere Arbeit finanziell. Jeder Beitrag hilft uns,
+                Unterstütze unsere Arbeit finanziell. Jeder Beitrag hilft uns,
                 Menschen auszubilden und in die Welt zu senden.
               </p>
             </div>
@@ -80,7 +80,7 @@ export default function UnterstuetzungPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">Mitarbeit</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Komm als Freiwillige/r oder Langzeitmitarbeiter/in zu uns. Wir
-                suchen Menschen mit verschiedenen Gaben und Faehigkeiten.
+                suchen Menschen mit verschiedenen Gaben und Fähigkeiten.
               </p>
             </div>
           </div>
@@ -99,9 +99,9 @@ export default function UnterstuetzungPage() {
                   Stipendienfonds
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Unterstuetze Studenten aus finanziell benachteiligten Laendern,
-                  damit auch sie an unseren Schulen teilnehmen koennen. Dein
-                  Beitrag ermoeglicht Menschen aus der ganzen Welt eine
+                  Unterstütze Studenten aus finanziell benachteiligten Ländern,
+                  damit auch sie an unseren Schulen teilnehmen können. Dein
+                  Beitrag ermöglicht Menschen aus der ganzen Welt eine
                   Ausbildung bei JMEM Wiler.
                 </p>
               </div>
@@ -113,9 +113,9 @@ export default function UnterstuetzungPage() {
                   Allgemeiner Betrieb JMEM Wiler
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Unterstuetze den allgemeinen Betrieb unseres Standorts in Wiler
+                  Unterstütze den allgemeinen Betrieb unseres Standorts in Wiler
                   bei Utzenstorf. Dein Beitrag hilft bei der Instandhaltung,
-                  Verwaltung und dem taeglichen Betrieb der Gemeinschaft.
+                  Verwaltung und dem täglichen Betrieb der Gemeinschaft.
                 </p>
               </div>
             </div>
@@ -125,7 +125,7 @@ export default function UnterstuetzungPage() {
           <div className="max-w-2xl mx-auto mb-16" data-edit-path="src/app/unterstuetzung/page.tsx" data-edit-section="bank-details">
             <div className="bg-[var(--color-warm)] rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                Bankverbindung fuer Spenden
+                Bankverbindung für Spenden
               </h2>
               <div className="space-y-3 text-sm text-gray-600">
                 <div className="flex justify-between py-2 border-b border-gray-200">
@@ -159,7 +159,7 @@ export default function UnterstuetzungPage() {
                 Offene Stellen
               </h2>
               <p className="text-sm text-gray-500">
-                Voraussetzung: abgeschlossene DTS (Juengerschaftsschule)
+                Voraussetzung: abgeschlossene DTS (Jüngerschaftsschule)
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -191,9 +191,9 @@ export default function UnterstuetzungPage() {
                 Sachspenden
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed mb-6">
-                Wir freuen uns ueber Spenden von Moebeln, Haushaltswaren und
+                Wir freuen uns über Spenden von Möbeln, Haushaltswaren und
                 Verbrauchsmaterial. Nimm bitte vorher Kontakt mit uns auf, damit
-                wir absprechen koennen, was aktuell benoetigt wird.
+                wir absprechen können, was aktuell benötigt wird.
               </p>
               <a
                 href="/kontakt"
