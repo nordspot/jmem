@@ -135,7 +135,7 @@ export const schools: School[] = [
     slug: "svs",
     shortName: "SVS",
     title: "School of Visual Storytelling",
-    image: "/images/site/dts-outdoor.jpg",
+    image: "/images/site/svs-visual.jpg",
     description:
       "Lerne, wie du mit visuellen Medien Geschichten erzählen und damit Menschen für Gottes Reich begeistern kannst.",
     duration: "12 Wochen",
@@ -145,7 +145,7 @@ export const schools: School[] = [
     slug: "smj",
     shortName: "SMJ",
     title: "School of Missional Justice",
-    image: "/images/site/einsatz-1.jpg",
+    image: "/images/site/smj-justice.jpg",
     description:
       "Entdecke Gottes Herz für Gerechtigkeit und lerne, wie du in deinem Umfeld für Veränderung eintreten kannst.",
     duration: "12 Wochen",
@@ -156,7 +156,7 @@ export const schools: School[] = [
     slug: "blp",
     shortName: "BLP",
     title: "Ausbildungskurs für Leiter (Bible & Leadership Program)",
-    image: "/images/site/about-worship.jpg",
+    image: "/images/site/blp-leadership.jpg",
     description:
       "Ein intensiver Kurs für angehende und bestehende Leiter, der biblische Grundlagen mit praktischer Leiterschaftsentwicklung verbindet.",
     duration: "12 Wochen",
@@ -166,7 +166,7 @@ export const schools: School[] = [
     slug: "wlc",
     shortName: "WLC",
     title: "Weltanschauungs-Leiterschaftskurs",
-    image: "/images/site/dts-teaching.jpg",
+    image: "/images/site/wlc-worldview.jpg",
     description:
       "Vertiefe dein Verständnis christlicher Weltanschauung und entwickle deine Leiterschaftsfähigkeiten weiter.",
     duration: "6 Monate",
@@ -177,7 +177,7 @@ export const schools: School[] = [
     slug: "b-sbs",
     shortName: "B-SBS",
     title: "Berufsbegleitende Schule für Bibelstudium",
-    image: "/images/site/sbs-3.jpg",
+    image: "/images/site/bsbs-parttime.jpg",
     description:
       "Studiere die Bibel intensiv neben deinem Beruf. Modularer Aufbau mit flexiblen Terminen.",
     price: "CHF 450 / Modul",
@@ -187,7 +187,7 @@ export const schools: School[] = [
     slug: "uofn",
     shortName: "UofN",
     title: "University of the Nations",
-    image: "/images/site/about-group.jpg",
+    image: "/images/site/uofn-campus.jpg",
     description:
       "JMEM Wiler ist Teil der University of the Nations mit 15 Fakultäten weltweit. Akkreditierte Kurse mit internationaler Anerkennung.",
     accredited: true,
