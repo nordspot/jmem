@@ -18,7 +18,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   if (!ghToken) {
     return Response.json({ error: "GITHUB_TOKEN not configured" }, { status: 500 });
   }
-  const h = { Authorization: `token ${ghToken}`, Accept: "application/vnd.github.v3+json" };
+  const h = { Authorization: `token ${ghToken}`, Accept: "application/vnd.github.v3+json", "User-Agent": "jmem-cms" };
 
   try {
     let commits;

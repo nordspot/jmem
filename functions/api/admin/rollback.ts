@@ -14,7 +14,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { sha } = await context.request.json() as any;
   if (!sha) return Response.json({ error: "Missing commit SHA" }, { status: 400 });
 
-  const h = { Authorization: `token ${context.env.GITHUB_TOKEN}`, Accept: "application/vnd.github.v3+json", "Content-Type": "application/json" };
+  const h = { Authorization: `token ${context.env.GITHUB_TOKEN}`, Accept: "application/vnd.github.v3+json", "User-Agent": "jmem-cms", "Content-Type": "application/json" };
 
   try {
     const commitRes = await fetch(`https://api.github.com/repos/${REPO}/git/commits/${sha}`, { headers: h });

@@ -31,7 +31,7 @@ const SYSTEM_PROMPT = `You are the CMS agent for the JMEM Wiler website (jmemwil
 
 async function ghGet(path: string, token: string) {
   const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
-    headers: { Authorization: `token ${token}`, Accept: "application/vnd.github.v3+json" },
+    headers: { Authorization: `token ${token}`, Accept: "application/vnd.github.v3+json", "User-Agent": "jmem-cms" },
   });
   if (!res.ok) return null;
   const data: any = await res.json();
@@ -39,7 +39,7 @@ async function ghGet(path: string, token: string) {
 }
 
 async function ghCommit(changes: { path: string; content: string }[], message: string, token: string) {
-  const h = { Authorization: `token ${token}`, Accept: "application/vnd.github.v3+json", "Content-Type": "application/json" };
+  const h = { Authorization: `token ${token}`, Accept: "application/vnd.github.v3+json", "User-Agent": "jmem-cms", "Content-Type": "application/json" };
 
   const refRes = await fetch(`https://api.github.com/repos/${REPO}/git/ref/heads/master`, { headers: h });
   const refData: any = await refRes.json();
