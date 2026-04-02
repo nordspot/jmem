@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
-  Bot,
   GraduationCap,
   ShoppingBag,
   Gift,
@@ -19,40 +18,11 @@ import {
   Lock,
   ChevronRight,
 } from "lucide-react";
+import { schools as initialSchools, type School } from "@/lib/schools";
+import { products as initialProducts, type Product } from "@/lib/products";
+import { offerings as initialOfferings, type Offering } from "@/lib/offerings";
 
 // --- Types ---
-
-interface School {
-  slug: string;
-  shortName: string;
-  title: string;
-  description: string;
-  descriptionLong?: string;
-  startDate?: string;
-  endDate?: string;
-  price?: string;
-  duration?: string;
-  language?: string;
-  credits?: string;
-  accredited: boolean;
-}
-
-interface Product {
-  sku: string;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-  category: string;
-  inStock: boolean;
-}
-
-interface Offering {
-  title: string;
-  description: string;
-  image: string;
-  category: string;
-}
 
 type Tab = "schulen" | "produkte" | "angebote" | "seiten" | "einstellungen";
 
@@ -63,68 +33,6 @@ const TABS: { key: Tab; label: string; icon: React.ReactNode }[] = [
   { key: "seiten", label: "Seiten", icon: <FileText className="w-4 h-4" /> },
   { key: "einstellungen", label: "Einstellungen", icon: <Settings className="w-4 h-4" /> },
 ];
-
-// --- Parsers ---
-
-function parseSchools(content: string): School[] {
-  try {
-    const match = content.match(/export\s+const\s+schools:\s*School\[\]\s*=\s*(\[[\s\S]*\]);/);
-    if (!match) return [];
-    const cleaned = match[1]
-      .replace(/\/\/.*/g, "")
-      .replace(/,(\s*[\]}])/g, "$1")
-      .replace(/(\w+)\s*:/g, '"$1":')
-      .replace(/'/g, '"');
-    return JSON.parse(cleaned);
-  } catch {
-    return [];
-  }
-}
-
-function parseProducts(content: string): Product[] {
-  try {
-    const match = content.match(/export\s+const\s+products:\s*Product\[\]\s*=\s*(\[[\s\S]*\]);/);
-    if (!match) return [];
-    const cleaned = match[1]
-      .replace(/\/\/.*/g, "")
-      .replace(/,(\s*[\]}])/g, "$1")
-      .replace(/(\w+)\s*:/g, '"$1":')
-      .replace(/'/g, '"');
-    return JSON.parse(cleaned);
-  } catch {
-    return [];
-  }
-}
-
-function parseOfferings(content: string): Offering[] {
-  try {
-    const match = content.match(/const\s+offerings\s*=\s*(\[[\s\S]*?\]);/);
-    if (!match) return [];
-    const cleaned = match[1]
-      .replace(/\/\/.*/g, "")
-      .replace(/,(\s*[\]}])/g, "$1")
-      .replace(/(\w+)\s*:/g, '"$1":')
-      .replace(/'/g, '"');
-    return JSON.parse(cleaned);
-  } catch {
-    return [];
-  }
-}
-
-function parseDeTranslations(content: string): Record<string, unknown> {
-  try {
-    const match = content.match(/export\s+const\s+de\s*=\s*(\{[\s\S]*\});/);
-    if (!match) return {};
-    const cleaned = match[1]
-      .replace(/\/\/.*/g, "")
-      .replace(/,(\s*[\]}])/g, "$1")
-      .replace(/(\w+)\s*:/g, '"$1":')
-      .replace(/'/g, '"');
-    return JSON.parse(cleaned);
-  } catch {
-    return {};
-  }
-}
 
 // --- Components ---
 
@@ -305,7 +213,7 @@ function ProductEditor({
           <label className="block text-xs font-medium text-gray-400 mb-1">Kategorie</label>
           <select
             value={data.category}
-            onChange={(e) => set("category", e.target.value)}
+            onChange={(e) => set("category", e.target.value as Product["category"])}
             className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:outline-none focus:border-[var(--color-primary)]"
           >
             {categories.map((c) => (
@@ -403,18 +311,13 @@ export default function CmsPage() {
   const [authed, setAuthed] = useState(false);
   const [secret, setSecret] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>("schulen");
-  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  // Raw file contents
-  const [rawFiles, setRawFiles] = useState<Record<string, string>>({});
-
-  // Parsed data
-  const [schools, setSchools] = useState<School[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [offerings, setOfferings] = useState<Offering[]>([]);
-  const [translations, setTranslations] = useState<Record<string, unknown>>({});
+  // Data initialized from imports (bundled at build time)
+  const [schools, setSchools] = useState(initialSchools);
+  const [products, setProducts] = useState(initialProducts);
+  const [offerings, setOfferings] = useState(initialOfferings);
 
   // Editor state
   const [editingSchool, setEditingSchool] = useState<School | null>(null);
@@ -422,18 +325,20 @@ export default function CmsPage() {
   const [editingOffering, setEditingOffering] = useState<Offering | null>(null);
   const [isNewProduct, setIsNewProduct] = useState(false);
 
-  // Page content editing
-  const [heroWelcome, setHeroWelcome] = useState("");
-  const [heroTagline, setHeroTagline] = useState("");
-  const [heroSubtitle, setHeroSubtitle] = useState("");
-  const [ctaDTS, setCtaDTS] = useState("");
-  const [ctaAngebote, setCtaAngebote] = useState("");
+  // Page content editing (defaults from de.ts)
+  const [heroWelcome, setHeroWelcome] = useState("Willkommen bei Jugend mit einer Mission");
+  const [heroTagline, setHeroTagline] = useState("passion \u00b7 training \u00b7 mission");
+  const [heroSubtitle, setHeroSubtitle] = useState(
+    "Gott besser kennenlernen und ihn bekannt machen. Entdecke unsere Schulen, Seminare und Eins\u00e4tze in Wiler bei Seedorf."
+  );
+  const [ctaDTS, setCtaDTS] = useState("J\u00fcngerschaftsschule DTS");
+  const [ctaAngebote, setCtaAngebote] = useState("Angebote ansehen");
 
-  // Settings
+  // Settings (hardcoded from known org data)
   const [settingsOrgName, setSettingsOrgName] = useState("Jugend mit einer Mission");
-  const [settingsAddress, setSettingsAddress] = useState("");
-  const [settingsPhone, setSettingsPhone] = useState("");
-  const [settingsEmail, setSettingsEmail] = useState("");
+  const [settingsAddress, setSettingsAddress] = useState("Hauptstrasse 15, 3266 Wiler bei Seedorf");
+  const [settingsPhone, setSettingsPhone] = useState("+41 32 391 70 30");
+  const [settingsEmail, setSettingsEmail] = useState("info@jmemwiler.ch");
 
   const authHeaders = { Authorization: `Bearer ${secret}` };
 
@@ -445,64 +350,9 @@ export default function CmsPage() {
     }
   }, []);
 
-  useEffect(() => {
-    if (authed) loadContent();
-  }, [authed]);
-
   function showFeedback(type: "success" | "error", message: string) {
     setFeedback({ type, message });
     setTimeout(() => setFeedback(null), 4000);
-  }
-
-  async function loadContent() {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/admin/cms", { headers: authHeaders });
-      const data = await res.json();
-      if (data.error) {
-        showFeedback("error", data.error);
-        setLoading(false);
-        return;
-      }
-
-      const files = data.files as Record<string, string>;
-      setRawFiles(files);
-
-      if (files["src/lib/schools.ts"]) {
-        setSchools(parseSchools(files["src/lib/schools.ts"]));
-      }
-      if (files["src/lib/products.ts"]) {
-        setProducts(parseProducts(files["src/lib/products.ts"]));
-      }
-      if (files["src/app/angebote/page.tsx"]) {
-        setOfferings(parseOfferings(files["src/app/angebote/page.tsx"]));
-      }
-      if (files["src/lib/i18n/de.ts"]) {
-        const t = parseDeTranslations(files["src/lib/i18n/de.ts"]);
-        setTranslations(t);
-        const hero = t.hero as Record<string, string> | undefined;
-        if (hero) {
-          setHeroWelcome(hero.welcome || "");
-          setHeroTagline(hero.tagline || "");
-          setHeroSubtitle(hero.subtitle || "");
-          setCtaDTS(hero.ctaDTS || "");
-          setCtaAngebote(hero.ctaAngebote || "");
-        }
-        const contact = t.contact as Record<string, string> | undefined;
-        if (contact) {
-          setSettingsAddress(contact.address || "");
-          setSettingsPhone(contact.phone || "");
-          setSettingsEmail(contact.email || "");
-        }
-        const footer = t.footer as Record<string, string> | undefined;
-        if (footer) {
-          setSettingsOrgName(footer.orgName || "Jugend mit einer Mission");
-        }
-      }
-    } catch {
-      showFeedback("error", "Fehler beim Laden der Inhalte");
-    }
-    setLoading(false);
   }
 
   async function saveViaAgent(prompt: string) {
@@ -529,14 +379,11 @@ export default function CmsPage() {
           showFeedback("error", retryData.error);
         } else {
           showFeedback("success", retryData.message || "Gespeichert!");
-          await loadContent();
         }
       } else if (data.type === "committed") {
         showFeedback("success", data.message || "Gespeichert!");
-        await loadContent();
       } else {
         showFeedback("success", data.message || data.content || "Gespeichert!");
-        await loadContent();
       }
     } catch {
       showFeedback("error", "Speichern fehlgeschlagen");
@@ -549,6 +396,7 @@ export default function CmsPage() {
     saveViaAgent(
       `Update the school with slug "${updated.slug}" in src/lib/schools.ts. Replace its data with the following values: ${schoolJson}. Keep the same TypeScript format, interfaces, and other schools unchanged.`
     );
+    setSchools((prev) => prev.map((s) => (s.slug === updated.slug ? updated : s)));
     setEditingSchool(null);
   }
 
@@ -558,10 +406,12 @@ export default function CmsPage() {
       saveViaAgent(
         `Add a new product to src/lib/products.ts with the following data: ${productJson}. Keep the same TypeScript format and existing products unchanged.`
       );
+      setProducts((prev) => [...prev, updated]);
     } else {
       saveViaAgent(
         `Update the product with SKU "${updated.sku}" in src/lib/products.ts. Replace its data with: ${productJson}. Keep the same TypeScript format and other products unchanged.`
       );
+      setProducts((prev) => prev.map((p) => (p.sku === updated.sku ? updated : p)));
     }
     setEditingProduct(null);
     setIsNewProduct(false);
@@ -572,13 +422,17 @@ export default function CmsPage() {
     saveViaAgent(
       `Remove the product with SKU "${sku}" from src/lib/products.ts. Keep the same TypeScript format and other products unchanged.`
     );
+    setProducts((prev) => prev.filter((p) => p.sku !== sku));
     setEditingProduct(null);
   }
 
   function handleSaveOffering(updated: Offering) {
     const offeringJson = JSON.stringify(updated, null, 2);
     saveViaAgent(
-      `Update the offering titled "${editingOffering?.title}" in src/app/angebote/page.tsx. Replace its data with: ${offeringJson}. Keep the same format, other offerings, and the rest of the file unchanged.`
+      `Update the offering titled "${editingOffering?.title}" in src/lib/offerings.ts. Replace its data with: ${offeringJson}. Keep the same format, other offerings, and the rest of the file unchanged.`
+    );
+    setOfferings((prev) =>
+      prev.map((o) => (o.title === editingOffering?.title ? updated : o))
     );
     setEditingOffering(null);
   }
@@ -695,274 +549,253 @@ export default function CmsPage() {
           </div>
         )}
 
-        {loading ? (
-          <div className="flex items-center justify-center py-32">
-            <Loader2 className="w-8 h-8 text-[var(--color-primary)] animate-spin" />
-          </div>
-        ) : (
-          <div className="p-6">
-            {/* === SCHULEN === */}
-            {activeTab === "schulen" && (
-              <div>
-                <h2 className="text-xl font-bold mb-6">Schulen</h2>
-                {editingSchool ? (
-                  <SchoolEditor
-                    school={editingSchool}
-                    onSave={handleSaveSchool}
-                    onCancel={() => setEditingSchool(null)}
-                    saving={saving}
-                  />
-                ) : (
-                  <div className="space-y-2">
-                    {schools.map((s) => (
-                      <button
-                        key={s.slug}
-                        onClick={() => setEditingSchool(s)}
-                        className="w-full flex items-center justify-between bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors text-left"
-                      >
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-xs font-mono bg-gray-800 text-gray-400 px-2 py-0.5 rounded">
-                              {s.shortName}
-                            </span>
-                            {s.accredited && (
-                              <span className="text-xs bg-green-900/30 text-green-400 px-2 py-0.5 rounded">
-                                Akkreditiert
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm text-white font-medium">{s.title}</p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            {[s.startDate, s.duration, s.price].filter(Boolean).join(" · ")}
-                          </p>
-                        </div>
-                        <ChevronRight className="w-4 h-4 text-gray-600" />
-                      </button>
-                    ))}
-                    {schools.length === 0 && (
-                      <p className="text-gray-500 text-sm text-center py-12">
-                        Keine Schulen gefunden. Daten konnten nicht geparst werden.
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* === PRODUKTE === */}
-            {activeTab === "produkte" && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold">Produkte</h2>
-                  {!editingProduct && (
+        <div className="p-6">
+          {/* === SCHULEN === */}
+          {activeTab === "schulen" && (
+            <div>
+              <h2 className="text-xl font-bold mb-6">Schulen</h2>
+              {editingSchool ? (
+                <SchoolEditor
+                  school={editingSchool}
+                  onSave={handleSaveSchool}
+                  onCancel={() => setEditingSchool(null)}
+                  saving={saving}
+                />
+              ) : (
+                <div className="space-y-2">
+                  {schools.map((s) => (
                     <button
-                      onClick={() => {
-                        setIsNewProduct(true);
-                        setEditingProduct({
-                          sku: "",
-                          name: "",
-                          price: 0,
-                          description: "",
-                          image: "/images/products/",
-                          category: "books",
-                          inStock: true,
-                        });
-                      }}
-                      className="flex items-center gap-2 px-3 py-2 bg-[var(--color-primary)] text-white rounded-lg text-sm hover:bg-[var(--color-primary-light)] transition-colors"
+                      key={s.slug}
+                      onClick={() => setEditingSchool(s)}
+                      className="w-full flex items-center justify-between bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors text-left"
                     >
-                      <Plus className="w-4 h-4" />
-                      Neues Produkt
-                    </button>
-                  )}
-                </div>
-                {editingProduct ? (
-                  <ProductEditor
-                    product={editingProduct}
-                    onSave={handleSaveProduct}
-                    onCancel={() => {
-                      setEditingProduct(null);
-                      setIsNewProduct(false);
-                    }}
-                    onDelete={
-                      !isNewProduct ? () => handleDeleteProduct(editingProduct.sku) : undefined
-                    }
-                    saving={saving}
-                    isNew={isNewProduct}
-                  />
-                ) : (
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {products.map((p) => (
-                      <button
-                        key={p.sku}
-                        onClick={() => setEditingProduct(p)}
-                        className="bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors text-left"
-                      >
-                        <div className="flex items-center gap-2 mb-2">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
                           <span className="text-xs font-mono bg-gray-800 text-gray-400 px-2 py-0.5 rounded">
-                            #{p.sku}
+                            {s.shortName}
                           </span>
-                          <span
-                            className={`text-xs px-2 py-0.5 rounded ${
-                              p.inStock
-                                ? "bg-green-900/30 text-green-400"
-                                : "bg-red-900/30 text-red-400"
-                            }`}
-                          >
-                            {p.inStock ? "Auf Lager" : "Ausverkauft"}
-                          </span>
-                        </div>
-                        <p className="text-sm text-white font-medium truncate">{p.name}</p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          CHF {p.price} · {p.category}
-                        </p>
-                      </button>
-                    ))}
-                    {products.length === 0 && (
-                      <p className="text-gray-500 text-sm text-center py-12 col-span-full">
-                        Keine Produkte gefunden. Daten konnten nicht geparst werden.
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* === ANGEBOTE === */}
-            {activeTab === "angebote" && (
-              <div>
-                <h2 className="text-xl font-bold mb-6">Angebote</h2>
-                {editingOffering ? (
-                  <OfferingEditor
-                    offering={editingOffering}
-                    onSave={handleSaveOffering}
-                    onCancel={() => setEditingOffering(null)}
-                    saving={saving}
-                  />
-                ) : (
-                  <div className="space-y-2">
-                    {offerings.map((o) => (
-                      <button
-                        key={o.title}
-                        onClick={() => setEditingOffering(o)}
-                        className="w-full flex items-center justify-between bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors text-left"
-                      >
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">
-                              {o.category}
+                          {s.accredited && (
+                            <span className="text-xs bg-green-900/30 text-green-400 px-2 py-0.5 rounded">
+                              Akkreditiert
                             </span>
-                          </div>
-                          <p className="text-sm text-white font-medium">{o.title}</p>
-                          <p className="text-xs text-gray-500 mt-1 truncate max-w-lg">
-                            {o.description}
-                          </p>
+                          )}
                         </div>
-                        <ChevronRight className="w-4 h-4 text-gray-600" />
-                      </button>
-                    ))}
-                    {offerings.length === 0 && (
-                      <p className="text-gray-500 text-sm text-center py-12">
-                        Keine Angebote gefunden. Daten konnten nicht geparst werden.
-                      </p>
-                    )}
-                  </div>
+                        <p className="text-sm text-white font-medium">{s.title}</p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {[s.startDate, s.duration, s.price].filter(Boolean).join(" · ")}
+                        </p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-gray-600" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* === PRODUKTE === */}
+          {activeTab === "produkte" && (
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold">Produkte</h2>
+                {!editingProduct && (
+                  <button
+                    onClick={() => {
+                      setIsNewProduct(true);
+                      setEditingProduct({
+                        sku: "",
+                        name: "",
+                        price: 0,
+                        description: "",
+                        image: "/images/products/",
+                        category: "books",
+                        inStock: true,
+                      });
+                    }}
+                    className="flex items-center gap-2 px-3 py-2 bg-[var(--color-primary)] text-white rounded-lg text-sm hover:bg-[var(--color-primary-light)] transition-colors"
+                  >
+                    <Plus className="w-4 h-4" />
+                    Neues Produkt
+                  </button>
                 )}
               </div>
-            )}
-
-            {/* === SEITEN === */}
-            {activeTab === "seiten" && (
-              <div>
-                <h2 className="text-xl font-bold mb-6">Seiten-Inhalte</h2>
-                <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-                  <h3 className="text-base font-bold text-white mb-4">Homepage Hero</h3>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <InputField
-                      label="Willkommen-Text"
-                      value={heroWelcome}
-                      onChange={setHeroWelcome}
-                    />
-                    <InputField label="Tagline" value={heroTagline} onChange={setHeroTagline} />
-                    <div className="md:col-span-2">
-                      <InputField
-                        label="Untertitel"
-                        value={heroSubtitle}
-                        onChange={setHeroSubtitle}
-                        multiline
-                      />
-                    </div>
-                    <InputField label="CTA: DTS Button" value={ctaDTS} onChange={setCtaDTS} />
-                    <InputField
-                      label="CTA: Angebote Button"
-                      value={ctaAngebote}
-                      onChange={setCtaAngebote}
-                    />
-                  </div>
-                  <div className="flex justify-end mt-6">
+              {editingProduct ? (
+                <ProductEditor
+                  product={editingProduct}
+                  onSave={handleSaveProduct}
+                  onCancel={() => {
+                    setEditingProduct(null);
+                    setIsNewProduct(false);
+                  }}
+                  onDelete={
+                    !isNewProduct ? () => handleDeleteProduct(editingProduct.sku) : undefined
+                  }
+                  saving={saving}
+                  isNew={isNewProduct}
+                />
+              ) : (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {products.map((p) => (
                     <button
-                      onClick={handleSavePages}
-                      disabled={saving}
-                      className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-light)] transition-colors disabled:opacity-50"
+                      key={p.sku}
+                      onClick={() => setEditingProduct(p)}
+                      className="bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors text-left"
                     >
-                      {saving ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Save className="w-4 h-4" />
-                      )}
-                      Speichern
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-mono bg-gray-800 text-gray-400 px-2 py-0.5 rounded">
+                          #{p.sku}
+                        </span>
+                        <span
+                          className={`text-xs px-2 py-0.5 rounded ${
+                            p.inStock
+                              ? "bg-green-900/30 text-green-400"
+                              : "bg-red-900/30 text-red-400"
+                          }`}
+                        >
+                          {p.inStock ? "Auf Lager" : "Ausverkauft"}
+                        </span>
+                      </div>
+                      <p className="text-sm text-white font-medium truncate">{p.name}</p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        CHF {p.price} · {p.category}
+                      </p>
                     </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* === ANGEBOTE === */}
+          {activeTab === "angebote" && (
+            <div>
+              <h2 className="text-xl font-bold mb-6">Angebote</h2>
+              {editingOffering ? (
+                <OfferingEditor
+                  offering={editingOffering}
+                  onSave={handleSaveOffering}
+                  onCancel={() => setEditingOffering(null)}
+                  saving={saving}
+                />
+              ) : (
+                <div className="space-y-2">
+                  {offerings.map((o) => (
+                    <button
+                      key={o.title}
+                      onClick={() => setEditingOffering(o)}
+                      className="w-full flex items-center justify-between bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors text-left"
+                    >
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">
+                            {o.category}
+                          </span>
+                        </div>
+                        <p className="text-sm text-white font-medium">{o.title}</p>
+                        <p className="text-xs text-gray-500 mt-1 truncate max-w-lg">
+                          {o.description}
+                        </p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-gray-600" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* === SEITEN === */}
+          {activeTab === "seiten" && (
+            <div>
+              <h2 className="text-xl font-bold mb-6">Seiten-Inhalte</h2>
+              <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
+                <h3 className="text-base font-bold text-white mb-4">Homepage Hero</h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <InputField
+                    label="Willkommen-Text"
+                    value={heroWelcome}
+                    onChange={setHeroWelcome}
+                  />
+                  <InputField label="Tagline" value={heroTagline} onChange={setHeroTagline} />
+                  <div className="md:col-span-2">
+                    <InputField
+                      label="Untertitel"
+                      value={heroSubtitle}
+                      onChange={setHeroSubtitle}
+                      multiline
+                    />
                   </div>
+                  <InputField label="CTA: DTS Button" value={ctaDTS} onChange={setCtaDTS} />
+                  <InputField
+                    label="CTA: Angebote Button"
+                    value={ctaAngebote}
+                    onChange={setCtaAngebote}
+                  />
+                </div>
+                <div className="flex justify-end mt-6">
+                  <button
+                    onClick={handleSavePages}
+                    disabled={saving}
+                    className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-light)] transition-colors disabled:opacity-50"
+                  >
+                    {saving ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Save className="w-4 h-4" />
+                    )}
+                    Speichern
+                  </button>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* === EINSTELLUNGEN === */}
-            {activeTab === "einstellungen" && (
-              <div>
-                <h2 className="text-xl font-bold mb-6">Einstellungen</h2>
-                <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-                  <h3 className="text-base font-bold text-white mb-4">Organisation</h3>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <InputField
-                      label="Name der Organisation"
-                      value={settingsOrgName}
-                      onChange={setSettingsOrgName}
-                    />
-                    <InputField
-                      label="Adresse"
-                      value={settingsAddress}
-                      onChange={setSettingsAddress}
-                    />
-                    <InputField
-                      label="Telefon"
-                      value={settingsPhone}
-                      onChange={setSettingsPhone}
-                    />
-                    <InputField
-                      label="E-Mail"
-                      value={settingsEmail}
-                      onChange={setSettingsEmail}
-                    />
-                  </div>
-                  <div className="flex justify-end mt-6">
-                    <button
-                      onClick={handleSaveSettings}
-                      disabled={saving}
-                      className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-light)] transition-colors disabled:opacity-50"
-                    >
-                      {saving ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Save className="w-4 h-4" />
-                      )}
-                      Speichern
-                    </button>
-                  </div>
+          {/* === EINSTELLUNGEN === */}
+          {activeTab === "einstellungen" && (
+            <div>
+              <h2 className="text-xl font-bold mb-6">Einstellungen</h2>
+              <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
+                <h3 className="text-base font-bold text-white mb-4">Organisation</h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <InputField
+                    label="Name der Organisation"
+                    value={settingsOrgName}
+                    onChange={setSettingsOrgName}
+                  />
+                  <InputField
+                    label="Adresse"
+                    value={settingsAddress}
+                    onChange={setSettingsAddress}
+                  />
+                  <InputField
+                    label="Telefon"
+                    value={settingsPhone}
+                    onChange={setSettingsPhone}
+                  />
+                  <InputField
+                    label="E-Mail"
+                    value={settingsEmail}
+                    onChange={setSettingsEmail}
+                  />
+                </div>
+                <div className="flex justify-end mt-6">
+                  <button
+                    onClick={handleSaveSettings}
+                    disabled={saving}
+                    className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-light)] transition-colors disabled:opacity-50"
+                  >
+                    {saving ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Save className="w-4 h-4" />
+                    )}
+                    Speichern
+                  </button>
                 </div>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );
