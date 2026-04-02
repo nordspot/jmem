@@ -1,0 +1,119 @@
+Hoi Simon
+
+Danke für die detaillierte Auflistung und den Einblick in den Prototyp auf new.jmemwiler.ch! Ich habe mir alles genau angeschaut — die bestehende Seite, den Prototyp und auch den Shop.
+
+Ich habe euer Anforderungsdokument studiert und möchte euch einen alternativen Ansatz vorschlagen, der **alle eure Anforderungen abdeckt**, aber deutlich moderner, schneller und einfacher zu pflegen ist als TYPO3.
+
+---
+
+## Euer Bedarf — unsere Lösung
+
+Ihr habt folgende Punkte aufgelistet. Hier Punkt für Punkt unsere Antwort:
+
+### Phase 1: Website-Einrichtung
+
+| Eure Anforderung | Unsere Lösung |
+|---|---|
+| **Staging-Umgebung** | Automatisch dabei — jeder Entwurf wird auf einer separaten Preview-URL getestet, bevor er live geht. Die bestehende Website bleibt unberührt bis zum Go-Live. |
+| **TYPO3 v13 Installation** | Statt TYPO3 setzen wir auf **Next.js + Cloudflare Pages** — kein PHP-Server nötig, keine Datenbank, keine regelmässigen Security-Updates. Die Seite ist statisch und damit extrem schnell und sicher. |
+| **T3 Karma Website Builder** | Wir bieten einen **visuellen CMS-Editor** direkt im Browser, wo euer Team Texte, Bilder, Schulen, Angebote und Shop-Produkte selbst bearbeiten kann — ohne Programmierkenntnisse. Zusätzlich gibt es einen **AI-gestützten Assistenten**, der auf Textbefehle reagiert ("Aktualisiere die DTS-Daten", "Füge ein neues Buch hinzu"). |
+| **Google Analytics** | Google Analytics 4 Einbindung inklusive. |
+| **Consent-Management** | Datenschutzkonforme Cookie-Lösung mit Cookie-Banner, Consent-Blocker und Datenschutzerklärung — DSGVO/DSG-konform. |
+| **Live-Schaltung** | Domain-Umschaltung auf die neue Seite, sobald ihr zufrieden seid. |
+
+### Phase 2: Fortlaufender Support
+
+| Eure Anforderung | Unsere Lösung |
+|---|---|
+| **Regelmässige Systemupdates und Backups** | Entfällt fast komplett — kein PHP, kein MySQL, keine TYPO3-Patches. Die Seite ist statisch auf Cloudflare gehostet. **Jede Änderung wird automatisch versioniert** (Git-History) und kann jederzeit rückgängig gemacht werden. Das ist besser als jedes Backup. |
+| **Technischer Support und Fehlerbehebung** | Technischer Support von uns im Hintergrund, schnelle Reaktionszeiten. |
+
+---
+
+## Warum nicht TYPO3?
+
+Ich verstehe total, dass TYPO3 bisher als ideal angesehen wurde. Aber ehrlich gesagt bringt TYPO3 für euren Anwendungsfall einiges an Overhead mit:
+
+- **Server-Wartung**: PHP-Updates, MySQL-Patches, TYPO3-Security-Updates — das braucht regelmässig Aufmerksamkeit
+- **Kosten**: Ein TYPO3-Server kostet CHF 20-50/Monat + Wartungsaufwand
+- **Geschwindigkeit**: TYPO3 generiert Seiten dynamisch — das ist langsamer als statische Seiten
+- **Sicherheit**: Ein PHP/MySQL-Backend ist ein Angriffsziel. Statische Seiten können nicht gehackt werden
+- **Abhängigkeit**: T3 Karma Builder ist ein Nischenprodukt mit begrenztem Support
+
+**Unsere Lösung gibt euch alles, was TYPO3 kann — ohne den Overhead:**
+- Inhalte selbst bearbeiten ✓
+- Design selbst anpassen ✓
+- Formulare mit automatischer Kommunikation ✓
+- Mehrsprachig (DE/EN) ✓
+- Schneller, sicherer, günstiger im Betrieb ✓
+
+---
+
+## Was wir konkret umsetzen würden
+
+### Komplette Website
+- Alle bestehenden Inhalte übernommen (Schulen, Angebote, Einsätze, Über uns, Kontakt)
+- **10 Schulseiten** mit allen Details (DTS mit 4 Varianten, SBCW mit 7 Einflussbereichen, SBS mit Quartalstruktur, etc.)
+- **25+ Angebote** mit Bildern und Kategorien (Familie, Paare, Kinder, Workshops)
+- **Shop** mit allen ~40 Produkten (Bücher, Musik, Kinder-Material, Tricks)
+- **2 Sprachen** (Deutsch + Englisch)
+- Erfahrungsberichte/Testimonials von Studierenden
+- Responsive Design (Handy, Tablet, Desktop)
+- YouTube-Videos, Wave-Animationen, moderne Bildergalerien
+- Euer bestehendes Logo und Branding
+
+### CMS für euer Team
+- **Visueller Editor** — Sandra & Vera können Texte, Bilder, Schulen, Produkte, Angebote direkt bearbeiten
+- **Jede Änderung nachvollziehbar** — wer hat wann was geändert
+- **Rückgängig-Funktion** — jede Änderung kann mit einem Klick rückgängig gemacht werden
+- **AI-Assistent** für den Admin — Änderungen per natürlicher Sprache
+
+### Formulare & Kommunikation
+- Kontaktformular mit Betreff-Auswahl
+- Anmeldeformulare für Schulen und Events
+- Automatische E-Mail-Benachrichtigungen
+- Newsletter-Anbindung (euer bestehendes Sendinblue/Brevo)
+
+### Analytics & Datenschutz
+- Google Analytics 4
+- Cookie-Banner mit Consent-Management (DSG-konform)
+- Datenschutzerklärung / Cookie-Erklärung
+
+---
+
+## Vorgehen
+
+1. **Kickoff-Meeting** mit dir, Sandra & Vera — Prototyp besprechen, Wünsche klären, Design-Richtung festlegen. (nur falls ihr das wollt)
+2. **Umsetzung** (ca. 3-4 Tage) — wir bauen die Seite, ihr gebt laufend Feedback
+3. **Content-Migration** — alle Inhalte, Bilder, Texte aus der bestehenden Seite werden übernommen
+4. **CMS-Schulung** — wir zeigen Sandra & Vera wie sie alles selbst bearbeiten können
+5. **Go-Live** — Staging prüfen, Domain umschalten, fertig
+
+**Zeitrahmen:** Go-Live bis Winter 2026, wie von euch gewünscht. Wir könnten aber deutlich schneller sein — je nach Kickoff-Termin wäre ein Go-Live bereits im Sommer realistisch.
+
+---
+
+## Kosten
+
+### Phase 1: Website-Einrichtung
+**CHF 4'800** (einmalig)
+
+Beinhaltet: Komplette Website, Shop, CMS, 2 Sprachen, Formulare, Content-Migration, Analytics, Consent-Management, Schulung.
+
+### Phase 2: Fortlaufender Support
+**CHF 50/Monat**
+
+Beinhaltet: Hosting (Cloudflare), technischer Support, Fehlerbehebung, Updates bei Bedarf.
+
+> Zum Vergleich: Euer Budget von ca. CHF 5'000 für die TYPO3-Lösung deckt nur die Installation und Grundeinrichtung — ohne Content-Migration, ohne Shop, ohne Mehrsprachigkeit, ohne Schulung. Und der laufende Betrieb eines TYPO3-Servers ist teurer.
+
+---
+
+## Nächste Schritte
+
+Sobald Sandra & Vera zurück sind, würde ich vorschlagen, dass wir uns zu viert zusammensetzen. Ich kann dann live zeigen, wie das CMS funktioniert und wie einfach die Bedienung ist. So könnt ihr direkt einschätzen, ob das für euch passt.
+
+Was meinst du — wann wäre ein guter Termin?
+
+Liebe Grüsse
+Daniel

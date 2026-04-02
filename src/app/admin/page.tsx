@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import Link from "next/link";
 import {
   Send,
   History,
@@ -15,7 +16,17 @@ import {
   Lock,
   FileCode,
   X,
+  Paperclip,
+  FileText,
+  Image as ImageIcon,
 } from "lucide-react";
+
+interface Attachment {
+  type: "image" | "document";
+  media_type: string;
+  data: string;
+  name: string;
+}
 
 interface Message {
   id: string;
@@ -25,6 +36,7 @@ interface Message {
   commitSha?: string;
   filesChanged?: string[];
   timestamp: Date;
+  attachments?: Attachment[];
 }
 
 interface Commit {
@@ -34,6 +46,29 @@ interface Commit {
   date: string;
   url: string;
   isAgent: boolean;
+}
+
+const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
+const ACCEPTED_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "application/pdf",
+];
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      // Remove data URL prefix (data:type;base64,)
+      const base64 = result.split(",")[1];
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 export default function AdminPage() {
@@ -48,8 +83,12 @@ export default function AdminPage() {
   const [agentOnly, setAgentOnly] = useState(false);
   const [loadingHistory, setLoadingHistory] = useState(false);
   const [reverting, setReverting] = useState<string | null>(null);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [dragOver, setDragOver] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const chatAreaRef = useRef<HTMLDivElement>(null);
 
   const authHeaders = { Authorization: `Bearer ${secret}` };
 
@@ -69,6 +108,60 @@ export default function AdminPage() {
     localStorage.setItem("jmem-admin-secret", secret);
     setAuthed(true);
   }
+
+  // --- File handling ---
+
+  const processFiles = useCallback(async (files: FileList | File[]) => {
+    const newAttachments: Attachment[] = [];
+    for (const file of Array.from(files)) {
+      if (!ACCEPTED_TYPES.includes(file.type)) {
+        alert(`Dateityp nicht unterstuetzt: ${file.type}`);
+        continue;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        alert(`Datei zu gross (max 20MB): ${file.name}`);
+        continue;
+      }
+      const data = await fileToBase64(file);
+      newAttachments.push({
+        type: file.type.startsWith("image/") ? "image" : "document",
+        media_type: file.type,
+        data,
+        name: file.name,
+      });
+    }
+    setAttachments((prev) => [...prev, ...newAttachments]);
+  }, []);
+
+  function removeAttachment(index: number) {
+    setAttachments((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragOver(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragOver(false);
+  }, []);
+
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragOver(false);
+      if (e.dataTransfer.files.length > 0) {
+        processFiles(e.dataTransfer.files);
+      }
+    },
+    [processFiles]
+  );
+
+  // --- History ---
 
   async function loadHistory() {
     setLoadingHistory(true);
@@ -90,7 +183,7 @@ export default function AdminPage() {
   }, [tab, authed, agentOnly]);
 
   async function handleRevert(sha: string) {
-    if (!confirm(`Commit ${sha.slice(0, 7)} wirklich rückgängig machen?`)) return;
+    if (!confirm(`Commit ${sha.slice(0, 7)} wirklich rueckgaengig machen?`)) return;
     setReverting(sha);
     try {
       const res = await fetch("/api/admin/rollback", {
@@ -100,7 +193,7 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert(`Erfolgreich rückgängig gemacht. Neuer Commit: ${data.sha.slice(0, 7)}`);
+        alert(`Erfolgreich rueckgaengig gemacht. Neuer Commit: ${data.sha.slice(0, 7)}`);
         loadHistory();
       } else {
         alert(`Fehler: ${data.error}`);
@@ -111,24 +204,34 @@ export default function AdminPage() {
     setReverting(null);
   }
 
-  async function sendMessage() {
-    if (!input.trim() || loading) return;
+  // --- Send message ---
 
+  async function sendMessage() {
+    if ((!input.trim() && attachments.length === 0) || loading) return;
+
+    const currentAttachments = [...attachments];
     const userMsg: Message = {
       id: crypto.randomUUID(),
       role: "user",
       content: input.trim(),
       timestamp: new Date(),
+      attachments: currentAttachments.length > 0 ? currentAttachments : undefined,
     };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    setAttachments([]);
     setLoading(true);
 
     try {
+      const body: Record<string, unknown> = { prompt: userMsg.content };
+      if (currentAttachments.length > 0) {
+        body.attachments = currentAttachments;
+      }
+
       const res = await fetch("/api/admin/agent", {
         method: "POST",
         headers: { ...authHeaders, "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userMsg.content }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -139,16 +242,23 @@ export default function AdminPage() {
           { id: crypto.randomUUID(), role: "agent", content: data.error, type: "error", timestamp: new Date() },
         ]);
       } else if (data.type === "needsFiles") {
-        // Agent needs to read files first — auto-retry with file contents
         setMessages((prev) => [
           ...prev,
           { id: crypto.randomUUID(), role: "agent", content: "Dateien werden gelesen...", type: "message", timestamp: new Date() },
         ]);
 
+        const retryBody: Record<string, unknown> = {
+          prompt: data.originalPrompt,
+          fileContents: data.files,
+        };
+        if (currentAttachments.length > 0) {
+          retryBody.attachments = currentAttachments;
+        }
+
         const retryRes = await fetch("/api/admin/agent", {
           method: "POST",
           headers: { ...authHeaders, "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: data.originalPrompt, fileContents: data.files }),
+          body: JSON.stringify(retryBody),
         });
         const retryData = await retryRes.json();
         addAgentMessage(retryData);
@@ -241,13 +351,38 @@ export default function AdminPage() {
               <History className="w-4 h-4 inline mr-1.5" />
               Verlauf
             </button>
+            <Link
+              href="/admin/cms"
+              className="px-4 py-2 rounded-lg text-sm font-medium transition-colors text-gray-400 hover:text-white"
+            >
+              <FileText className="w-4 h-4 inline mr-1.5" />
+              CMS
+            </Link>
           </div>
         </div>
       </header>
 
       {tab === "agent" ? (
         /* Agent Chat */
-        <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
+        <div
+          ref={chatAreaRef}
+          className={`flex-1 flex flex-col max-w-4xl mx-auto w-full ${
+            dragOver ? "ring-2 ring-[var(--color-primary)] ring-inset" : ""
+          }`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
+          {/* Drag overlay */}
+          {dragOver && (
+            <div className="absolute inset-0 bg-[var(--color-primary)]/10 z-10 flex items-center justify-center pointer-events-none">
+              <div className="bg-gray-900 border-2 border-dashed border-[var(--color-primary)] rounded-2xl px-8 py-6 text-center">
+                <Paperclip className="w-8 h-8 text-[var(--color-primary)] mx-auto mb-2" />
+                <p className="text-white font-medium">Dateien hier ablegen</p>
+              </div>
+            </div>
+          )}
+
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.length === 0 && (
@@ -255,13 +390,13 @@ export default function AdminPage() {
                 <Bot className="w-16 h-16 text-gray-700 mx-auto mb-4" />
                 <h2 className="text-xl font-bold text-gray-400 mb-2">CMS Agent</h2>
                 <p className="text-gray-600 text-sm max-w-md mx-auto mb-8">
-                  Beschreibe, was du ändern möchtest. Der Agent liest die Dateien, macht die Änderungen und committet sie automatisch.
+                  Beschreibe, was du aendern moechtest. Der Agent liest die Dateien, macht die Aenderungen und committet sie automatisch.
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center max-w-lg mx-auto">
                   {[
-                    "Füge ein neues Buch zum Shop hinzu",
+                    "Fuege ein neues Buch zum Shop hinzu",
                     "Aktualisiere die DTS-Startdaten",
-                    "Ändere die Telefonnummer",
+                    "Aendere die Telefonnummer",
                     "Neues Angebot: Worship Night",
                   ].map((suggestion) => (
                     <button
@@ -297,6 +432,27 @@ export default function AdminPage() {
                           : "bg-gray-800 text-gray-200"
                   }`}
                 >
+                  {/* Show attachment previews in user messages */}
+                  {msg.attachments && msg.attachments.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {msg.attachments.map((att, i) => (
+                        <div key={i} className="relative">
+                          {att.type === "image" ? (
+                            <img
+                              src={`data:${att.media_type};base64,${att.data}`}
+                              alt={att.name}
+                              className="w-16 h-16 rounded-lg object-cover"
+                            />
+                          ) : (
+                            <div className="flex items-center gap-1.5 bg-white/10 rounded-lg px-2.5 py-1.5">
+                              <FileText className="w-3.5 h-3.5" />
+                              <span className="text-xs truncate max-w-[100px]">{att.name}</span>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
                   {msg.type === "committed" && (
                     <div className="mt-3 space-y-2">
@@ -340,8 +496,52 @@ export default function AdminPage() {
             <div ref={messagesEndRef} />
           </div>
 
+          {/* Attachment previews */}
+          {attachments.length > 0 && (
+            <div className="px-4 pt-2 flex flex-wrap gap-2">
+              {attachments.map((att, i) => (
+                <div
+                  key={i}
+                  className="relative group bg-gray-800 rounded-lg border border-gray-700 overflow-hidden"
+                >
+                  {att.type === "image" ? (
+                    <img
+                      src={`data:${att.media_type};base64,${att.data}`}
+                      alt={att.name}
+                      className="w-16 h-16 object-cover"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 flex flex-col items-center justify-center p-1">
+                      <FileText className="w-5 h-5 text-gray-400 mb-1" />
+                      <span className="text-[10px] text-gray-500 truncate w-full text-center">
+                        {att.name}
+                      </span>
+                    </div>
+                  )}
+                  <button
+                    onClick={() => removeAttachment(i)}
+                    className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <X className="w-3 h-3 text-white" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Input */}
           <div className="p-4 border-t border-gray-800">
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept={ACCEPTED_TYPES.join(",")}
+              className="hidden"
+              onChange={(e) => {
+                if (e.target.files) processFiles(e.target.files);
+                e.target.value = "";
+              }}
+            />
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -349,6 +549,14 @@ export default function AdminPage() {
               }}
               className="flex gap-3"
             >
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-3 py-3 bg-gray-800 border border-gray-700 rounded-xl text-gray-400 hover:text-white hover:border-gray-600 transition-colors"
+                title="Datei anhaengen"
+              >
+                <Paperclip className="w-5 h-5" />
+              </button>
               <textarea
                 ref={inputRef}
                 value={input}
@@ -359,13 +567,13 @@ export default function AdminPage() {
                     sendMessage();
                   }
                 }}
-                placeholder="Was möchtest du ändern?"
+                placeholder="Was moechtest du aendern?"
                 rows={1}
                 className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm resize-none focus:outline-none focus:border-[var(--color-primary)]"
               />
               <button
                 type="submit"
-                disabled={loading || !input.trim()}
+                disabled={loading || (!input.trim() && attachments.length === 0)}
                 className="px-4 py-3 bg-[var(--color-primary)] text-white rounded-xl hover:bg-[var(--color-primary-light)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-5 h-5" />
@@ -448,7 +656,7 @@ export default function AdminPage() {
                         ) : (
                           <>
                             <RotateCcw className="w-3 h-3 inline mr-1" />
-                            Rückgängig
+                            Rueckgaengig
                           </>
                         )}
                       </button>

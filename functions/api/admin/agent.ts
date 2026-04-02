@@ -83,17 +83,49 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
   }
 
-  const { prompt, fileContents } = await context.request.json() as any;
-  if (!prompt) return new Response(JSON.stringify({ error: "Missing prompt" }), { status: 400 });
+  const { prompt, fileContents, attachments } = await context.request.json() as any;
+  if (!prompt && (!attachments || attachments.length === 0)) {
+    return new Response(JSON.stringify({ error: "Missing prompt" }), { status: 400 });
+  }
 
-  let userContent = prompt;
+  // Build content array for user message
+  const contentBlocks: any[] = [];
+
+  // Add attachments first (images and documents)
+  if (attachments && Array.isArray(attachments)) {
+    for (const att of attachments) {
+      if (att.type === "image") {
+        contentBlocks.push({
+          type: "image",
+          source: { type: "base64", media_type: att.media_type, data: att.data },
+        });
+      } else if (att.type === "document") {
+        contentBlocks.push({
+          type: "document",
+          source: { type: "base64", media_type: att.media_type, data: att.data },
+        });
+      }
+    }
+  }
+
+  // Build text content
+  let textContent = prompt || "";
   if (fileContents && Object.keys(fileContents).length > 0) {
     let ctx = "Here are the current file contents:\n\n";
     for (const [path, content] of Object.entries(fileContents)) {
       ctx += `### ${path}\n\`\`\`\n${content}\n\`\`\`\n\n`;
     }
-    userContent = ctx + `\nNow, please process this request: ${prompt}`;
+    textContent = ctx + `\nNow, please process this request: ${textContent}`;
   }
+
+  if (textContent) {
+    contentBlocks.push({ type: "text", text: textContent });
+  }
+
+  // Use string content if no attachments, array otherwise
+  const userContent = contentBlocks.length === 1 && contentBlocks[0].type === "text"
+    ? contentBlocks[0].text
+    : contentBlocks;
 
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
