@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare
 
 on:
   push:
@@ -27,27 +27,9 @@ jobs:
           KEYSTATIC_SECRET: ${{ secrets.KEYSTATIC_SECRET }}
         run: npx opennextjs-cloudflare build
 
-      - name: Prepare Pages bundle
-        run: |
-          # Copy the worker into assets as _worker.js for Pages Advanced Mode
-          cp .open-next/worker.js .open-next/assets/_worker.js
-          # Copy server functions alongside
-          if [ -d ".open-next/server-functions" ]; then
-            cp -r .open-next/server-functions .open-next/assets/_server-functions
-          fi
-          if [ -d ".open-next/middleware" ]; then
-            cp -r .open-next/middleware .open-next/assets/_middleware
-          fi
-          if [ -d ".open-next/cloudflare" ]; then
-            cp -r .open-next/cloudflare .open-next/assets/_cloudflare
-          fi
-          if [ -d ".open-next/cache" ]; then
-            cp -r .open-next/cache .open-next/assets/_cache
-          fi
-
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-        run: npx wrangler pages deploy .open-next/assets --project-name=jmem
+        run: npx wrangler deploy
