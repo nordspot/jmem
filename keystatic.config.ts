@@ -1,9 +1,16 @@
 import { config, fields, collection, singleton } from "@keystatic/core";
 
+const isProd = process.env.NODE_ENV === "production";
+
 export default config({
-  storage: {
-    kind: "local",
-  },
+  storage: isProd
+    ? {
+        kind: "github",
+        repo: "nordspot/jmem",
+      }
+    : {
+        kind: "local",
+      },
   collections: {
     schools: collection({
       label: "Schulen",
