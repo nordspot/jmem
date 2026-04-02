@@ -22,10 +22,15 @@ export function EditOverlay() {
   const promptRef = useRef<HTMLTextAreaElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // Check if admin is logged in
+  // Check if admin is logged in + auto-enable from admin link
   useEffect(() => {
     const secret = localStorage.getItem("jmem-admin-secret");
     if (secret) setAdminSecret(secret);
+    const autoEdit = localStorage.getItem("jmem-edit-mode");
+    if (autoEdit && secret) {
+      setEnabled(true);
+      localStorage.removeItem("jmem-edit-mode");
+    }
   }, []);
 
   // Don't render anything if not admin

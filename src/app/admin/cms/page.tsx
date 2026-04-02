@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { AdminNav } from "@/components/AdminNav";
 import {
   GraduationCap,
   ShoppingBag,
@@ -567,22 +568,11 @@ export default function CmsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white flex">
+    <div className="min-h-screen bg-gray-950 text-white flex flex-col pt-16 lg:pt-20">
+      <AdminNav />
+      <div className="flex flex-1">
       {/* Sidebar */}
       <aside className="w-64 bg-gray-900 border-r border-gray-800 flex flex-col shrink-0">
-        <div className="p-4 border-b border-gray-800">
-          <Link
-            href="/admin"
-            className="flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-3 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Zurueck zum Agent
-          </Link>
-          <h1 className="text-lg font-bold text-white flex items-center gap-2">
-            <FileText className="w-5 h-5 text-[var(--color-primary)]" />
-            CMS
-          </h1>
-        </div>
         <nav className="flex-1 p-2">
           {TABS.map((t) => (
             <button
@@ -1053,6 +1043,7 @@ export default function CmsPage() {
           )}
         </div>
       </main>
+      </div>
     </div>
   );
 }

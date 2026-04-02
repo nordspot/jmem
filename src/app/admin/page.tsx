@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import Link from "next/link";
 import {
   Send,
   History,
@@ -20,6 +19,7 @@ import {
   FileText,
   Image as ImageIcon,
 } from "lucide-react";
+import { AdminNav } from "@/components/AdminNav";
 
 interface Attachment {
   type: "image" | "document";
@@ -324,43 +324,8 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white flex flex-col">
-      {/* Header */}
-      <header className="bg-gray-900 border-b border-gray-800 px-4 py-3">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Bot className="w-6 h-6 text-[var(--color-primary)]" />
-            <h1 className="text-lg font-bold">JMEM CMS Agent</h1>
-          </div>
-          <div className="flex gap-1 bg-gray-800 rounded-xl p-1">
-            <button
-              onClick={() => setTab("agent")}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                tab === "agent" ? "bg-[var(--color-primary)] text-white" : "text-gray-400 hover:text-white"
-              }`}
-            >
-              <Bot className="w-4 h-4 inline mr-1.5" />
-              Agent
-            </button>
-            <button
-              onClick={() => setTab("history")}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                tab === "history" ? "bg-[var(--color-primary)] text-white" : "text-gray-400 hover:text-white"
-              }`}
-            >
-              <History className="w-4 h-4 inline mr-1.5" />
-              Verlauf
-            </button>
-            <Link
-              href="/admin/cms"
-              className="px-4 py-2 rounded-lg text-sm font-medium transition-colors text-gray-400 hover:text-white"
-            >
-              <FileText className="w-4 h-4 inline mr-1.5" />
-              CMS
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gray-950 text-white flex flex-col pt-16 lg:pt-20">
+      <AdminNav activeTab={tab} onTabChange={(t) => setTab(t as "agent" | "history")} />
 
       {tab === "agent" ? (
         /* Agent Chat */

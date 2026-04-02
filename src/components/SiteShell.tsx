@@ -14,19 +14,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
-  if (isAdmin) {
-    return <>{children}</>;
-  }
-
   return (
     <LangProvider>
       <CartProvider>
         <AuthProvider>
           <Header />
           <main className="flex-1">{children}</main>
-          <Footer />
-          <CartButton />
-          <CartDrawer />
+          {!isAdmin && <Footer />}
+          {!isAdmin && <CartButton />}
+          {!isAdmin && <CartDrawer />}
           <EditOverlay />
         </AuthProvider>
       </CartProvider>
