@@ -51,8 +51,9 @@ export default function RootLayout({
     <html
       lang="de"
       className={`${geistSans.variable} ${geistMono.variable} ${pathwayGothicOne.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <SiteShell>{children}</SiteShell>
       </body>
     </html>
