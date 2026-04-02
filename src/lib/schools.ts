@@ -29,7 +29,7 @@ export const schools: School[] = [
     slug: "dts",
     shortName: "DTS",
     title: "Jüngerschaftsschule (Discipleship Training School)",
-    image: "/images/site/dts-group.jpg",
+    image: "/images/site/dts-community.jpg",
     description:
       "Die DTS bietet dir die Gelegenheit in einem internationalen Umfeld deine Beziehung zu Gott zu vertiefen, deine Berufung zu entdecken, deine Persönlichkeit weiterzuentwickeln und gemeinsam mit anderen Missionserfahrungen zu sammeln.",
     descriptionLong:
@@ -69,7 +69,7 @@ export const schools: School[] = [
     slug: "sbcw",
     shortName: "SBCW",
     title: "Schule für Biblisch Christliche Weltanschauung",
-    image: "/images/site/sbcw-1.jpg",
+    image: "/images/site/sbcw-classroom.jpg",
     description:
       "Die gute Nachricht von Jesus Christus betrifft weit mehr als persönliche Rettung und ist relevant in allen Bereichen der Gesellschaft. Die SBCW erforscht die 7 Einflussbereiche: Familie, Kirche, Staat, Bildung, Wirtschaft, Medien, Wissenschaft und Kunst.",
     descriptionLong:
@@ -94,7 +94,7 @@ export const schools: School[] = [
     slug: "sbs",
     shortName: "SBS",
     title: "Schule für Bibelstudium",
-    image: "/images/site/sbs-1.jpg",
+    image: "/images/site/sbs-group.jpg",
     description:
       "Eine spannende Reise durch alle 66 Bücher der Bibel. 9-monatiges Programm in 3 Quartalen. Du lernst die induktive Studienmethode: Beobachtung, Interpretation, Anwendung.",
     descriptionLong:
@@ -123,7 +123,7 @@ export const schools: School[] = [
     slug: "dbs",
     shortName: "DBS",
     title: "Jüngerschafts-Bibelschule",
-    image: "/images/site/schulen-dbs.jpg",
+    image: "/images/site/dbs-fondue.jpg",
     description:
       "Gemeinsam die ganze Bibel entdecken! In dieser Schule lernst du die biblischen Zusammenhänge besser verstehen.",
     startDate: "April 2026",
