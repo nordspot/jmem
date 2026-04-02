@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/lib/CartContext";
+import { useAuth } from "@/lib/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 import { Loader2, ShoppingBag, ArrowLeft } from "lucide-react";
 
 export default function CheckoutPage() {
   const { items, getProduct, totalPrice, clearCart } = useCart();
+  const { user, isLoggedIn } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,6 +23,21 @@ export default function CheckoutPage() {
     phone: "",
     notes: "",
   });
+
+  // Pre-fill form with user data if logged in
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      setForm((prev) => ({
+        ...prev,
+        name: prev.name || `${user.firstName} ${user.lastName}`.trim(),
+        email: prev.email || user.email,
+        address: prev.address || user.address,
+        zip: prev.zip || user.plz,
+        city: prev.city || user.city,
+        phone: prev.phone || user.phone,
+      }));
+    }
+  }, [isLoggedIn, user]);
 
   function updateField(key: string, value: string) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -48,6 +65,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           items: cartItems,
           customer: form,
+          customerEmail: isLoggedIn ? user?.email : undefined,
           totalAmount: totalPrice,
         }),
       });

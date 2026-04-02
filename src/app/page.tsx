@@ -51,7 +51,7 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Stats */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" data-edit-path="src/lib/i18n/de.ts" data-edit-section="stats">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat) => (
@@ -68,7 +68,7 @@ export default function HomePage() {
       </section>
 
       {/* Video Section */}
-      <section className="py-20 bg-[var(--color-warm)]">
+      <section className="py-20 bg-[var(--color-warm)]" data-edit-path="src/lib/i18n/de.ts" data-edit-section="video">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -91,7 +91,7 @@ export default function HomePage() {
       </section>
 
       {/* Main Sections */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" data-edit-path="src/lib/i18n/de.ts" data-edit-section="discover">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -110,7 +110,7 @@ export default function HomePage() {
       </section>
 
       {/* Schools Preview */}
-      <section className="py-20">
+      <section className="py-20" data-edit-path="src/lib/schools.ts" data-edit-section="schools-preview">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-12">
             <div>
@@ -158,7 +158,7 @@ export default function HomePage() {
       />
 
       {/* CTA */}
-      <section className="py-20 bg-[var(--color-dark)]">
+      <section className="py-20 bg-[var(--color-dark)]" data-edit-path="src/lib/i18n/de.ts" data-edit-section="cta">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             {t.cta.title}
@@ -184,7 +184,7 @@ export default function HomePage() {
       </section>
 
       {/* Guest Info */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" data-edit-path="src/lib/i18n/de.ts" data-edit-section="guest-info">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>

@@ -82,7 +82,7 @@ export default async function SchoolPage({
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2" data-edit-path="src/lib/schools.ts" data-edit-section="school-detail">
               <h2 className="text-xl font-bold text-gray-900 mb-4">
                 Ueber diese Schule
               </h2>

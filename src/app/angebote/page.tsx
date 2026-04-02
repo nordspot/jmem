@@ -25,7 +25,7 @@ export default function AngebotePage() {
         image="/images/site/angebot-family-camp.jpg"
       />
 
-      <section className="py-16">
+      <section className="py-16" data-edit-path="src/lib/offerings.ts" data-edit-section="offerings-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {offerings.map((offering) => (

@@ -58,7 +58,7 @@ export default function UnterstuetzungPage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Three pillars */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8 mb-16" data-edit-path="src/app/unterstuetzung/page.tsx" data-edit-section="support-pillars">
             <div className="bg-white rounded-2xl border border-gray-100 p-8 text-center">
               <Heart className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Gebet</h3>
@@ -86,7 +86,7 @@ export default function UnterstuetzungPage() {
           </div>
 
           {/* Donation categories */}
-          <div className="max-w-4xl mx-auto mb-16">
+          <div className="max-w-4xl mx-auto mb-16" data-edit-path="src/app/unterstuetzung/page.tsx" data-edit-section="donation-categories">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
               Spendenzwecke
             </h2>
@@ -122,7 +122,7 @@ export default function UnterstuetzungPage() {
           </div>
 
           {/* Bank Details */}
-          <div className="max-w-2xl mx-auto mb-16">
+          <div className="max-w-2xl mx-auto mb-16" data-edit-path="src/app/unterstuetzung/page.tsx" data-edit-section="bank-details">
             <div className="bg-[var(--color-warm)] rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                 Bankverbindung fuer Spenden
@@ -153,7 +153,7 @@ export default function UnterstuetzungPage() {
           </div>
 
           {/* Open Positions */}
-          <div className="max-w-4xl mx-auto mb-16">
+          <div className="max-w-4xl mx-auto mb-16" data-edit-path="src/app/unterstuetzung/page.tsx" data-edit-section="open-positions">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Offene Stellen

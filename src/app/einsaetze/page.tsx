@@ -24,7 +24,7 @@ export default function EinsaetzePage() {
     <>
       <PageHero title={t.einsaetze.title} subtitle={t.einsaetze.subtitle} image="/images/site/einsatz-1.jpg" />
 
-      <section className="py-16">
+      <section className="py-16" data-edit-path="src/app/einsaetze/page.tsx" data-edit-section="einsaetze-content">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
@@ -105,7 +105,7 @@ export default function EinsaetzePage() {
       </section>
 
       {/* Image Gallery */}
-      <section className="py-16 bg-[var(--color-warm)]">
+      <section className="py-16 bg-[var(--color-warm)]" data-edit-path="src/app/einsaetze/page.tsx" data-edit-section="einsaetze-gallery">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
             {t.einsaetze.galleryTitle}

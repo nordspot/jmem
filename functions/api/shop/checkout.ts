@@ -24,6 +24,7 @@ interface CheckoutRequest {
     phone: string;
     notes: string;
   };
+  customerEmail?: string;
   totalAmount: number;
 }
 
@@ -31,6 +32,7 @@ interface Order {
   id: string;
   items: CartItem[];
   customer: CheckoutRequest["customer"];
+  customerEmail?: string;
   totalAmount: number;
   status: "pending" | "paid" | "shipped" | "cancelled";
   createdAt: string;
@@ -167,6 +169,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       id: generateOrderId(),
       items: body.items,
       customer: body.customer,
+      customerEmail: body.customerEmail || body.customer.email,
       totalAmount: calculatedTotal,
       status: "pending",
       createdAt: new Date().toISOString(),

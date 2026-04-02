@@ -29,7 +29,7 @@ export default function SchulenPage() {
       </section>
 
       {/* Schools Grid */}
-      <section className="py-16">
+      <section className="py-16" data-edit-path="src/lib/schools.ts" data-edit-section="schools-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {schools.map((school, i) => (
@@ -45,7 +45,7 @@ export default function SchulenPage() {
       </section>
 
       {/* UofN Info */}
-      <section className="py-16 bg-[var(--color-warm)]">
+      <section className="py-16 bg-[var(--color-warm)]" data-edit-path="src/lib/i18n/de.ts" data-edit-section="uofn-info">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             {t.schools.uofnTitle}

@@ -35,7 +35,7 @@ export default function ShopPage() {
         image="/images/site/schulen-dbs.jpg"
       />
 
-      <section className="py-12">
+      <section className="py-12" data-edit-path="src/lib/products.ts" data-edit-section="product-catalog">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Filters */}
           <div className="flex flex-col sm:flex-row gap-4 mb-10">

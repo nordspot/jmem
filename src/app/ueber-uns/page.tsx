@@ -37,7 +37,7 @@ export default function UeberUnsPage() {
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start mb-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-start mb-20" data-edit-path="src/lib/i18n/de.ts" data-edit-section="about-jmem">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 {t.ueberUns.jmemWiler}
@@ -87,7 +87,7 @@ export default function UeberUnsPage() {
           </div>
 
           {/* Teams */}
-          <div className="mb-20">
+          <div className="mb-20" data-edit-path="src/lib/i18n/de.ts" data-edit-section="teams">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
               {t.ueberUns.teamsTitle}
             </h2>
@@ -110,7 +110,7 @@ export default function UeberUnsPage() {
           </div>
 
           {/* JMEM Worldwide */}
-          <div id="weltweit" className="bg-[var(--color-warm)] rounded-2xl p-8 lg:p-12">
+          <div id="weltweit" className="bg-[var(--color-warm)] rounded-2xl p-8 lg:p-12" data-edit-path="src/lib/i18n/de.ts" data-edit-section="worldwide">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               {t.ueberUns.worldwideTitle}
             </h2>
@@ -150,7 +150,7 @@ export default function UeberUnsPage() {
           </div>
 
           {/* Gaeste */}
-          <div id="gaeste" className="mt-16">
+          <div id="gaeste" className="mt-16" data-edit-path="src/lib/i18n/de.ts" data-edit-section="guests">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">{t.ueberUns.guests}</h2>
             <p className="text-gray-600 leading-relaxed mb-6 max-w-3xl">
               {t.ueberUns.guestsDesc}

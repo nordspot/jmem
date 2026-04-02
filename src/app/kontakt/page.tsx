@@ -12,7 +12,7 @@ export default function KontaktPage() {
     <>
       <PageHero title="Kontakt" subtitle="Wir freuen uns auf deine Nachricht. Nimm Kontakt mit uns auf!" image="/images/site/about-campus.jpg" />
 
-      <section className="py-16">
+      <section className="py-16" data-edit-path="src/app/kontakt/page.tsx" data-edit-section="kontakt-info">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}

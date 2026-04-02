@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLang } from "@/lib/LangContext";
+import { useAuth } from "@/lib/AuthContext";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface NavItem {
@@ -89,6 +90,7 @@ export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const { t } = useLang();
+  const { isLoggedIn, user } = useAuth();
 
   const navigation: NavItem[] = [
     {
@@ -182,6 +184,26 @@ export function Header() {
               }
             />
             <Link
+              href="/konto"
+              className={`flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-full transition-colors ${
+                isHome && !scrolled
+                  ? "text-white/90 hover:text-white hover:bg-white/10"
+                  : "text-gray-700 hover:text-[var(--color-accent)] hover:bg-gray-50"
+              }`}
+              title={isLoggedIn ? "Mein Konto" : "Anmelden"}
+            >
+              {isLoggedIn ? (
+                <span className="w-7 h-7 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center text-xs font-bold">
+                  {user?.firstName?.charAt(0).toUpperCase()}
+                </span>
+              ) : (
+                <User className="w-5 h-5" />
+              )}
+              <span className="hidden xl:inline">
+                {isLoggedIn ? "Mein Konto" : "Anmelden"}
+              </span>
+            </Link>
+            <Link
               href="/kontakt"
               className={`text-sm font-medium px-5 py-2.5 rounded-full transition-colors ${
                 isHome && !scrolled
@@ -245,8 +267,16 @@ export function Header() {
                 <LanguageSwitcher className="border-gray-200 text-gray-700 hover:bg-gray-50" />
               </div>
               <Link
+                href="/konto"
+                className="flex items-center gap-2 mx-4 mt-3 px-4 py-3 text-base font-medium text-gray-700 hover:bg-[var(--color-warm)] rounded-lg transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                <User className="w-5 h-5" />
+                {isLoggedIn ? "Mein Konto" : "Anmelden"}
+              </Link>
+              <Link
                 href="/kontakt"
-                className="block mx-4 mt-4 text-center bg-[var(--color-primary)] text-white font-medium px-5 py-3 rounded-full hover:bg-[var(--color-primary-light)] transition-colors"
+                className="block mx-4 mt-2 text-center bg-[var(--color-primary)] text-white font-medium px-5 py-3 rounded-full hover:bg-[var(--color-primary-light)] transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 {t.nav.kontakt}
