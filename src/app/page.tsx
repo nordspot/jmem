@@ -83,7 +83,7 @@ export default function HomePage() {
               className="absolute inset-0 w-full h-full"
               src="https://www.youtube.com/embed/ruzke9nYO54?start=14&rel=0"
               title="JMEM Wiler Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="fullscreen"
               allowFullScreen
             />
           </div>
