@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pathway_Gothic_One } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/SiteShell";
-import { HydrationFix } from "@/components/HydrationFix";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,9 +54,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <HydrationFix>
-          <SiteShell>{children}</SiteShell>
-        </HydrationFix>
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

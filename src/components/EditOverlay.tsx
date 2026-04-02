@@ -5,10 +5,10 @@ import { Pencil, X, Send, Loader2, CheckCircle, Wand2 } from "lucide-react";
 
 interface SelectedElement {
   rect: DOMRect;
-  path: string;       // data-edit-path: which source file
-  section: string;     // data-edit-section: section identifier
-  content: string;     // visible text content
-  html: string;        // raw innerHTML (truncated)
+  path: string;
+  section: string;
+  content: string;
+  html: string;
 }
 
 export function EditOverlay() {
@@ -22,7 +22,6 @@ export function EditOverlay() {
   const promptRef = useRef<HTMLTextAreaElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // Check if admin is logged in + auto-enable from admin link
   useEffect(() => {
     const secret = localStorage.getItem("jmem-admin-secret");
     if (secret) setAdminSecret(secret);
@@ -33,17 +32,14 @@ export function EditOverlay() {
     }
   }, []);
 
-  // Don't render anything if not admin
-  if (!adminSecret) return null;
-
-  const findEditableParent = (el: HTMLElement): HTMLElement | null => {
+  const findEditableParent = useCallback((el: HTMLElement): HTMLElement | null => {
     let current: HTMLElement | null = el;
     while (current) {
       if (current.dataset.editPath) return current;
       current = current.parentElement;
     }
     return null;
-  };
+  }, []);
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -56,31 +52,25 @@ export function EditOverlay() {
         setHovered(null);
       }
     },
-    [enabled, selected, loading]
+    [enabled, selected, loading, findEditableParent]
   );
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
       if (!enabled || loading) return;
       const target = e.target as HTMLElement;
-
-      // Ignore clicks on the overlay itself
       if (overlayRef.current?.contains(target)) return;
 
       const editable = findEditableParent(target);
       if (editable) {
         e.preventDefault();
         e.stopPropagation();
-
-        const textContent = editable.innerText?.slice(0, 500) || "";
-        const htmlContent = editable.innerHTML?.slice(0, 1000) || "";
-
         setSelected({
           rect: editable.getBoundingClientRect(),
           path: editable.dataset.editPath || "",
           section: editable.dataset.editSection || "",
-          content: textContent,
-          html: htmlContent,
+          content: editable.innerText?.slice(0, 500) || "",
+          html: editable.innerHTML?.slice(0, 1000) || "",
         });
         setHovered(null);
         setTimeout(() => promptRef.current?.focus(), 100);
@@ -88,7 +78,7 @@ export function EditOverlay() {
         setSelected(null);
       }
     },
-    [enabled, loading]
+    [enabled, loading, findEditableParent]
   );
 
   useEffect(() => {
@@ -140,17 +130,13 @@ Bitte lies zuerst die Datei "${selected.path}" und mache dann die gewünschte Ä
       if (data.error) {
         setResult({ type: "error", message: data.error });
       } else if (data.type === "needsFiles") {
-        // Auto-retry with file contents
         const retryRes = await fetch("/api/admin/agent", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${adminSecret}`,
           },
-          body: JSON.stringify({
-            prompt: contextPrompt,
-            fileContents: data.files,
-          }),
+          body: JSON.stringify({ prompt: contextPrompt, fileContents: data.files }),
         });
         const retryData = await retryRes.json();
         if (retryData.type === "committed") {
@@ -171,8 +157,6 @@ Bitte lies zuerst die Datei "${selected.path}" und mache dann die gewünschte Ä
           message: data.message || "Änderung gespeichert! Seite wird in ~1 Minute aktualisiert.",
         });
         setPrompt("");
-      } else if (data.type === "question") {
-        setResult({ type: "error", message: data.content });
       } else {
         setResult({
           type: "success",
@@ -182,15 +166,15 @@ Bitte lies zuerst die Datei "${selected.path}" und mache dann die gewünschte Ä
     } catch {
       setResult({ type: "error", message: "Verbindungsfehler" });
     }
-
     setLoading(false);
   }
 
-  const scrollY = typeof window !== "undefined" ? window.scrollY : 0;
+  // ALL hooks are above — safe to return early now
+  if (!adminSecret) return null;
 
   return (
     <>
-      {/* Toggle button — bottom left */}
+      {/* Toggle button */}
       <button
         onClick={() => {
           setEnabled(!enabled);
@@ -205,17 +189,11 @@ Bitte lies zuerst die Datei "${selected.path}" und mache dann die gewünschte Ä
         }`}
       >
         {enabled ? (
-          <>
-            <X className="w-4 h-4" /> Edit-Modus beenden
-          </>
+          <><X className="w-4 h-4" /> Edit-Modus beenden</>
         ) : (
-          <>
-            <Pencil className="w-4 h-4" /> Edit-Modus
-          </>
+          <><Pencil className="w-4 h-4" /> Edit-Modus</>
         )}
       </button>
-
-      {!enabled && null}
 
       {/* Hover highlight */}
       {enabled && hovered && !selected && (
@@ -237,7 +215,6 @@ Bitte lies zuerst die Datei "${selected.path}" und mache dann die gewünschte Ä
       {/* Selected element + prompt */}
       {enabled && selected && (
         <>
-          {/* Selection outline */}
           <div
             className="fixed z-[9990] pointer-events-none border-2 border-[var(--color-primary)] rounded-lg bg-[var(--color-primary)]/5"
             style={{
@@ -248,26 +225,15 @@ Bitte lies zuerst die Datei "${selected.path}" und mache dann die gewünschte Ä
             }}
           />
 
-          {/* Floating prompt box */}
           <div
             ref={overlayRef}
             className="fixed z-[9999] w-96 max-w-[90vw] bg-gray-900 rounded-2xl shadow-2xl border border-gray-700 overflow-hidden"
             style={{
-              top: Math.min(
-                selected.rect.bottom + 12,
-                window.innerHeight - 280
-              ),
-              left: Math.max(
-                8,
-                Math.min(
-                  selected.rect.left,
-                  window.innerWidth - 400
-                )
-              ),
+              top: Math.min(selected.rect.bottom + 12, window.innerHeight - 280),
+              left: Math.max(8, Math.min(selected.rect.left, window.innerWidth - 400)),
             }}
           >
             <div className="p-4">
-              {/* Context info */}
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <Wand2 className="w-4 h-4 text-[var(--color-primary)]" />
@@ -276,74 +242,42 @@ Bitte lies zuerst die Datei "${selected.path}" und mache dann die gewünschte Ä
                     {selected.section && ` → ${selected.section}`}
                   </span>
                 </div>
-                <button
-                  onClick={() => {
-                    setSelected(null);
-                    setResult(null);
-                  }}
-                  className="text-gray-500 hover:text-white"
-                >
+                <button onClick={() => { setSelected(null); setResult(null); }} className="text-gray-500 hover:text-white">
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Current content preview */}
               <div className="bg-gray-800 rounded-lg p-2 mb-3 max-h-20 overflow-y-auto">
                 <p className="text-xs text-gray-400 line-clamp-3">
-                  {selected.content.slice(0, 200)}
-                  {selected.content.length > 200 && "..."}
+                  {selected.content.slice(0, 200)}{selected.content.length > 200 && "..."}
                 </p>
               </div>
 
-              {/* Prompt input */}
               <textarea
                 ref={promptRef}
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    submitChange();
-                  }
-                }}
+                onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submitChange(); } }}
                 placeholder="Was möchtest du hier ändern?"
                 rows={2}
                 className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm resize-none focus:outline-none focus:border-[var(--color-primary)] mb-3"
               />
 
-              {/* Result feedback */}
               {result && (
-                <div
-                  className={`flex items-start gap-2 p-2 rounded-lg mb-3 text-xs ${
-                    result.type === "success"
-                      ? "bg-green-900/30 text-green-400"
-                      : "bg-red-900/30 text-red-400"
-                  }`}
-                >
-                  {result.type === "success" ? (
-                    <CheckCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-                  ) : (
-                    <X className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-                  )}
+                <div className={`flex items-start gap-2 p-2 rounded-lg mb-3 text-xs ${
+                  result.type === "success" ? "bg-green-900/30 text-green-400" : "bg-red-900/30 text-red-400"
+                }`}>
+                  {result.type === "success" ? <CheckCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" /> : <X className="w-3.5 h-3.5 mt-0.5 shrink-0" />}
                   <span>{result.message}</span>
                 </div>
               )}
 
-              {/* Submit */}
               <button
                 onClick={submitChange}
                 disabled={loading || !prompt.trim()}
                 className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-light)] transition-colors disabled:opacity-50 text-sm font-medium"
               >
-                {loading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" /> Wird geändert...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" /> Änderung anwenden
-                  </>
-                )}
+                {loading ? (<><Loader2 className="w-4 h-4 animate-spin" /> Wird geändert...</>) : (<><Send className="w-4 h-4" /> Änderung anwenden</>)}
               </button>
             </div>
           </div>
