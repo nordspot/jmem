@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pathway_Gothic_One } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { LangProvider } from "@/lib/LangContext";
+import { SiteShell } from "@/components/SiteShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +22,7 @@ const pathwayGothicOne = Pathway_Gothic_One({
 export const metadata: Metadata = {
   title: "JMEM Wiler | Jugend mit einer Mission",
   description:
-    "Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf, Schweiz. Schulen, Eins\u00e4tze, Seminare und mehr. passion - training - mission.",
+    "Jugend mit einer Mission (JMEM / YWAM) Wiler bei Seedorf, Schweiz. Schulen, Einsätze, Seminare und mehr. passion - training - mission.",
   keywords: [
     "JMEM",
     "YWAM",
@@ -55,11 +53,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${pathwayGothicOne.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <LangProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </LangProvider>
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );
