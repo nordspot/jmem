@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Check } from "lucide-react";
+import { useCart } from "@/lib/CartContext";
 
 interface ProductCardProps {
+  sku: string;
   name: string;
   price: number;
   image: string;
@@ -12,18 +15,29 @@ interface ProductCardProps {
 }
 
 export function ProductCard({
+  sku,
   name,
   price,
   image,
   category,
   inStock,
 }: ProductCardProps) {
+  const { addItem, setCartOpen } = useCart();
+  const [added, setAdded] = useState(false);
+
   const categoryLabels: Record<string, string> = {
     books: "Buch",
     music: "Musik",
     kids: "Kinder & Jugend",
     tricks: "Tricks & Hilfsmittel",
   };
+
+  function handleAddToCart() {
+    addItem(sku);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+    setCartOpen(true);
+  }
 
   return (
     <div className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all duration-300">
@@ -56,11 +70,27 @@ export function ProductCard({
             CHF {price.toFixed(2)}
           </p>
           {inStock && (
-            <button className="w-10 h-10 bg-[var(--color-primary)] text-white rounded-full flex items-center justify-center hover:bg-[var(--color-primary-light)] transition-colors">
-              <ShoppingCart className="w-4 h-4" />
+            <button
+              onClick={handleAddToCart}
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                added
+                  ? "bg-green-500 text-white"
+                  : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-light)]"
+              }`}
+            >
+              {added ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <ShoppingCart className="w-4 h-4" />
+              )}
             </button>
           )}
         </div>
+        {added && (
+          <p className="text-xs text-green-600 mt-1 text-right">
+            Hinzugefügt
+          </p>
+        )}
       </div>
     </div>
   );

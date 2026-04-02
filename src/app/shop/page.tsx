@@ -79,6 +79,7 @@ export default function ShopPage() {
             {filtered.map((product, i) => (
               <ProductCard
                 key={product.sku}
+                sku={product.sku}
                 name={product.name}
                 price={product.price}
                 image={product.image}

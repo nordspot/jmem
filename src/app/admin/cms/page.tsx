@@ -17,6 +17,10 @@ import {
   Trash2,
   Lock,
   ChevronRight,
+  Package,
+  ChevronDown,
+  ChevronUp,
+  Truck,
 } from "lucide-react";
 import { schools as initialSchools, type School } from "@/lib/schools";
 import { products as initialProducts, type Product } from "@/lib/products";
@@ -24,12 +28,39 @@ import { offerings as initialOfferings, type Offering } from "@/lib/offerings";
 
 // --- Types ---
 
-type Tab = "schulen" | "produkte" | "angebote" | "seiten" | "einstellungen";
+type Tab = "schulen" | "produkte" | "angebote" | "bestellungen" | "seiten" | "einstellungen";
+
+interface OrderItem {
+  sku: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+interface OrderRecord {
+  id: string;
+  items: OrderItem[];
+  customer: {
+    name: string;
+    email: string;
+    address: string;
+    zip: string;
+    city: string;
+    country: string;
+    phone: string;
+    notes: string;
+  };
+  totalAmount: number;
+  status: "pending" | "paid" | "shipped" | "cancelled";
+  createdAt: string;
+  paidAt?: string;
+}
 
 const TABS: { key: Tab; label: string; icon: React.ReactNode }[] = [
   { key: "schulen", label: "Schulen", icon: <GraduationCap className="w-4 h-4" /> },
   { key: "produkte", label: "Produkte", icon: <ShoppingBag className="w-4 h-4" /> },
   { key: "angebote", label: "Angebote", icon: <Gift className="w-4 h-4" /> },
+  { key: "bestellungen", label: "Bestellungen", icon: <Package className="w-4 h-4" /> },
   { key: "seiten", label: "Seiten", icon: <FileText className="w-4 h-4" /> },
   { key: "einstellungen", label: "Einstellungen", icon: <Settings className="w-4 h-4" /> },
 ];
@@ -319,6 +350,11 @@ export default function CmsPage() {
   const [products, setProducts] = useState(initialProducts);
   const [offerings, setOfferings] = useState(initialOfferings);
 
+  // Orders state
+  const [orders, setOrders] = useState<OrderRecord[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
+  const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
+
   // Editor state
   const [editingSchool, setEditingSchool] = useState<School | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -447,6 +483,47 @@ export default function CmsPage() {
     saveViaAgent(
       `Update src/lib/i18n/de.ts: In the footer section, set orgName to "${settingsOrgName}". In the contact section, set address to "${settingsAddress}", phone to "${settingsPhone}", email to "${settingsEmail}". Keep everything else unchanged.`
     );
+  }
+
+  async function fetchOrders() {
+    setOrdersLoading(true);
+    try {
+      const res = await fetch("/api/shop/orders", {
+        headers: authHeaders,
+      });
+      const data = await res.json();
+      if (data.orders) {
+        setOrders(data.orders);
+      } else if (data.error) {
+        showFeedback("error", data.error);
+      }
+    } catch {
+      showFeedback("error", "Bestellungen konnten nicht geladen werden.");
+    }
+    setOrdersLoading(false);
+  }
+
+  async function updateOrderStatus(orderId: string, status: string) {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/shop/orders", {
+        method: "PUT",
+        headers: { ...authHeaders, "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId, status }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setOrders((prev) =>
+          prev.map((o) => (o.id === orderId ? { ...o, status: status as OrderRecord["status"] } : o))
+        );
+        showFeedback("success", `Bestellung ${orderId} als "${status}" markiert.`);
+      } else {
+        showFeedback("error", data.error || "Status konnte nicht aktualisiert werden.");
+      }
+    } catch {
+      showFeedback("error", "Fehler beim Aktualisieren des Status.");
+    }
+    setSaving(false);
   }
 
   function handleLogin() {
@@ -610,6 +687,7 @@ export default function CmsPage() {
                         image: "/images/products/",
                         category: "books",
                         inStock: true,
+                        stock: 10,
                       });
                     }}
                     className="flex items-center gap-2 px-3 py-2 bg-[var(--color-primary)] text-white rounded-lg text-sm hover:bg-[var(--color-primary-light)] transition-colors"
@@ -699,6 +777,184 @@ export default function CmsPage() {
                       <ChevronRight className="w-4 h-4 text-gray-600" />
                     </button>
                   ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* === BESTELLUNGEN === */}
+          {activeTab === "bestellungen" && (
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold">Bestellungen</h2>
+                <button
+                  onClick={fetchOrders}
+                  disabled={ordersLoading}
+                  className="flex items-center gap-2 px-3 py-2 bg-[var(--color-primary)] text-white rounded-lg text-sm hover:bg-[var(--color-primary-light)] transition-colors disabled:opacity-50"
+                >
+                  {ordersLoading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Package className="w-4 h-4" />
+                  )}
+                  Laden
+                </button>
+              </div>
+
+              {orders.length === 0 && !ordersLoading ? (
+                <div className="text-center py-12 text-gray-500">
+                  <Package className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                  <p className="text-sm">
+                    Keine Bestellungen vorhanden. Klicke &quot;Laden&quot; um Bestellungen abzurufen.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {orders.map((order) => {
+                    const isExpanded = expandedOrder === order.id;
+                    const statusColors: Record<string, string> = {
+                      pending: "bg-yellow-900/30 text-yellow-400",
+                      paid: "bg-green-900/30 text-green-400",
+                      shipped: "bg-blue-900/30 text-blue-400",
+                      cancelled: "bg-red-900/30 text-red-400",
+                    };
+                    const statusLabels: Record<string, string> = {
+                      pending: "Ausstehend",
+                      paid: "Bezahlt",
+                      shipped: "Versendet",
+                      cancelled: "Storniert",
+                    };
+
+                    return (
+                      <div
+                        key={order.id}
+                        className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden"
+                      >
+                        <button
+                          onClick={() =>
+                            setExpandedOrder(isExpanded ? null : order.id)
+                          }
+                          className="w-full flex items-center justify-between p-4 hover:bg-gray-800/50 transition-colors text-left"
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <span className="text-xs font-mono bg-gray-800 text-gray-400 px-2 py-0.5 rounded shrink-0">
+                              {order.id}
+                            </span>
+                            <span
+                              className={`text-xs px-2 py-0.5 rounded shrink-0 ${
+                                statusColors[order.status] || "bg-gray-800 text-gray-400"
+                              }`}
+                            >
+                              {statusLabels[order.status] || order.status}
+                            </span>
+                            <span className="text-sm text-white truncate">
+                              {order.customer.name}
+                            </span>
+                            <span className="text-xs text-gray-500 shrink-0">
+                              CHF {order.totalAmount.toFixed(2)}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 shrink-0">
+                            <span className="text-xs text-gray-600">
+                              {new Date(order.createdAt).toLocaleDateString("de-CH")}
+                            </span>
+                            {isExpanded ? (
+                              <ChevronUp className="w-4 h-4 text-gray-600" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4 text-gray-600" />
+                            )}
+                          </div>
+                        </button>
+
+                        {isExpanded && (
+                          <div className="border-t border-gray-800 p-4 space-y-4">
+                            {/* Customer Info */}
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                              <div>
+                                <p className="text-xs text-gray-500 mb-1">Kunde</p>
+                                <p className="text-white">{order.customer.name}</p>
+                                <p className="text-gray-400">{order.customer.email}</p>
+                                {order.customer.phone && (
+                                  <p className="text-gray-400">{order.customer.phone}</p>
+                                )}
+                              </div>
+                              <div>
+                                <p className="text-xs text-gray-500 mb-1">Adresse</p>
+                                <p className="text-white">{order.customer.address}</p>
+                                <p className="text-gray-400">
+                                  {order.customer.zip} {order.customer.city}
+                                </p>
+                                <p className="text-gray-400">{order.customer.country}</p>
+                              </div>
+                            </div>
+
+                            {order.customer.notes && (
+                              <div>
+                                <p className="text-xs text-gray-500 mb-1">Bemerkungen</p>
+                                <p className="text-sm text-gray-300 bg-gray-800 rounded-lg p-3">
+                                  {order.customer.notes}
+                                </p>
+                              </div>
+                            )}
+
+                            {/* Items */}
+                            <div>
+                              <p className="text-xs text-gray-500 mb-2">Artikel</p>
+                              <div className="space-y-1">
+                                {order.items.map((item, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="flex items-center justify-between text-sm bg-gray-800 rounded-lg px-3 py-2"
+                                  >
+                                    <span className="text-white">
+                                      {item.quantity}x {item.name}
+                                    </span>
+                                    <span className="text-gray-400">
+                                      CHF {(item.price * item.quantity).toFixed(2)}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="flex justify-end mt-2">
+                                <span className="text-sm font-bold text-white">
+                                  Total: CHF {order.totalAmount.toFixed(2)}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Actions */}
+                            <div className="flex items-center gap-2 pt-2 border-t border-gray-800">
+                              {order.status === "paid" && (
+                                <button
+                                  onClick={() => updateOrderStatus(order.id, "shipped")}
+                                  disabled={saving}
+                                  className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-500 transition-colors disabled:opacity-50"
+                                >
+                                  <Truck className="w-4 h-4" />
+                                  Als versendet markieren
+                                </button>
+                              )}
+                              {order.status === "pending" && (
+                                <button
+                                  onClick={() => updateOrderStatus(order.id, "cancelled")}
+                                  disabled={saving}
+                                  className="flex items-center gap-2 px-3 py-2 bg-red-600/20 text-red-400 rounded-lg text-sm hover:bg-red-600/30 transition-colors disabled:opacity-50"
+                                >
+                                  Stornieren
+                                </button>
+                              )}
+                              <span className="text-xs text-gray-600 ml-auto">
+                                Erstellt: {new Date(order.createdAt).toLocaleString("de-CH")}
+                                {order.paidAt && (
+                                  <> | Bezahlt: {new Date(order.paidAt).toLocaleString("de-CH")}</>
+                                )}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
