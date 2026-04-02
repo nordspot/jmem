@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // No static export — hybrid mode for Cloudflare Workers
+  output: "export",
   images: {
     unoptimized: true,
   },
