@@ -27,7 +27,7 @@ jobs:
           KEYSTATIC_SECRET: ${{ secrets.KEYSTATIC_SECRET }}
         run: npx opennextjs-cloudflare build
 
-      - name: Deploy
+      - name: Deploy to Cloudflare Workers
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
