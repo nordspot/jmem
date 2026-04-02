@@ -14,7 +14,11 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   const url = new URL(context.request.url);
   const query = url.searchParams.get("q");
   const agentOnly = url.searchParams.get("agent") === "true";
-  const h = { Authorization: `token ${context.env.GITHUB_TOKEN}`, Accept: "application/vnd.github.v3+json" };
+  const ghToken = context.env.GITHUB_TOKEN;
+  if (!ghToken) {
+    return Response.json({ error: "GITHUB_TOKEN not configured" }, { status: 500 });
+  }
+  const h = { Authorization: `token ${ghToken}`, Accept: "application/vnd.github.v3+json" };
 
   try {
     let commits;
@@ -31,6 +35,10 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
       }));
     } else {
       const res = await fetch(`https://api.github.com/repos/${REPO}/commits?per_page=30`, { headers: h });
+      if (!res.ok) {
+        const text = await res.text();
+        return Response.json({ error: `GitHub API ${res.status}: ${text.slice(0, 200)}` }, { status: 502 });
+      }
       const data: any = await res.json();
       commits = data.map((c: any) => ({
         sha: c.sha, message: c.commit.message, author: c.commit.author.name,
