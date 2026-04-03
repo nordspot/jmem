@@ -186,15 +186,15 @@ export default function HomePage() {
       {/* Guest Info */}
       <section className="py-20 bg-white" data-edit-path="src/lib/i18n/de.ts" data-edit-section="guest-info">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
+          <div className="grid lg:grid-cols-2 gap-12 items-stretch">
+            <div className="flex flex-col">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
                 {t.guest.title}
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
                 {t.guest.description}
               </p>
-              <div className="bg-[var(--color-warm)] rounded-xl p-6 space-y-3">
+              <div className="bg-[var(--color-warm)] rounded-xl p-6 space-y-3 mt-auto">
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">{t.guest.overnight}</span>
                   <span className="text-sm font-semibold">{t.guest.overnightPrice}</span>
@@ -205,7 +205,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="bg-[var(--color-warm)] rounded-2xl p-8">
+            <div className="bg-[var(--color-warm)] rounded-2xl p-8 flex flex-col justify-center">
               <h3 className="text-lg font-bold text-gray-900 mb-4">{t.guest.arrival}</h3>
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
                 <strong>Adresse:</strong> {t.guest.address}

@@ -16,7 +16,7 @@ export function WaveDivider({
   className = "",
 }: WaveDividerProps) {
   return (
-    <div className={`w-full leading-[0] overflow-hidden -mb-px ${className}`}>
+    <div className={`w-full leading-[0] overflow-hidden -mb-1 ${className}`}>
       <svg
         viewBox="0 0 1200 200"
         xmlns="http://www.w3.org/2000/svg"

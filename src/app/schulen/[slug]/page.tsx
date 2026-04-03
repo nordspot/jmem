@@ -48,7 +48,7 @@ export default async function SchoolPage({
   return (
     <>
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <Image src="/images/site/schulen-worship.jpg" alt="" fill className="object-cover" priority />
+        <Image src={school.image || "/images/site/schulen-worship.jpg"} alt={school.title} fill className="object-cover object-center" priority />
         <div className="absolute inset-0 bg-[var(--color-dark)]/75" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link

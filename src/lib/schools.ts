@@ -29,7 +29,7 @@ export const schools: School[] = [
     slug: "dts",
     shortName: "DTS",
     title: "Jüngerschaftsschule (Discipleship Training School)",
-    image: "/images/site/dts-community.jpg",
+    image: "/images/site/sbcw-classroom.jpg",
     description:
       "Die DTS bietet dir die Gelegenheit in einem internationalen Umfeld deine Beziehung zu Gott zu vertiefen, deine Berufung zu entdecken, deine Persönlichkeit weiterzuentwickeln und gemeinsam mit anderen Missionserfahrungen zu sammeln.",
     descriptionLong:
@@ -69,7 +69,7 @@ export const schools: School[] = [
     slug: "sbcw",
     shortName: "SBCW",
     title: "Schule für Biblisch Christliche Weltanschauung",
-    image: "/images/site/sbcw-classroom.jpg",
+    image: "/images/site/about-group.jpg",
     description:
       "Die gute Nachricht von Jesus Christus betrifft weit mehr als persönliche Rettung und ist relevant in allen Bereichen der Gesellschaft. Die SBCW erforscht die 7 Einflussbereiche: Familie, Kirche, Staat, Bildung, Wirtschaft, Medien, Wissenschaft und Kunst.",
     descriptionLong:
@@ -145,7 +145,7 @@ export const schools: School[] = [
     slug: "smj",
     shortName: "SMJ",
     title: "School of Missional Justice",
-    image: "/images/site/smj-justice.jpg",
+    image: "/images/site/einsatz-1.jpg",
     description:
       "Entdecke Gottes Herz für Gerechtigkeit und lerne, wie du in deinem Umfeld für Veränderung eintreten kannst.",
     duration: "12 Wochen",
@@ -166,7 +166,7 @@ export const schools: School[] = [
     slug: "wlc",
     shortName: "WLC",
     title: "Weltanschauungs-Leiterschaftskurs",
-    image: "/images/site/wlc-worldview.jpg",
+    image: "/images/site/sbcw-4.jpg",
     description:
       "Vertiefe dein Verständnis christlicher Weltanschauung und entwickle deine Leiterschaftsfähigkeiten weiter.",
     duration: "6 Monate",
@@ -187,7 +187,7 @@ export const schools: School[] = [
     slug: "uofn",
     shortName: "UofN",
     title: "University of the Nations",
-    image: "/images/site/uofn-campus.jpg",
+    image: "/images/site/sbcw-3.jpg",
     description:
       "JMEM Wiler ist Teil der University of the Nations mit 15 Fakultäten weltweit. Akkreditierte Kurse mit internationaler Anerkennung.",
     accredited: true,
