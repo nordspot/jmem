@@ -7,6 +7,10 @@ export interface Product {
   category: "books" | "music" | "kids" | "tricks";
   inStock: boolean;
   stock: number;
+  author?: string;
+  pages?: number;
+  isbn?: string;
+  publisher?: string;
 }
 
 export const products: Product[] = [
@@ -17,21 +21,21 @@ export const products: Product[] = [
   { sku: "104", name: "Plausch im Raege", price: 10, description: "Zweite Kinder-Lobpreis-CD mit Schweizerdeutschen Liedern zum Tanzen und Hüpfen.", image: "/images/products/104-plausch-im-raege.jpg", category: "music", inStock: true, stock: 10 },
   { sku: "105", name: "Kombi: Plausch im Raege + Du bisch de Strom", price: 12, description: "Beide CDs von Stefan Hüsler im Kombi-Angebot.", image: "/images/products/105-kombi-plausch-strom.jpg", category: "music", inStock: true, stock: 10 },
   // BOOKS
-  { sku: "201", name: "Bist du es, Herr?", price: 15, description: "Biografie von Loren Cunningham und die Gründung von JMEM. 216 Seiten.", image: "/images/products/201-bist-du-es-herr.jpg", category: "books", inStock: false, stock: 0 },
-  { sku: "202", name: "Das Buch, das Nationen transformiert", price: 10, description: "Die Kraft der Bibel, jede Nation zu verändern. Von Loren Cunningham und Janice Rogers. 256 Seiten.", image: "/images/products/202-buch-nationen-transformiert.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "203", name: "Gefangen im Iran", price: 10, description: "Dan Baumanns Reise in den Iran 1996/97 und seine Gefangenschaft im Evin-Gefängnis. 220 Seiten.", image: "/images/products/203-gefangen-im-iran.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "205", name: "Graf Zinzendorf", price: 6, description: "Was tust du für mich? Von Janet & Geoff Benge. 160 Seiten.", image: "/images/products/205-graf-zinzendorf.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "206", name: "Cameron W. Townsend", price: 6, description: "Biografie des Gründers der Wycliffe Bibelübersetzer. Von Janet & Geoff Benge. 192 Seiten.", image: "/images/products/206-cameron-townsend.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "207", name: "Die AT-Formel", price: 15, description: "Biblische Perspektive auf das Berufsleben von Landa Cope. 296 Seiten.", image: "/images/products/207-at-formel.jpg", category: "books", inStock: true, stock: 10 },
+  { sku: "201", name: "Bist du es, Herr?", price: 15, description: "Biografie von Loren Cunningham und die Gründung von JMEM. 216 Seiten.", image: "/images/products/201-bist-du-es-herr.jpg", category: "books", inStock: false, stock: 0, author: "Loren Cunningham", pages: 216 },
+  { sku: "202", name: "Das Buch, das Nationen transformiert", price: 10, description: "Die Kraft der Bibel, jede Nation zu verändern. Von Loren Cunningham und Janice Rogers. 256 Seiten.", image: "/images/products/202-buch-nationen-transformiert.jpg", category: "books", inStock: true, stock: 10, author: "Loren Cunningham & Janice Rogers", pages: 256, isbn: "9783944108353" },
+  { sku: "203", name: "Gefangen im Iran", price: 10, description: "Dan Baumanns Reise in den Iran 1996/97 und seine Gefangenschaft im Evin-Gefängnis. 220 Seiten.", image: "/images/products/203-gefangen-im-iran.jpg", category: "books", inStock: true, stock: 10, author: "Dan Baumann", pages: 220, isbn: "978-1-57658-431-6" },
+  { sku: "205", name: "Graf Zinzendorf", price: 6, description: "Was tust du für mich? Von Janet & Geoff Benge. 160 Seiten.", image: "/images/products/205-graf-zinzendorf.jpg", category: "books", inStock: true, stock: 10, author: "Janet & Geoff Benge", pages: 160, isbn: "978-1-57658-427-9" },
+  { sku: "206", name: "Cameron W. Townsend", price: 6, description: "Biografie des Gründers der Wycliffe Bibelübersetzer. Von Janet & Geoff Benge. 192 Seiten.", image: "/images/products/206-cameron-townsend.jpg", category: "books", inStock: true, stock: 10, author: "Janet & Geoff Benge", pages: 192, isbn: "9781576584910" },
+  { sku: "207", name: "Die AT-Formel", price: 15, description: "Biblische Perspektive auf das Berufsleben von Landa Cope. 296 Seiten.", image: "/images/products/207-at-formel.jpg", category: "books", inStock: true, stock: 10, author: "Landa Cope", pages: 296, isbn: "9783981354942" },
   { sku: "208", name: "Beziehungen", price: 10, description: "Von Dean Sherman über Beziehungen aus christlicher Perspektive. 120 Seiten.", image: "/images/products/208-beziehungen.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "209", name: "Die fünf Sprachen der Liebe - Teenager", price: 20, description: "Von Gary Chapman. Wie Eltern die Liebessprache ihres Teenagers verstehen. 224 Seiten.", image: "/images/products/209-sprachen-liebe-teenager.jpg", category: "books", inStock: true, stock: 10 },
+  { sku: "209", name: "Die fünf Sprachen der Liebe - Teenager", price: 20, description: "Von Gary Chapman. Wie Eltern die Liebessprache ihres Teenagers verstehen. 224 Seiten.", image: "/images/products/209-sprachen-liebe-teenager.jpg", category: "books", inStock: true, stock: 10, author: "Gary Chapman", pages: 224, isbn: "9783868274370" },
   { sku: "210", name: "Die fünf Sprachen der Liebe für Kinder", price: 20, description: "Von Gary Chapman. Die Liebessprache deines Kindes verstehen. ", image: "/images/products/210-sprachen-liebe-kinder.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "211", name: "Kinder sind wie ein Spiegel", price: 14, description: "Von Ross Campbell. Wie Eltern konkrete Liebe zeigen können. 144 Seiten.", image: "/images/products/211-kinder-spiegel.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "212", name: "So stell ich mir Familie vor", price: 12, description: "Von Gary Chapman. 5 Merkmale einer funktionierenden Familie. 205 Seiten.", image: "/images/products/212-so-stell-ich-mir-familie-vor.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "215", name: "Abenteuer, Familien im Dienst", price: 14, description: "Von Andreas & Angela Fresz. Impulse und Anregungen für Familien im Dienst. 172 Seiten.", image: "/images/products/215-abenteuer-familien.jpg", category: "books", inStock: true, stock: 10 },
+  { sku: "211", name: "Kinder sind wie ein Spiegel", price: 14, description: "Von Ross Campbell. Wie Eltern konkrete Liebe zeigen können. 144 Seiten.", image: "/images/products/211-kinder-spiegel.jpg", category: "books", inStock: true, stock: 10, author: "Ross Campbell", pages: 144, isbn: "9783868272383" },
+  { sku: "212", name: "So stell ich mir Familie vor", price: 12, description: "Von Gary Chapman. 5 Merkmale einer funktionierenden Familie. 205 Seiten.", image: "/images/products/212-so-stell-ich-mir-familie-vor.jpg", category: "books", inStock: true, stock: 10, author: "Gary Chapman", pages: 205, isbn: "9783861225416" },
+  { sku: "215", name: "Abenteuer, Familien im Dienst", price: 14, description: "Von Andreas & Angela Fresz. Impulse und Anregungen für Familien im Dienst. 172 Seiten.", image: "/images/products/215-abenteuer-familien.jpg", category: "books", inStock: true, stock: 10, author: "Andreas & Angela Fresz", pages: 172, isbn: "978-1-57658-482-8" },
   { sku: "217", name: "Der wahre Reichtum", price: 9, description: "Von Samuel Boerner. Biblische Perspektiven zum Umgang mit Geld. 60 Seiten.", image: "/images/products/217-der-wahre-reichtum.jpg", category: "books", inStock: true, stock: 10 },
   { sku: "218", name: "Wie sollen wir denn denken?", price: 15, description: "Von Darrow L. Miller. Christliche Weltanschauung und gesellschaftliche Entwicklung.", image: "/images/products/218-wie-sollen-wir-denken.jpg", category: "books", inStock: true, stock: 10 },
-  { sku: "219", name: "Das Buch der Mitte", price: 25, description: "Von Vishal Mangalwadi. Die Bibel als Herzstück der westlichen Kultur. 524 Seiten.", image: "/images/products/219-buch-der-mitte.jpg", category: "books", inStock: true, stock: 10 },
+  { sku: "219", name: "Das Buch der Mitte", price: 25, description: "Von Vishal Mangalwadi. Die Bibel als Herzstück der westlichen Kultur. 524 Seiten.", image: "/images/products/219-buch-der-mitte.jpg", category: "books", inStock: true, stock: 10, author: "Vishal Mangalwadi", pages: 524, isbn: "9783038480044" },
   { sku: "220", name: "Wahrheit und Wandlung", price: 20, description: "Analyse von Weltanschauungen und kulturellen Trends. Nicht-westliche Perspektive auf europäische Wurzeln.", image: "/images/products/220-wahrheit-und-wandlung.jpg", category: "books", inStock: true, stock: 10 },
   { sku: "221", name: "Gottes Wort unser Schatz", price: 8, description: "Von Loren Cunningham. Vision für die Verbreitung von Gottes Wort weltweit.", image: "/images/products/221-gottes-wort-schatz.jpg", category: "books", inStock: true, stock: 10 },
   // KIDS/YOUTH

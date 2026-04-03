@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingCart, Check } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 
@@ -32,7 +33,9 @@ export function ProductCard({
     tricks: "Tricks & Hilfsmittel",
   };
 
-  function handleAddToCart() {
+  function handleAddToCart(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     addItem(sku);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
@@ -40,7 +43,10 @@ export function ProductCard({
   }
 
   return (
-    <div className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all duration-300">
+    <Link
+      href={`/shop/${sku}`}
+      className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all duration-300 block"
+    >
       <div className="relative aspect-square bg-gray-50 overflow-hidden">
         <Image
           src={image}
@@ -92,6 +98,6 @@ export function ProductCard({
           </p>
         )}
       </div>
-    </div>
+    </Link>
   );
 }
