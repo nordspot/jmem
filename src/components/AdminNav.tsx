@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bot, History, FileText, Pencil, Package } from "lucide-react";
+import { Bot, History, FileText, Pencil, Package, ClipboardList } from "lucide-react";
 
 const adminLinks = [
   { href: "/admin", label: "AI Agent", icon: Bot, exact: true },
@@ -83,6 +83,19 @@ export function AdminNav({ activeTab, onTabChange }: AdminNavProps) {
           >
             <FileText className="w-3.5 h-3.5" />
             CMS
+          </Link>
+
+          {/* Formulare */}
+          <Link
+            href="/admin/forms"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              pathname?.startsWith("/admin/forms")
+                ? "bg-[var(--color-primary)] text-white"
+                : "text-gray-400 hover:text-white hover:bg-gray-800"
+            }`}
+          >
+            <ClipboardList className="w-3.5 h-3.5" />
+            Formulare
           </Link>
 
           {/* Bestellungen */}

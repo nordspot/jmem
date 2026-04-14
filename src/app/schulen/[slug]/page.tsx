@@ -14,6 +14,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { TestimonialCard } from "@/components/TestimonialCard";
+import { SchoolFormSection } from "@/components/SchoolFormSection";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -210,21 +211,7 @@ export default async function SchoolPage({
                 </div>
               )}
 
-              <div className="mt-12">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">
-                  Interesse?
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Nimm Kontakt mit uns auf für weitere Informationen oder um
-                  dich anzumelden.
-                </p>
-                <Link
-                  href="/kontakt"
-                  className="inline-flex bg-[var(--color-primary)] text-white font-medium px-6 py-3 rounded-full hover:bg-[var(--color-primary-light)] transition-colors text-sm"
-                >
-                  Kontakt aufnehmen
-                </Link>
-              </div>
+              <SchoolFormSection slug={slug} />
             </div>
 
             <div className="space-y-4">
