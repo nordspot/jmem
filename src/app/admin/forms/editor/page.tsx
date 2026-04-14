@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useState, useEffect, useCallback, useRef, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { AdminNav } from "@/components/AdminNav";
 import {
@@ -65,10 +65,18 @@ type EditorTab = "fields" | "emails" | "settings";
 const MAX_HISTORY = 50;
 const AUTOSAVE_DELAY = 2000; // 2s debounce for localStorage draft
 
-export default function FormEditorPage() {
-  const params = useParams();
+export default function FormEditorPageWrapper() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-950" />}>
+      <FormEditorPage />
+    </Suspense>
+  );
+}
+
+function FormEditorPage() {
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const formId = params.formId as string;
+  const formId = searchParams.get("id") || "new";
   const isNew = formId === "new";
 
   const [authed, setAuthed] = useState(false);
@@ -293,7 +301,7 @@ export default function FormEditorPage() {
           body: JSON.stringify({ formId: form.id, snapshot: form }),
         }).catch(() => {}); // fire and forget
         if (isNew) {
-          router.replace(`/admin/forms/${form.id}`);
+          router.replace(`/admin/forms/editor?id=${form.id}`);
         }
       }
     } catch (e) {
@@ -478,7 +486,7 @@ export default function FormEditorPage() {
 
             {!isNew && (
               <Link
-                href={`/admin/forms/${form.id}/submissions`}
+                href={`/admin/forms/submissions?formId=${form.id}`}
                 className="flex items-center gap-1.5 px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-xs text-gray-400 hover:text-white hover:border-gray-600 transition-colors"
               >
                 <Inbox className="w-3.5 h-3.5" />

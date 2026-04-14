@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { AdminNav } from "@/components/AdminNav";
 import {
@@ -27,9 +27,17 @@ interface Submission {
   submittedAt: string;
 }
 
-export default function SubmissionsPage() {
-  const params = useParams();
-  const formId = params.formId as string;
+export default function SubmissionsPageWrapper() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-950" />}>
+      <SubmissionsPage />
+    </Suspense>
+  );
+}
+
+function SubmissionsPage() {
+  const searchParams = useSearchParams();
+  const formId = searchParams.get("formId") || "";
 
   const [authed, setAuthed] = useState(false);
   const [secret, setSecret] = useState("");
@@ -171,7 +179,7 @@ export default function SubmissionsPage() {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <Link
-              href={`/admin/forms/${formId}`}
+              href={`/admin/forms/editor?id=${formId}`}
               className="p-2 text-gray-400 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />

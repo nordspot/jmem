@@ -131,7 +131,7 @@ export default function FormsListPage() {
             </p>
           </div>
           <Link
-            href="/admin/forms/new"
+            href="/admin/forms/editor?id=new"
             className="flex items-center gap-2 bg-[var(--color-primary)] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[var(--color-primary-light)] transition-colors"
           >
             <Plus className="w-4 h-4" />
@@ -171,7 +171,7 @@ export default function FormsListPage() {
             </p>
             {forms.length === 0 && (
               <Link
-                href="/admin/forms/new"
+                href="/admin/forms/editor?id=new"
                 className="inline-flex items-center gap-2 bg-[var(--color-primary)] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[var(--color-primary-light)] transition-colors"
               >
                 <Plus className="w-4 h-4" />
@@ -188,7 +188,7 @@ export default function FormsListPage() {
               >
                 <div className="flex items-center justify-between gap-4">
                   <Link
-                    href={`/admin/forms/${form.id}`}
+                    href={`/admin/forms/editor?id=${form.id}`}
                     className="flex-1 min-w-0"
                   >
                     <div className="flex items-center gap-3 mb-1">
@@ -222,7 +222,7 @@ export default function FormsListPage() {
 
                   <div className="flex items-center gap-2 shrink-0">
                     <Link
-                      href={`/admin/forms/${form.id}/submissions`}
+                      href={`/admin/forms/submissions?formId=${form.id}`}
                       className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 border border-gray-700 rounded-lg text-xs text-gray-400 hover:text-white hover:border-gray-600 transition-colors"
                     >
                       <Inbox className="w-3.5 h-3.5" />
